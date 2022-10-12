@@ -25,7 +25,7 @@ void shell() {
     fgets(userInp, sizeof(userInp), stdin);
 
     char *tokenInput = strtok(userInp, " ");
-    char *flagComputeText = *tokenInput;
+    char *flagComputeText = strtok(userInp, " ");
     flagComputeText[0] = "no";
     puts(tokenInput);
     puts(flagComputeText);
