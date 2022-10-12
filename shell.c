@@ -42,9 +42,9 @@ void shell() {
         }
         flagComputeText = strtok(NULL, " ");
     }
-    puts(flag1);
-    puts(flag2);
-    puts(flagComputeText);
+    // puts(flag1);
+    // puts(flag2);
+    // puts(flagComputeText);
 
     if (strcmp(tokenInput, "exit\n")==0) {
         //exit
