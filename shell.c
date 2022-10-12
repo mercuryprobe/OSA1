@@ -34,6 +34,7 @@ void shell() {
         int flag1Taken = 0;
         while (flagComputeText != NULL)
         {
+            puts(flagComputeText);
             if (flagComputeText[0]=='-'){
                 printf("hmmm\n");
                 if (flag1Taken == 0){
