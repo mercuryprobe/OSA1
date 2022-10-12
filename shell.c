@@ -2,6 +2,12 @@
 #include <stdlib.h>
 #include <string.h>
 
+
+void cd(char* cmd) {
+    puts("Hey");
+}
+
+
 void shell() {
     // cd echo pwd
     // ls cat date rm mkdir
@@ -18,10 +24,6 @@ void shell() {
     }
 }
 
-void cd(char* cmd) {
-    puts("Hey");
-    return(0);
-}
 
 int main() {
     puts("Welcome to Aryaman's shell!\n");
