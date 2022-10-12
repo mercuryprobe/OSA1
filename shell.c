@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+#include <unistd.h>
 
 void cd(char* cmd) {
-    printf("Hey");
+    chdir("..");
 }
 
 
@@ -29,7 +29,7 @@ void shell() {
 
 
 int main() {
-    puts("Welcome to Aryaman's shell!\n");
+    puts("Welcome to Aryaman's shell!");
     shell();
     return 0;
 }
