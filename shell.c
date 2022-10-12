@@ -17,10 +17,11 @@ void shell() {
     fgets(userInp, sizeof(userInp), stdin);
 
     char *tokenInput = strtok(userInp, "");
-    printf("%d", strcmp(tokenInput, "cd\n"));
-    printf("%s",tokenInput);
+    // printf("%d", strcmp(tokenInput, "cd\n"));
+    // printf("%s",tokenInput);
 
     if (strcmp(tokenInput, "cd")==0) {
+        // reminder: handle "cd\n" case
         printf("Changing directory...\n");
         cd(tokenInput);
     }
