@@ -33,7 +33,7 @@ void shell() {
     int flag1Taken = 0;
     while (flagComputeText != NULL)
     {
-        if (strcmp(flagComputeText[0], "-")==0){
+        if (flagComputeText[0]=='-'){
             if (flag1Taken == 0){
                 strcpy(flag1, flagComputeText);
             } else {
