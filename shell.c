@@ -4,22 +4,22 @@
 
 
 void cd(char* cmd) {
-    puts("Hey");
+    printf("Hey");
 }
 
 
 void shell() {
     // cd echo pwd
     // ls cat date rm mkdir
-    puts("Enter command: ");
+    printf("Enter command: ");
     
     char userInp[512]; //will store user input
     fgets(userInp, sizeof(userInp), stdin);
 
     char *tokenInput = strtok(userInp, "");
 
-    if (strcmp(tokenInput, "cd")) {
-        puts("Changing directory...\n");
+    if (strcmp(tokenInput, "cd")==0) {
+        printf("Changing directory...\n");
         cd(tokenInput);
     }
 }
