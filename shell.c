@@ -48,7 +48,7 @@ void shell() {
 
     if (strcmp(tokenInput, "exit\n")==0) {
         //exit
-        return;
+        break;
     }
 
     if (strcmp(tokenInput, "cd")==0) {
