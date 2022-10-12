@@ -26,7 +26,23 @@ void shell() {
 
     char *tokenInput = strtok(userInp, " ");
     char *flagComputeText = strtok(userInp, " ");
-    flagComputeText[0] = "no";
+    
+    char flag1[2];
+    char flag2[2];
+
+    int flag1Taken = 0;
+    while (flagComputeText != NULL)
+    {
+        if (flagComputeText[0]=="-"){
+            if (flag1Taken == 0){
+                flag1 = flagComputeText;        
+            } else {
+                flag2 = flagComputeText;
+            }
+        }
+        flagComputeText = strtok(NULL, " ");
+    }
+    
     puts(tokenInput);
     puts(flagComputeText);
 
