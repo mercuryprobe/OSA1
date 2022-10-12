@@ -29,7 +29,7 @@ void shell() {
     flagComputeText[0] = "no";
     puts(tokenInput);
     puts(flagComputeText);
-    
+
     if (strcmp(tokenInput, "exit\n")==0) {
         //exit
         return;
@@ -47,7 +47,7 @@ void shell() {
 
 int main() {
     puts("Welcome to Aryaman's shell!");
-    while true{
+    while (1){
         shell();
         }
     return 0;
