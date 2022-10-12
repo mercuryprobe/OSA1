@@ -27,23 +27,23 @@ void shell() {
     char *tokenInput = strtok(userInp, " ");
     char *flagComputeText = strtok(userInp, " ");
     
-    char flag1[2];
-    char flag2[2];
+    char flag1[64];
+    char flag2[64];
 
     int flag1Taken = 0;
     while (flagComputeText != NULL)
     {
         if (flagComputeText[0]=="-"){
             if (flag1Taken == 0){
-                flag1 = flagComputeText;        
+                strcpy(flag1, flagComputeText);
             } else {
-                flag2 = flagComputeText;
+                strcpy(flag2, flagComputeText);
             }
         }
         flagComputeText = strtok(NULL, " ");
     }
-    
-    puts(tokenInput);
+    puts(flag1);
+    puts(flag2);
     puts(flagComputeText);
 
     if (strcmp(tokenInput, "exit\n")==0) {
