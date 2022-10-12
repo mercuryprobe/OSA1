@@ -43,7 +43,7 @@ void shell() {
             }
             flagComputeText = strtok(NULL, " ");
         }
-        printf("%s",flag1);
+        printf("%s bruh\n",flag1);
         // puts(flag2);
         // puts(flagComputeText);
 
