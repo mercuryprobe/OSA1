@@ -35,6 +35,7 @@ void shell() {
         while (flagComputeText != NULL)
         {
             if (flagComputeText[0]=='-'){
+                printf("hmmm\n");
                 if (flag1Taken == 0){
                     strcpy(flag1, flagComputeText);
                 } else {
