@@ -17,6 +17,7 @@ void shell() {
     fgets(userInp, sizeof(userInp), stdin);
 
     char *tokenInput = strtok(userInp, "");
+    printf("%d", strcmp(tokenInput, "cd")==0);
 
     if (strcmp(tokenInput, "cd")==0) {
         printf("Changing directory...\n");
