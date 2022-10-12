@@ -44,6 +44,9 @@ void shell() {
                 }
             }
             flagComputeText = strtok(NULL, " ");
+            if (flagComputeText==NULL) {
+                puts("End!");
+            }
         }
         printf("%s bruh\n",flag1);
         // puts(flag2);
