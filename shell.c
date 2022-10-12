@@ -17,7 +17,7 @@ void shell() {
     fgets(userInp, sizeof(userInp), stdin);
 
     char *tokenInput = strtok(userInp, "");
-    printf("%d", strcmp(tokenInput, "cd"));
+    printf("%d", strcmp(tokenInput, "cd\n"));
     printf("%s",tokenInput);
 
     if (strcmp(tokenInput, "cd")==0) {
