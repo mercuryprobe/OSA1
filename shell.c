@@ -21,10 +21,10 @@ void shell() {
     // printf("%d", strcmp(tokenInput, "cd\n"));
     // printf("%s",tokenInput);
 
-    char[256] buf;
+    
     if (strcmp(tokenInput, "cd")==0) {
         // reminder: handle "cd\n" case
-        
+        char[256] buf;    
         char *getcwd(char *buf, sizeof(buf));
         printf("%s\n", buf);
         printf("Changing directory...\n");
