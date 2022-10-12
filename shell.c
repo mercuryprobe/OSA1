@@ -4,8 +4,8 @@
 #include <unistd.h>
 
 void cd(char* cmd) {
-    int retVal = chdir("..");
-    printf("%d", retVal);
+    
+    printf("ok");
 }
 
 
@@ -24,7 +24,8 @@ void shell() {
     if (strcmp(tokenInput, "cd")==0) {
         // reminder: handle "cd\n" case
         printf("Changing directory...\n");
-        cd(tokenInput);
+        // cd(tokenInput);
+        chdir("..");
     }
 }
 
