@@ -28,11 +28,12 @@ void shell() {
         getcwd(buf, sizeof(buf));
         printf("%s\n", buf);
         printf("Changing directory...\n");
+        chdir("..");
         getcwd(buf, sizeof(buf));
         printf("%s\n", buf);
 
         // cd(tokenInput);
-        chdir("..");
+        
     }
 }
 
