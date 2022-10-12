@@ -16,7 +16,7 @@ void shell() {
     char userInp[512]; //will store user input
     fgets(userInp, sizeof(userInp), stdin);
 
-    char *tokenInput = strtok(userInp, "");
+    char *tokenInput = strtok(userInp, " ");
     // printf("%d", strcmp(tokenInput, "cd\n"));
     // printf("%s",tokenInput);
 
