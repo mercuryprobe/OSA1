@@ -4,7 +4,8 @@
 #include <unistd.h>
 
 void cd(char* cmd) {
-    chdir("..");
+    int retVal = chdir("..");
+    printf("%d", retVal);
 }
 
 
