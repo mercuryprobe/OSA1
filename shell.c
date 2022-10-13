@@ -77,7 +77,7 @@ void shell() {
             tokenInput = strtok(NULL, space);
             cd(tokenInput, flag1, flag2);
         } else {
-            puts("Command not found.")
+            puts("Command not found.");
         }
     }
 }
