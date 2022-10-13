@@ -26,7 +26,7 @@ void shell() {
         // fgets(userInp, sizeof(userInp), stdin);
 
         char userInp[] = "This is a test for this thing";
-        const char space[] = " "
+        const char space[] = " ";
         char *tokenInput;
         char *flagComputeText;
         tokenInput = strtok(userInp, space);
