@@ -22,10 +22,10 @@ void shell() {
     while (1)
     {    printf("rmnShell>");
         
-        // char userInp[512]; //will store user input
-        // fgets(userInp, sizeof(userInp), stdin);
+        char str[512]; //will store user input
+        fgets(userInp, sizeof(str), stdin);
         
-        char str[80] = "This is a test";
+        // char str[80] = "This is a test";
         const char s[2] = " ";
         char *token;
         
