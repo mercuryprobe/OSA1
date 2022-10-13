@@ -38,7 +38,7 @@ void shell() {
         
         token = strtok(NULL, s);}
 
-
+        return
         // char userInp[] = "This is a test for this thing";
         // const char space[] = " ";
         // char *tokenInput;
