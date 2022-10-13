@@ -19,6 +19,7 @@ void cd(char* cmd, char flag1[], char flag2[]) {
     const char* directory = cmd;
 
     //token ready
+    printf("Directory requested: %s", directory);
     printf("Changing directory...\n");
     int chdirResult = chdir(directory);
 
@@ -89,6 +90,7 @@ void shell() {
 
         if (strcmp(tokenInput, "cd")==0) {
             // reminder: handle "cd\n" case
+            tokenInput = strtok(NULL, space);
             cd(tokenInput, flag1, flag2);
         }
     }
