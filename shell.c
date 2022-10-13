@@ -25,12 +25,14 @@ void shell() {
         char userInp[512]; //will store user input
         fgets(userInp, sizeof(userInp), stdin);
         
+        char userInpCopy[512];
+        strcpy(userInpCopy, userInp);
         const char space[2] = " ";
         
-        // char *tokenInput;
+        char *tokenInput;
         char *flagComputeText;
-        // tokenInput = strtok(userInp, space);
-        flagComputeText = strtok(userInp, space);
+        tokenInput = strtok(userInp, space);
+        flagComputeText = strtok(userInpCopy, space);
         
         char flag1[64];
         char flag2[64];
