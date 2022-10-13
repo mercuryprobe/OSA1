@@ -26,8 +26,11 @@ void shell() {
         // fgets(userInp, sizeof(userInp), stdin);
 
         char userInp[] = "This is a test for this thing";
-        char *tokenInput = strtok(userInp, " ");
-        char *flagComputeText = strtok(userInp, " ");
+        const char space[] = " "
+        char *tokenInput;
+        char *flagComputeText;
+        tokenInput = strtok(userInp, space);
+        flagComputeText = strtok(userInp, space);
         
         char flag1[64];
         char flag2[64];
