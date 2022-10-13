@@ -67,8 +67,8 @@ void shell() {
         if (flag1Taken==0) {
             flag1[0]='\0';
         }
-
-        if ((strcmp(tokenInput, "exit\n")==0) || (strcmp(tokenInput, "e\n")==0)) {
+        tokenInput[strcspn(tokenInput, "\n")]=0;
+        if ((strcmp(tokenInput, "exit")==0) || (strcmp(tokenInput, "e")==0)) {
             //exit
             puts("Exiting...");
             return;
@@ -77,7 +77,7 @@ void shell() {
             tokenInput = strtok(NULL, space);
             cd(tokenInput, flag1, flag2);
         } else {
-            puts("Command not found.");
+            puts("command not found.");
         }
     }
 }
