@@ -70,14 +70,14 @@ void shell() {
 
         if ((strcmp(tokenInput, "exit\n")==0) || (strcmp(tokenInput, "e\n")==0)) {
             //exit
-            puts("Exiting...")
+            puts("Exiting...");
             return;
         } else if (strcmp(tokenInput, "cd")==0) {
             // reminder: handle "cd\n" case
             tokenInput = strtok(NULL, space);
             cd(tokenInput, flag1, flag2);
         } else {
-            puts("")
+            puts("Command not found.")
         }
     }
 }
