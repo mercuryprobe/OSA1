@@ -12,8 +12,11 @@ void cd(char* cmd, char flag1[], char flag2[]) {
     getcwd(cwd, sizeof(cwd));
     printf("Current directory: %s\n", cwd);
 
-    //changing directory
-    const char* directory = cmd;
+    //preparing directory input
+    cmd[strcspn(cmd, "\n")] = 0; //removes newline
+    const char* directory = cmd; //chdir() needs a const input
+
+    //directory change
     printf("Directory requested: %s", directory);
     printf("Changing directory...\n");
     int chdirResult = chdir(directory);
