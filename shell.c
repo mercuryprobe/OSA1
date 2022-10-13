@@ -12,18 +12,11 @@ void cd(char* cmd, char flag1[], char flag2[]) {
     getcwd(cwd, sizeof(cwd));
     printf("Current directory: %s\n", cwd);
 
-    //skip flags before inputting token into chdir
-    while (cmd[0]=='-') {
-        cmd = strtok(NULL, space);
-    }
+    //changing directory
     const char* directory = cmd;
-
-    //token ready
     printf("Directory requested: %s", directory);
     printf("Changing directory...\n");
     int chdirResult = chdir(directory);
-
-
     
     if (chdirResult==0) {
         //directory changed successfully
@@ -31,7 +24,7 @@ void cd(char* cmd, char flag1[], char flag2[]) {
         printf("Current directory: %s\n", cwd);
     } else {
         //directory change failed
-        perror("Error: ");
+        perror("Error");
         // printf("Error %d: Invalid directory.\n", chdirResult);
     }
 }
@@ -46,31 +39,24 @@ void shell() {
         char userInp[512]; //will store user input
         fgets(userInp, sizeof(userInp), stdin);
         
-        char userInpCopy[512];
-        strcpy(userInpCopy, userInp);
-        
         //tokenise input
         const char space[2] = " ";
         char* tokenInput;
-        char* flagComputeText;
         tokenInput = strtok(userInp, space);
-        flagComputeText = strtok(userInpCopy, space);
         
         char flag1[16];
         char flag2[16];
 
         int flag1Taken = 0;
         int flag2Taken = 0;
-        while (flagComputeText != NULL)
-        {
+        while (tokenInput[0] == '-') {
             //detect flags, if any
-            if (flagComputeText[0]=='-'){
-                printf("Flag detected\n");
-                if (flag1Taken == 0){
-                    strcpy(flag1, flagComputeText);
-                } else if (flag2Taken==0) {
-                    strcpy(flag2, flagComputeText);
-                }
+            printf("Flag detected\n");
+
+            if (flag1Taken == 0){
+                strcpy(flag1, flagComputeText);
+            } else if (flag2Taken==0) {
+                strcpy(flag2, flagComputeText);
             }
             flagComputeText = strtok(NULL, space);
         }
