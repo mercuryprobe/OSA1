@@ -24,35 +24,49 @@ void shell() {
         
         // char userInp[512]; //will store user input
         // fgets(userInp, sizeof(userInp), stdin);
-
-        char userInp[] = "This is a test for this thing";
-        const char space[] = " ";
-        char *tokenInput;
-        char *flagComputeText;
-        tokenInput = strtok(userInp, space);
-        flagComputeText = strtok(userInp, space);
         
-        char flag1[64];
-        char flag2[64];
+        char str[80] = "This is a test";
+        const char s[2] = " ";
+        char *token;
+        
+        /* get the first token */
+        token = strtok(str, s);
+        
+        /* walk through other tokens */
+        while( token != NULL ) {
+        {printf( " %s\n", token );
+        
+        token = strtok(NULL, s);}
 
-        int flag1Taken = 0;
-        while (flagComputeText != NULL)
-        {
-            puts(flagComputeText);
-            if (flagComputeText[0]=='-'){
-                printf("hmmm\n");
-                if (flag1Taken == 0){
-                    strcpy(flag1, flagComputeText);
-                } else {
-                    strcpy(flag2, flagComputeText);
-                }
-            }
-            flagComputeText = strtok(NULL, space);
-            if (flagComputeText==NULL) {
-                puts("End!");
-            }
-        }
-        printf("%s bruh\n",flag1);
+
+        // char userInp[] = "This is a test for this thing";
+        // const char space[] = " ";
+        // char *tokenInput;
+        // char *flagComputeText;
+        // tokenInput = strtok(userInp, space);
+        // flagComputeText = strtok(userInp, space);
+        
+        // char flag1[64];
+        // char flag2[64];
+
+        // int flag1Taken = 0;
+        // while (flagComputeText != NULL)
+        // {
+        //     puts(flagComputeText);
+        //     if (flagComputeText[0]=='-'){
+        //         printf("hmmm\n");
+        //         if (flag1Taken == 0){
+        //             strcpy(flag1, flagComputeText);
+        //         } else {
+        //             strcpy(flag2, flagComputeText);
+        //         }
+        //     }
+        //     flagComputeText = strtok(NULL, space);
+        //     if (flagComputeText==NULL) {
+        //         puts("End!");
+        //     }
+        // }
+        // printf("%s bruh\n",flag1);
         return;
         // puts(flag2);
         // puts(flagComputeText);
