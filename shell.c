@@ -16,9 +16,10 @@ void cd(char* cmd, char flag1[], char flag2[]) {
         cmd = strtok(NULL, space);
     }
     const char* directory = cmd;
+
     //token ready
     printf("Changing directory...\n");
-    int chdirResult = chdir(cmd);
+    int chdirResult = chdir(directory);
     
     if (chdirResult==0) {
         //directory changed successfully
