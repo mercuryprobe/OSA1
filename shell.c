@@ -27,9 +27,9 @@ void shell() {
         
         const char space[2] = " ";
         
-        char *tokenInput;
+        // char *tokenInput;
         char *flagComputeText;
-        tokenInput = strtok(userInp, space);
+        // tokenInput = strtok(userInp, space);
         flagComputeText = strtok(userInp, space);
         
         char flag1[64];
@@ -37,27 +37,19 @@ void shell() {
 
         int flag1Taken = 0;
         int flag2Taken = 0;
-
-        while (tokenInput != NULL) {
-            printf( "%s\n", tokenInput);
-            
-            tokenInput = strtok(NULL, space);
+        while (flagComputeText != NULL)
+        {
+            printf("%s\n", flagComputeText);
+            if (flagComputeText[0]=='-'){
+                printf("Flag detected\n");
+                if (flag1Taken == 0){
+                    strcpy(flag1, flagComputeText);
+                } else if (flag2Taken==0) {
+                    strcpy(flag2, flagComputeText);
+                }
+            }
+            flagComputeText = strtok(NULL, space);
         }
-
-
-        // while (flagComputeText != NULL)
-        // {
-        //     printf("%s\n", flagComputeText);
-        //     // if (flagComputeText[0]=='-'){
-        //     //     printf("Flag detected\n");
-        //     //     if (flag1Taken == 0){
-        //     //         strcpy(flag1, flagComputeText);
-        //     //     } else if (flag2Taken==0) {
-        //     //         strcpy(flag2, flagComputeText);
-        //     //     }
-        //     // }
-        //     flagComputeText = strtok(NULL, space);
-        // }
         printf("%s bruh\n",flag1);
         return;
         // puts(flag2);
