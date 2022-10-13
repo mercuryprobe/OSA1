@@ -18,14 +18,15 @@ void cd(char* cmd, char flag1[], char flag2[]) {
 
     //token ready
     printf("Changing directory...\n");
-
-    if (chdir(cmd)==0) {
+    int chdirResult = chdir(cmd);
+    
+    if (chdirResult==0) {
         //directory changed successfully
         getcwd(cwd, sizeof(cwd));
         printf("Current directory: %s\n", cwd);
     } else {
         //directory change failed
-        printf("Error: Invalid directory.\n");
+        printf("Error %d: Invalid directory.\n", chdirResult);
     }
 }
 
