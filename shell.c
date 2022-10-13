@@ -22,15 +22,15 @@ void shell() {
     while (1)
     {    printf("rmnShell>");
         
-        char str[512]; //will store user input
-        fgets(userInp, sizeof(str), stdin);
+        char userInp[512]; //will store user input
+        fgets(userInp, sizeof(userInp), stdin);
         
         // char str[80] = "This is a test";
         const char s[2] = " ";
         char *token;
         
         /* get the first token */
-        token = strtok(str, s);
+        token = strtok(userInp, s);
         
         /* walk through other tokens */
         while( token != NULL ) {
