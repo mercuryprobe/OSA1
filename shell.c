@@ -25,7 +25,7 @@ void shell() {
         char userInp[512]; //will store user input
         fgets(userInp, sizeof(userInp), stdin);
         
-        const char space[] = " ";
+        const char space[2] = " ";
         
         char *tokenInput;
         char *flagComputeText;
