@@ -9,23 +9,18 @@ void cd(char* cmd, char flag1[], char flag2[]) {
     char cwd[256];
     const char space[2] = " ";
 
-    //get current working directory
-    getcwd(cwd, sizeof(cwd));
-    printf("Current directory: %s\n", cwd);
-
     //preparing directory input
     cmd[strcspn(cmd, "\n")] = 0; //removes newline
     const char* directory = cmd; //chdir() needs a const input
 
     //directory change
-    printf("Directory requested: %s", directory);
+    printf("Directory requested: <%s>\n", directory);
     printf("Changing directory...\n");
     int chdirResult = chdir(directory);
     
     if (chdirResult==0) {
         //directory changed successfully
         getcwd(cwd, sizeof(cwd));
-        printf("Current directory: %s\n", cwd);
     } else {
         //directory change failed
         perror("Error");
@@ -75,13 +70,14 @@ void shell() {
 
         if ((strcmp(tokenInput, "exit\n")==0) || (strcmp(tokenInput, "e\n")==0)) {
             //exit
+            puts("Exiting...")
             return;
-        }
-
-        if (strcmp(tokenInput, "cd")==0) {
+        } else if (strcmp(tokenInput, "cd")==0) {
             // reminder: handle "cd\n" case
             tokenInput = strtok(NULL, space);
             cd(tokenInput, flag1, flag2);
+        } else {
+            puts("")
         }
     }
 }
