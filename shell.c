@@ -3,16 +3,30 @@
 #include <string.h>
 #include <unistd.h>
 
-void cd(char* cmd) {
-    char buf[256];    
-    getcwd(buf, sizeof(buf));
-    printf("%s\n", buf);
-    printf("Changing directory...\n");
-    chdir(cmd);
-    getcwd(buf, sizeof(buf));
-    printf("%s\n", buf);
+void cd(char* cmd, char flag1[], char flag2[]) {
+    char cwd[256];
+    const char space[2] = " "
 
-    printf("ok");
+    //get current working directory
+    getcwd(cwd, sizeof(cwd));
+    printf("Current directory: %s\n", cwd);
+
+    //skip flags before inputting token into chdir
+    while (cmd[0]=='-') {
+        cmd = strtok(NULL, space);
+    }
+
+    //token ready
+    printf("Changing directory...\n");
+
+    if (chdir(cmd)==0) {
+        //directory changed successfully
+        getcwd(cwd, sizeof(cwd));
+        printf("Current directory: %s\n", cwd);
+    } else {
+        //directory change failed
+        printf("Error: Invalid directory.\n")
+    }
 }
 
 
@@ -27,21 +41,22 @@ void shell() {
         
         char userInpCopy[512];
         strcpy(userInpCopy, userInp);
-        const char space[2] = " ";
         
+        //tokenise input
+        const char space[2] = " ";
         char *tokenInput;
         char *flagComputeText;
         tokenInput = strtok(userInp, space);
         flagComputeText = strtok(userInpCopy, space);
         
-        char flag1[64];
-        char flag2[64];
+        char flag1[16];
+        char flag2[16];
 
         int flag1Taken = 0;
         int flag2Taken = 0;
         while (flagComputeText != NULL)
         {
-            printf("%s\n", flagComputeText);
+            //detect flags, if any
             if (flagComputeText[0]=='-'){
                 printf("Flag detected\n");
                 if (flag1Taken == 0){
@@ -52,23 +67,27 @@ void shell() {
             }
             flagComputeText = strtok(NULL, space);
         }
-        printf("%s bruh\n",flag1);
-        return;
-        // puts(flag2);
-        // puts(flagComputeText);
+        
+        if (flag2Taken==0) {
+            for (int i; i<16; i++) {
+                flag2[i] = NULL;
+            }
+        } 
+        if (flag1Taken==0) {
+            for (int i; i<16; i++) {
+                flag1[i] = NULL;
+            }
+        }
 
-        // if (strcmp(tokenInput, "exit\n")==0) {
-        //     //exit
-        //     return;
-        // }
+        if (strcmp(tokenInput, "exit\n")==0) {
+            //exit
+            return;
+        }
 
-        // if (strcmp(tokenInput, "cd")==0) {
-            //
+        if (strcmp(tokenInput, "cd")==0) {
             // reminder: handle "cd\n" case
-            
-            // cd(tokenInput);
-            
-        // }
+            cd(tokenInput, flag1, flag2);
+        }
     }
 }
 
