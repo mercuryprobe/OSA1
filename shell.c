@@ -5,7 +5,7 @@
 
 void cd(char* cmd, char flag1[], char flag2[]) {
     char cwd[256];
-    const char space[2] = " "
+    const char space[2] = " ";
 
     //get current working directory
     getcwd(cwd, sizeof(cwd));
@@ -25,7 +25,7 @@ void cd(char* cmd, char flag1[], char flag2[]) {
         printf("Current directory: %s\n", cwd);
     } else {
         //directory change failed
-        printf("Error: Invalid directory.\n")
+        printf("Error: Invalid directory.\n");
     }
 }
 
