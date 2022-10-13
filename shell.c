@@ -5,6 +5,7 @@
 #include <errno.h>
 
 void cd(char* cmd, char flag1[], char flag2[]) {
+    //Change directory
     char cwd[256];
     const char space[2] = " ";
 
@@ -72,7 +73,7 @@ void shell() {
             flag1[0]='\0';
         }
 
-        if (strcmp(tokenInput, "exit\n")==0) {
+        if ((strcmp(tokenInput, "exit\n")==0) || (strcmp(tokenInput, "e\n")==0)) {
             //exit
             return;
         }
