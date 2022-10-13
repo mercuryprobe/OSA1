@@ -44,7 +44,8 @@ void shell() {
                     strcpy(flag2, flagComputeText);
                 }
             }
-            flagComputeText = strtok(NULL, " ");
+            const char space[] = " ";
+            flagComputeText = strtok(NULL, space);
             if (flagComputeText==NULL) {
                 puts("End!");
             }
