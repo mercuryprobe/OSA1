@@ -40,18 +40,15 @@ void shell() {
         while (flagComputeText != NULL)
         {
             printf("%s\n", flagComputeText);
-            if (flagComputeText[0]=='-'){
-                printf("Flag detected\n");
-                if (flag1Taken == 0){
-                    strcpy(flag1, flagComputeText);
-                } else if (flag2Taken==0) {
-                    strcpy(flag2, flagComputeText);
-                }
-            }
+            // if (flagComputeText[0]=='-'){
+            //     printf("Flag detected\n");
+            //     if (flag1Taken == 0){
+            //         strcpy(flag1, flagComputeText);
+            //     } else if (flag2Taken==0) {
+            //         strcpy(flag2, flagComputeText);
+            //     }
+            // }
             flagComputeText = strtok(NULL, space);
-            if (flagComputeText==NULL) {
-                puts("End!");
-            }
         }
         printf("%s bruh\n",flag1);
         return;
