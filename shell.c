@@ -34,7 +34,7 @@ void shell() {
         
         /* walk through other tokens */
         while( token != NULL ) {
-        {printf( " %s\n", token );
+        printf( " %s\n", token );
         
         token = strtok(NULL, s);}
 
