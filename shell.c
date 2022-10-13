@@ -54,11 +54,11 @@ void shell() {
             printf("Flag detected\n");
 
             if (flag1Taken == 0){
-                strcpy(flag1, flagComputeText);
+                strcpy(flag1, tokenInput);
             } else if (flag2Taken==0) {
-                strcpy(flag2, flagComputeText);
+                strcpy(flag2, tokenInput);
             }
-            flagComputeText = strtok(NULL, space);
+            tokenInput = strtok(NULL, space);
         }
         
 
