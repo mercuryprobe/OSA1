@@ -51,6 +51,7 @@ void shell() {
             }
         }
         printf("%s bruh\n",flag1);
+        return;
         // puts(flag2);
         // puts(flagComputeText);
 
