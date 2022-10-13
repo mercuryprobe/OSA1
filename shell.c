@@ -39,9 +39,9 @@ void shell() {
         int flag2Taken = 0;
 
         while( token != NULL ) {
-            printf( "%s\n", tokenInput );
+            printf( "%s\n", tokenInput);
             
-            tokenInput = strtok(NULL, s);
+            tokenInput = strtok(NULL, space);
         }
 
 
