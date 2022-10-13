@@ -38,7 +38,6 @@ void shell() {
         
         token = strtok(NULL, s);}
 
-        return
         // char userInp[] = "This is a test for this thing";
         // const char space[] = " ";
         // char *tokenInput;
@@ -71,12 +70,12 @@ void shell() {
         // puts(flag2);
         // puts(flagComputeText);
 
-        if (strcmp(tokenInput, "exit\n")==0) {
-            //exit
-            return;
-        }
+        // if (strcmp(tokenInput, "exit\n")==0) {
+        //     //exit
+        //     return;
+        // }
 
-        if (strcmp(tokenInput, "cd")==0) {
+        // if (strcmp(tokenInput, "cd")==0) {
             //
             // reminder: handle "cd\n" case
             
