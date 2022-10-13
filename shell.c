@@ -68,15 +68,12 @@ void shell() {
             flagComputeText = strtok(NULL, space);
         }
         
+
         if (flag2Taken==0) {
-            for (int i; i<16; i++) {
-                flag2[i] = NULL;
-            }
+            flag2[0]='\0';
         } 
         if (flag1Taken==0) {
-            for (int i; i<16; i++) {
-                flag1[i] = NULL;
-            }
+            flag1[0]='\0';
         }
 
         if (strcmp(tokenInput, "exit\n")==0) {
