@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <errno.h>
 
 void cd(char* cmd, char flag1[], char flag2[]) {
     char cwd[256];
@@ -20,6 +21,8 @@ void cd(char* cmd, char flag1[], char flag2[]) {
     //token ready
     printf("Changing directory...\n");
     int chdirResult = chdir(directory);
+
+
     
     if (chdirResult==0) {
         //directory changed successfully
@@ -27,7 +30,8 @@ void cd(char* cmd, char flag1[], char flag2[]) {
         printf("Current directory: %s\n", cwd);
     } else {
         //directory change failed
-        printf("Error %d: Invalid directory.\n", chdirResult);
+        perror("Error: ");
+        // printf("Error %d: Invalid directory.\n", chdirResult);
     }
 }
 
