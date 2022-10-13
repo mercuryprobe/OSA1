@@ -15,7 +15,7 @@ void cd(char* cmd, char flag1[], char flag2[]) {
     while (cmd[0]=='-') {
         cmd = strtok(NULL, space);
     }
-
+    const char* directory = cmd;
     //token ready
     printf("Changing directory...\n");
     int chdirResult = chdir(cmd);
@@ -45,8 +45,8 @@ void shell() {
         
         //tokenise input
         const char space[2] = " ";
-        char *tokenInput;
-        char *flagComputeText;
+        char* tokenInput;
+        char* flagComputeText;
         tokenInput = strtok(userInp, space);
         flagComputeText = strtok(userInpCopy, space);
         
