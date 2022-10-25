@@ -10,16 +10,21 @@ void cd(char cmd[512][512], char flag1[], char flag2[], int posn) {
     const char space[2] = " ";
     
     //preparing directory input
-    int cmpResult = (strcmp(cmd[posn], "") != 0); //edge case: blank input directory
-    if cmpResult{
-        cmd[posn][strcspn(cmd[0], "\n")] = 0; //removes newline
+    int nonBlankDir = (strcmp(cmd[posn], "") != 0) //edge case: blank input directory
+    if (nonBlankDir) {
+        cmd[posn][strcspn(cmd[0], "\n")] = 0; //removes newline        
     }
-    const char* directory = cmpResult ? cmd[posn] : "/home/"+getenv("USER"); //chdir() needs a const input
-    
+    const char* directory = cmd[posn]; //chdir() needs a const input
+    const char* userHome = "/home/"+getenv("USER");
+
     //directory change
     printf("Directory requested: <%s>\n", directory);
     printf("Changing directory...\n");
-    int chdirResult = chdir(directory);
+    if (nonBlankDir) {
+        int chdirResult = chdir(directory);
+    } else {
+        int chdirResult = chdir(userHome);
+    }
     
     if (chdirResult==0) {
         //directory changed successfully
