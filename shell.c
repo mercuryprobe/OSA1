@@ -76,7 +76,7 @@ void shell() {
         int flag1Taken = 0;
         int flag2Taken = 0;
         for (i=0; i++; i<argLen)
-        printf("%d\n", i);
+            printf("%d\n", i);
             if (splitString[i][0] == '-') {
                 //detect flags, if any
                 printf("Flag detected\n");
