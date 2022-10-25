@@ -63,6 +63,7 @@ void shell() {
             i+=1;
         }
         int argLen = i;
+        printf("d\n", argLen);
 
         while (i<512) {
             splitString[i][0] = 0;
