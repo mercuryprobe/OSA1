@@ -63,7 +63,7 @@ void shell() {
             i+=1;
         }
         int argLen = i;
-        printf("%d\n", argLen);
+        // printf("%d\n", argLen);
 
         while (i<512) {
             splitString[i][0] = 0;
@@ -77,7 +77,7 @@ void shell() {
         int flag1Taken = 0;
         int flag2Taken = 0;
         for (i=0; i++; i<argLen){
-            printf("%d\n", i);
+            // printf("%d\n", i);
             if (splitString[i][0] == '-') {
                 //detect flags, if any
                 printf("Flag detected\n");
@@ -93,6 +93,8 @@ void shell() {
                 }
             }
         }
+        printf(flag1);
+        printf(flag2);
         
 
         if (flag2Taken==0) {
