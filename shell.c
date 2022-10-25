@@ -32,6 +32,7 @@ void cd(char cmd[512][512], char flag1[], char flag2[], int posn) {
         //directory changed successfully
         getcwd(cwd, sizeof(cwd));
         printf(cwd);
+        printf("\n");
     } else {
         //directory change failed
         perror("Error");
