@@ -85,7 +85,7 @@ void shell() {
         if (flag1Taken==0) {
             flag1[0]='\0';
         }
-        splitString[0][strcspn(tokenInput, "\n")]=0;
+        splitString[0][strcspn(splitString[0], "\n")]=0;
         printf("TEST4\n");
         if ((strcmp(splitString[0], "exit")==0) || (strcmp(splitString[0], "e")==0)) {
             //exit
