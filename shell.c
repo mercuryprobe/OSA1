@@ -42,7 +42,7 @@ void shell() {
         const char space[2] = " ";
         char* tokenInput;
         tokenInput = strtok(userInp, space);
-        printf("TEST1\n");
+
         char splitString[512][512];
         int i = 0;
         while (tokenInput!=NULL) {
@@ -56,7 +56,6 @@ void shell() {
             splitString[i][0] = 0;
             i+=1;
         }
-        printf("TEST2\n");
 
         
         char flag1[16];
@@ -77,7 +76,7 @@ void shell() {
                     continue;
                 }
             }
-        printf("TEST3\n");
+        
 
         if (flag2Taken==0) {
             flag2[0]='\0';
@@ -86,14 +85,12 @@ void shell() {
             flag1[0]='\0';
         }
         splitString[0][strcspn(splitString[0], "\n")]=0;
-        printf("TEST4\n");
         if ((strcmp(splitString[0], "exit")==0) || (strcmp(splitString[0], "e")==0)) {
             //exit
             puts("Exiting...");
             return;
         } else if (strcmp(splitString[0], "cd")==0) {
             // reminder: handle "cd\n" case
-            printf("TEST5\n");
             cd(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken);
         } else {
             puts("Error: command not found.");
