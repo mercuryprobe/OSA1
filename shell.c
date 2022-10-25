@@ -4,14 +4,14 @@
 #include <unistd.h>
 #include <errno.h>
 
-void cd(char* cmd, char flag1[], char flag2[]) {
+void cd(char* cmd, char flag1[], char flag2[], int posn) {
     //Change directory
     char cwd[256];
     const char space[2] = " ";
-
+    
     //preparing directory input
-    cmd[strcspn(cmd, "\n")] = 0; //removes newline
-    const char* directory = cmd; //chdir() needs a const input
+    cmd[posn][strcspn(cmd[0], "\n")] = 0; //removes newline
+    const char* directory = cmd[posn]; //chdir() needs a const input
 
     //directory change
     printf("Directory requested: <%s>\n", directory);
@@ -42,23 +42,41 @@ void shell() {
         const char space[2] = " ";
         char* tokenInput;
         tokenInput = strtok(userInp, space);
+
+        char splitString[512][512];
+        int i = 0;
+        while (tokenInput!=NULL) {
+            strcpy(splitString[i], tokenInput);
+            tokenInput = strtok(NULL, space);
+            i+=1;
+        }
+        int argLen = i;
+
+        while (i<512) {
+            splitString[i] = '\0';
+            i+=1;
+        }
+
+
         
         char flag1[16];
         char flag2[16];
 
         int flag1Taken = 0;
         int flag2Taken = 0;
-        while (tokenInput[0] == '-') {
-            //detect flags, if any
-            printf("Flag detected\n");
-
-            if (flag1Taken == 0){
-                strcpy(flag1, tokenInput);
-            } else if (flag2Taken==0) {
-                strcpy(flag2, tokenInput);
+        for (i=0; i++; i<argLen)
+            if (splitString[i][0] == '-') {
+                //detect flags, if any
+                printf("Flag detected\n");
+                if (flag1Taken == 0){
+                    strcpy(flag1, splitString[i]);
+                } else if (flag2Taken==0) {
+                    strcpy(flag2, splitString[i]);
+                } else {
+                    printf("Error: Invalid number of flags detected.");
+                    continue;
+                }
             }
-            tokenInput = strtok(NULL, space);
-        }
         
 
         if (flag2Taken==0) {
@@ -67,17 +85,17 @@ void shell() {
         if (flag1Taken==0) {
             flag1[0]='\0';
         }
-        tokenInput[strcspn(tokenInput, "\n")]=0;
-        if ((strcmp(tokenInput, "exit")==0) || (strcmp(tokenInput, "e")==0)) {
+        splitString[0][strcspn(tokenInput, "\n")]=0;
+        if ((strcmp(splitString[0], "exit")==0) || (strcmp(splitString[0], "e")==0)) {
             //exit
             puts("Exiting...");
             return;
-        } else if (strcmp(tokenInput, "cd")==0) {
+        } else if (strcmp(splitString[0], "cd")==0) {
             // reminder: handle "cd\n" case
-            tokenInput = strtok(NULL, space);
-            cd(tokenInput, flag1, flag2);
+            printf("TEST");
+            cd(splitString, flag1, 1 + flag1Taken + flag2Taken);
         } else {
-            puts("command not found.");
+            puts("Error: command not found.");
         }
     }
 }
