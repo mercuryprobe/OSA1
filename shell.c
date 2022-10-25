@@ -11,7 +11,8 @@ void cd(char cmd[512][512], char flag1[], char flag2[], int posn) {
     //preparing directory input
     int nonBlankDir = (strcmp(cmd[posn], "") != 0); //edge case: blank input directory
     printf(cmd[posn]);
-    char curWord[] = cmd[posn];
+    char curWord[512];
+    strcpy(curWord, cmd[posn]);
     if (nonBlankDir) {
         curWord[strcspn(cmd[0], "\n")] = 0; //removes newline        
     }
