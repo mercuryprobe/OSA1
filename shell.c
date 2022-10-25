@@ -4,7 +4,7 @@
 #include <unistd.h>
 #include <errno.h>
 
-void cd(char[512][512] cmd, char flag1[], char flag2[], int posn) {
+void cd(char cmd[512][512], char flag1[], char flag2[], int posn) {
     //Change directory
     char cwd[256];
     const char space[2] = " ";
