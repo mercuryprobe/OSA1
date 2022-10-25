@@ -53,7 +53,7 @@ void shell() {
         int argLen = i;
 
         while (i<512) {
-            splitString[i] = '\0';
+            splitString[i] = 0;
             i+=1;
         }
 
@@ -93,7 +93,7 @@ void shell() {
         } else if (strcmp(splitString[0], "cd")==0) {
             // reminder: handle "cd\n" case
             printf("TEST");
-            cd(splitString, flag1, 1 + flag1Taken + flag2Taken);
+            cd(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken);
         } else {
             puts("Error: command not found.");
         }
