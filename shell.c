@@ -4,7 +4,7 @@
 #include <unistd.h>
 #include <errno.h>
 
-void cd(char** cmd, char flag1[], char flag2[], int posn) {
+void cd(char[512][512] cmd, char flag1[], char flag2[], int posn) {
     //Change directory
     char cwd[256];
     const char space[2] = " ";
@@ -53,7 +53,7 @@ void shell() {
         int argLen = i;
 
         while (i<512) {
-            splitString[i] = 0;
+            splitString[i][0] = 0;
             i+=1;
         }
 
