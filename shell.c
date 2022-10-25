@@ -82,8 +82,10 @@ void shell() {
                 printf("Flag detected\n");
                 if (flag1Taken == 0){
                     strcpy(flag1, splitString[i]);
+                    flag1Taken = 1;
                 } else if (flag2Taken==0) {
                     strcpy(flag2, splitString[i]);
+                    flag2Taken = 1;
                 } else {
                     printf("Error: Invalid number of flags detected.");
                     continue;
