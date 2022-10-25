@@ -13,6 +13,7 @@ void cd(char cmd[512][512], char flag1[], char flag2[], int posn) {
     if (nonBlankDir) {
         cmd[posn][strcspn(cmd[0], "\n")] = 0; //removes newline        
     }
+    printf(cmd[posn]);
     const char* directory = cmd[posn]; //chdir() needs a const input
     char home[512] = "/home/";
     strcat(home, getenv("USER"));
@@ -31,6 +32,7 @@ void cd(char cmd[512][512], char flag1[], char flag2[], int posn) {
     if (chdirResult==0) {
         //directory changed successfully
         getcwd(cwd, sizeof(cwd));
+        printf(cwd);
     } else {
         //directory change failed
         perror("Error");
