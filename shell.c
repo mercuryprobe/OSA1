@@ -102,6 +102,7 @@ void shell() {
             return;
         } else if (strcmp(splitString[0], "cd")==0) {
             // reminder: handle "cd\n" case
+            printf(splitString[1 + flag1Taken + flag2Taken]);
             cd(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken);
         } else {
             puts("Error: command not found.");
