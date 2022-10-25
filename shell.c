@@ -11,11 +11,13 @@ void cd(char cmd[512][512], char flag1[], char flag2[], int posn) {
     //preparing directory input
     int nonBlankDir = (strcmp(cmd[posn], "") != 0); //edge case: blank input directory
     printf(cmd[posn]);
+    char curWord[] = cmd[posn];
     if (nonBlankDir) {
-        cmd[posn][strcspn(cmd[0], "\n")] = 0; //removes newline        
+        curWord[strcspn(cmd[0], "\n")] = 0; //removes newline        
     }
     printf(cmd[posn]);
-    const char* directory = cmd[posn]; //chdir() needs a const input
+    printf(curWord);
+    const char* directory = curWord; //chdir() needs a const input
     char home[512] = "/home/";
     strcat(home, getenv("USER"));
     const char* userHome = home;
