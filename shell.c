@@ -10,6 +10,7 @@ void cd(char cmd[512][512], char flag1[], char flag2[], int posn) {
     printf(cmd[posn]);
     //preparing directory input
     int nonBlankDir = (strcmp(cmd[posn], "") != 0); //edge case: blank input directory
+    printf(cmd[posn]);
     if (nonBlankDir) {
         cmd[posn][strcspn(cmd[0], "\n")] = 0; //removes newline        
     }
