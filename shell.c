@@ -86,13 +86,14 @@ void shell() {
             flag1[0]='\0';
         }
         splitString[0][strcspn(tokenInput, "\n")]=0;
+        printf("TEST4\n");
         if ((strcmp(splitString[0], "exit")==0) || (strcmp(splitString[0], "e")==0)) {
             //exit
             puts("Exiting...");
             return;
         } else if (strcmp(splitString[0], "cd")==0) {
             // reminder: handle "cd\n" case
-            printf("TEST4\n");
+            printf("TEST5\n");
             cd(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken);
         } else {
             puts("Error: command not found.");
