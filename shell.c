@@ -7,8 +7,7 @@
 void cd(char cmd[512][512], char flag1[], char flag2[], int posn) {
     //Change directory
     char cwd[256];
-    const char space[2] = " ";
-    
+    printf(cmd[posn]);
     //preparing directory input
     int nonBlankDir = (strcmp(cmd[posn], "") != 0); //edge case: blank input directory
     if (nonBlankDir) {
