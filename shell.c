@@ -17,15 +17,16 @@ void cd(char cmd[512][512], char flag1[], char flag2[], int posn) {
     const char* directory = cmd[posn]; //chdir() needs a const input
     char home[512] = "/home/";
     strcat(home, getenv("USER"));
-    const char userHome[] = home;
+    const char* userHome = home;
 
     //directory change
     printf("Directory requested: <%s>\n", directory);
     printf("Changing directory...\n");
+    int chdirResult;
     if (nonBlankDir) {
-        int chdirResult = chdir(directory);
+        chdirResult = chdir(directory);
     } else {
-        int chdirResult = chdir(userHome);
+        chdirResult = chdir(userHome);
     }
     
     if (chdirResult==0) {
