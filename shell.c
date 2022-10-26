@@ -115,7 +115,7 @@ void echo(char cmd[512][512], int flag1, int flag2, int posn, int last) {
     if (newline==0) {
         cmd[last-1][strcspn(cmd[last-1], "\n")]=0; 
     }
-    for (int i=0; i<last; i++) {
+    for (int i=posn; i<last; i++) {
         if (i==(last-1)) {
             printf(cmd[i]);
         } else {
