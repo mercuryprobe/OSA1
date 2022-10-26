@@ -7,7 +7,19 @@
 void cd(char cmd[512][512], int flag1, int flag2, int posn) {
     //Change directory
     char cwd[256];
-    printf(cmd[posn]);
+    // printf(cmd[posn]);
+
+    //flag handling
+    int physical = 0;
+    if (cmd[flag1][1]=='L' || cmd[flag2][1]=='L') {
+        // default behaviour: -L
+        printf("L\n");
+    } else if ((cmd[flag1][1]=='P' || cmd[flag2][1]=='P')) {
+        physical = 1;
+    }
+    
+    
+    
     //preparing directory input
     int nonBlankDir = (strcmp(cmd[posn], "") != 0); //edge case: blank input directory
     if (nonBlankDir) {
