@@ -71,21 +71,22 @@ void shell() {
         }
 
         
-        char flag1[16];
-        char flag2[16];
+        int flag1 = -1;
+        int flag2 = -1;
 
         int flag1Taken = 0;
         int flag2Taken = 0;
-        for (i=0; i++; i<argLen){
+        i=0;
+        for (i; i<argLen; i++){
             // printf("%d\n", i);
             if (splitString[i][0] == '-') {
                 //detect flags, if any
                 printf("Flag detected\n");
                 if (flag1Taken == 0){
-                    strcpy(flag1, splitString[i]);
+                    flag1 = i;
                     flag1Taken = 1;
                 } else if (flag2Taken==0) {
-                    strcpy(flag2, splitString[i]);
+                    flag2 = i;
                     flag2Taken = 1;
                 } else {
                     printf("Error: Invalid number of flags detected.");
@@ -96,13 +97,6 @@ void shell() {
         printf(flag1);
         printf(flag2);
         
-
-        if (flag2Taken==0) {
-            flag2[0]='\0';
-        } 
-        if (flag1Taken==0) {
-            flag1[0]='\0';
-        }
         splitString[0][strcspn(splitString[0], "\n")]=0;
         if ((strcmp(splitString[0], "exit")==0) || (strcmp(splitString[0], "e")==0)) {
             //exit
@@ -110,7 +104,7 @@ void shell() {
             return;
         } else if (strcmp(splitString[0], "cd")==0) {
             // reminder: handle "cd\n" case
-            printf(splitString[1 + flag1Taken + flag2Taken]);
+            // printf(splitString[1 + flag1Taken + flag2Taken]);
             cd(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken);
         } else {
             puts("Error: command not found.");
