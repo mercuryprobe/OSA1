@@ -6,15 +6,15 @@
 
 void cd(char cmd[512][512], int flag1, int flag2, int posn) {
     //Change directory
+    char originalCwd[256];
+    getcwd(originalCwd, sizeof(originalCwd));
     char cwd[256];
-    // printf(cmd[posn]);
 
     //flag handling
     int physical = 0;
-    if (cmd[flag1][1]=='L' || cmd[flag2][1]=='L') {
-        // default behaviour: -L
-        printf("L\n");
-    } else if ((cmd[flag1][1]=='P' || cmd[flag2][1]=='P')) {
+    if (cmd[flag1][1]=='L' || cmd[flag2][1]=='L' || cmd[flag1][1]=='l' || cmd[flag2][1]=='l') {
+        // default behaviour: -L (edge case: conflicting flag entry)
+    } else if ((cmd[flag1][1]=='P' || cmd[flag2][1]=='P' || cmd[flag1][1]=='p' || cmd[flag2][1]=='p')) {
         physical = 1;
     }
     
@@ -40,15 +40,53 @@ void cd(char cmd[512][512], int flag1, int flag2, int posn) {
         chdirResult = chdir(userHome);
     }
     
-    if (chdirResult==0) {
-        //directory changed successfully
+    //if -P
+    int pChdirresult = 0;
+    if (physical==1){
+        //getcwd retrieves absolute path of cwd
         getcwd(cwd, sizeof(cwd));
+        pChdirresult = chdir(cwd);
+    }
+        
+
+    if (chdirResult==0 && pChdirresult==0) {
+        //directory changed successfully
+    } else {
+        //directory change failed (edge case: invalid directory entered)
+
+        if (chdirResult==0 && pChdirresult!=0){
+            chdir(originalCwd);
+        }
+        perror("Error");
+        // printf("Error %d: Invalid directory.\n", chdirResult);
+    }
+}
+
+void pwd(char cmd[512][512], int flag1, int flag2) {
+    //present working directory
+    char cwd[256];
+
+    //flag handling
+    int logical = 0;
+    if (cmd[flag1][1]=='P' || cmd[flag2][1]=='P' || cmd[flag1][1]=='p' || cmd[flag2][1]=='p') {
+        // default behaviour: -P (edge case: conflicting flag entry)
+    } else if (cmd[flag1][1]=='L' || cmd[flag2][1]=='L' || cmd[flag1][1]=='l' || cmd[flag2][1]=='l') {
+        logical = 1;
+    }
+    
+    //generate cwd
+    int getCwdResult = 0;
+    if (logical==0){
+        getCwdResult = getcwd(cwd, sizeof(cwd)); //gets physical/absolute cwd
+    } else {
+        cwd = getenv("PWD"); //gets logical pwd
+    }
+    if ((logical==0 && getCwdResult==0) || (logical==1 && errno==0)){
         printf(cwd);
         printf("\n");
     } else {
-        //directory change failed (edge case: invalid directory entered)
+        //getcwd failed
         perror("Error");
-        // printf("Error %d: Invalid directory.\n", chdirResult);
     }
 }
 
@@ -93,7 +131,7 @@ void shell() {
             // printf("%d\n", i);
             if (splitString[i][0] == '-') {
                 //detect flags, if any
-                printf("Flag detected\n");
+                // printf("Flag detected\n");
                 if (flag1Taken == 0){
                     flag1 = i;
                     flag1Taken = 1;
@@ -106,8 +144,8 @@ void shell() {
                 }
             }
         }
-        printf("%d\n", flag1);
-        printf("%d\n", flag2);
+        // printf("%d\n", flag1);
+        // printf("%d\n", flag2);
         
         splitString[0][strcspn(splitString[0], "\n")]=0;
         if ((strcmp(splitString[0], "exit")==0) || (strcmp(splitString[0], "e")==0)) {
