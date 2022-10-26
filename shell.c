@@ -91,7 +91,8 @@ void pwd(char cmd[512][512], int flag1, int flag2) {
         printf("\n");
     } else {
         // strcpy(cwd, getenv("PWD")); 
-        printf("%s\n", getenv("PWD")); //gets logical pwd
+        // printf("%s\n", getenv("PWD")); //gets logical pwd
+        printf("%s\n", readlink("/proc/self/exe", buf, bufsize));
     }
 }
 
