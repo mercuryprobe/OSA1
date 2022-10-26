@@ -85,13 +85,13 @@ void pwd(char cmd[512][512], int flag1, int flag2) {
     }
     
     //generate cwd
-    int getCwdResult = 0;
     if (logical==0){
-        getCwdResult = getcwd(cwd, sizeof(cwd)); //gets physical/absolute cwd
+        getcwd(cwd, sizeof(cwd)); //gets physical/absolute cwd
     } else {
-        cwd = getenv("PWD"); //gets logical pwd
+        free(cwd);
+        char *cwd = getenv("PWD"); //gets logical pwd
     }
-    if ((logical==0 && getCwdResult==0) || (logical==1 && errno==0)){
+    if (logical==0) || (logical==1 && errno==0)){
         printf(cwd);
         printf("\n");
     } else {
@@ -165,7 +165,7 @@ void shell() {
         } else if (strcmp(splitString[0], "cd")==0) {
             cd(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken);
         } else if (strcmp(splitString[0], "pwd")==0) {
-            cd(splitString, flag1, flag2); 
+            pwd(splitString, flag1, flag2); 
         } else {
             puts("Error: command not found.");
         }
