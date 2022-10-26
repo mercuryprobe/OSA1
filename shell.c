@@ -99,7 +99,7 @@ void pwd(char cmd[512][512], int flag1, int flag2) {
 
 void echo(char cmd[512][512], int flag1, int flag2, int posn) {
     //echoes input
-    int newline == 1;
+    int newline = 1;
     if (flag1!=-1) {
         if (cmd[flag1][1]=='H' || cmd[flag1][1]=='h') {
             //edge case: multiple flag entry
@@ -113,7 +113,7 @@ void echo(char cmd[512][512], int flag1, int flag2, int posn) {
     }
     
     if (newline==0) {
-        cmd[posn][strcspn(splitString[0], "\n")]=0;
+        cmd[posn][strcspn(cmd[posn], "\n")]=0; 
     }
     printf(cmd[posn]);
 }
