@@ -34,7 +34,7 @@ void cd(char cmd[512][512], int flag1, int flag2, int posn) {
         printf(cwd);
         printf("\n");
     } else {
-        //directory change failed
+        //directory change failed (edge case: invalid directory entered)
         perror("Error");
         // printf("Error %d: Invalid directory.\n", chdirResult);
     }
