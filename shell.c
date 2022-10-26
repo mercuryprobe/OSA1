@@ -4,7 +4,7 @@
 #include <unistd.h>
 #include <errno.h>
 
-void cd(char cmd[512][512], char flag1[], char flag2[], int posn) {
+void cd(char cmd[512][512], int flag1, int flag2, int posn) {
     //Change directory
     char cwd[256];
     printf(cmd[posn]);
@@ -94,8 +94,8 @@ void shell() {
                 }
             }
         }
-        printf(flag1);
-        printf(flag2);
+        printf("%d\n", flag1);
+        printf("%d\n", flag2);
         
         splitString[0][strcspn(splitString[0], "\n")]=0;
         if ((strcmp(splitString[0], "exit")==0) || (strcmp(splitString[0], "e")==0)) {
