@@ -69,7 +69,6 @@ void cd(char cmd[512][512], int flag1, int flag2, int posn) {
 
 void pwd(char cmd[512][512], int flag1, int flag2) {
     //present working directory
-    char cwd[256];
 
     //flag handling
     int logical = 0;
@@ -85,15 +84,21 @@ void pwd(char cmd[512][512], int flag1, int flag2) {
     }
     
     //generate cwd
+    char cwd[256];
     if (logical==0){
         getcwd(cwd, sizeof(cwd)); //gets physical/absolute cwd
     } else {
         // strcpy(cwd, getenv("PWD")); 
         // printf("%s\n", getenv("PWD")); //gets logical pwd
-        readlink("/proc/self/exe", cwd, sizeof(cwd));
+        readlink(getcwd(NULL, 0), cwd, sizeof(cwd));
     }
     printf(cwd);
     printf("\n");
+}
+
+
+void echo(char cmd[512][512], int flag1, int flag2, int posn) {
+
 }
 
 
