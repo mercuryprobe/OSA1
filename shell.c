@@ -98,7 +98,24 @@ void pwd(char cmd[512][512], int flag1, int flag2) {
 
 
 void echo(char cmd[512][512], int flag1, int flag2, int posn) {
-
+    //echoes input
+    int newline == 1;
+    if (flag1!=-1) {
+        if (cmd[flag1][1]=='H' || cmd[flag1][1]=='h') {
+            //edge case: multiple flag entry
+            printf("DESCRIPTION\n\techo displays a line of text.\nFLAGS\n\t-N: ignores ending newline\n\t--help: prints this section\n");
+        } else if (cmd[flag1][1]=='N' || cmd[flag1][1]=='n') {
+            if (flag2==-1 || (flag2!=-1 && (cmd[flag2][1]=='N' || cmd[flag2][1]=='n'))) {
+                //no flag2 or flag condition -N -N
+                newline = 0;
+            }
+        }
+    }
+    
+    if (newline==0) {
+        cmd[posn][strcspn(splitString[0], "\n")]=0;
+    }
+    printf(cmd[posn]);
 }
 
 
