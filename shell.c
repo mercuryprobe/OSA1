@@ -89,8 +89,8 @@ void pwd(char cmd[512][512], int flag1, int flag2) {
         getcwd(cwd, sizeof(cwd)); //gets physical/absolute cwd
     } else {
         // strcpy(cwd, getenv("PWD")); 
-        // printf("%s\n", getenv("PWD")); //gets logical pwd
-        readlink(getcwd(NULL, 0), cwd, sizeof(cwd));
+        printf("%s\n", getenv("PWD")); //gets logical pwd
+        // readlink(getcwd(NULL, 0), cwd, sizeof(cwd));
     }
     printf(cwd);
     printf("\n");
