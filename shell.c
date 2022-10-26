@@ -87,16 +87,11 @@ void pwd(char cmd[512][512], int flag1, int flag2) {
     //generate cwd
     if (logical==0){
         getcwd(cwd, sizeof(cwd)); //gets physical/absolute cwd
-    } else {
-        // strcpy(cwd, getenv("PWD")); 
-        readlink(cwd, sizeof(cwd)) //gets logical pwd
-    }
-    if ((logical==0) || (logical==1 && errno==0)){
         printf(cwd);
         printf("\n");
     } else {
-        //getcwd failed
-        perror("Error");
+        // strcpy(cwd, getenv("PWD")); 
+        printf("%s\n", getenv("PWD")); //gets logical pwd
     }
 }
 
