@@ -91,7 +91,7 @@ void pwd(char cmd[512][512], int flag1, int flag2) {
         free(cwd);
         char *cwd = getenv("PWD"); //gets logical pwd
     }
-    if (logical==0) || (logical==1 && errno==0)){
+    if ((logical==0) || (logical==1 && errno==0)){
         printf(cwd);
         printf("\n");
     } else {
