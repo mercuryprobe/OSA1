@@ -97,7 +97,7 @@ void pwd(char cmd[512][512], int flag1, int flag2) {
 }
 
 
-void echo(char cmd[512][512], int flag1, int flag2, int posn) {
+void echo(char cmd[512][512], int flag1, int flag2, int posn, int last) {
     //echoes input
     int newline = 1;
     if (flag1!=-1) {
@@ -113,9 +113,15 @@ void echo(char cmd[512][512], int flag1, int flag2, int posn) {
     }
     
     if (newline==0) {
-        cmd[posn][strcspn(cmd[posn], "\n")]=0; 
+        cmd[last-1][strcspn(cmd[last-1], "\n")]=0; 
     }
-    printf(cmd[posn]);
+    for (int i=0; i<last; i++) {
+        if (i==(last-1)) {
+            printf(cmd[i]);
+        } else {
+            printf("%s ", cmd[i]);
+        }
+    }
 }
 
 
@@ -123,7 +129,7 @@ void shell() {
     // cd echo pwd
     // ls cat date rm mkdir
     while (1)
-    {    printf("rmnShell>");
+    {    printf("[rmnShell]>");
         
         char userInp[512]; //will store user input
         fgets(userInp, sizeof(userInp), stdin);
@@ -185,7 +191,7 @@ void shell() {
         } else if (strcmp(splitString[0], "pwd")==0) {
             pwd(splitString, flag1, flag2); 
         } else if (strcmp(splitString[0], "echo")==0) {
-            echo(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken);
+            echo(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, argLen);
         } else {
             puts("Error: command not found.");
         }
