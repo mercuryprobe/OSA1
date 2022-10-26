@@ -88,6 +88,7 @@ void pwd(char cmd[512][512], int flag1, int flag2) {
     if (logical==0){
         getcwd(cwd, sizeof(cwd)); //gets physical/absolute cwd
     } else {
+        cwd[0] = 'A';
         free(cwd);
         char *cwd = getenv("PWD"); //gets logical pwd
     }
