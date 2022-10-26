@@ -184,6 +184,8 @@ void shell() {
             cd(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken);
         } else if (strcmp(splitString[0], "pwd")==0) {
             pwd(splitString, flag1, flag2); 
+        } else if (strcmp(splitString[0], "echo")==0) {
+            echo(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken);
         } else {
             puts("Error: command not found.");
         }
