@@ -12,10 +12,15 @@ void cd(char cmd[512][512], int flag1, int flag2, int posn) {
 
     //flag handling
     int physical = 0;
-    if (cmd[flag1][1]=='L' || cmd[flag2][1]=='L' || cmd[flag1][1]=='l' || cmd[flag2][1]=='l') {
-        // default behaviour: -L (edge case: conflicting flag entry)
-    } else if ((cmd[flag1][1]=='P' || cmd[flag2][1]=='P' || cmd[flag1][1]=='p' || cmd[flag2][1]=='p')) {
-        physical = 1;
+    if (flag1!=-1) {
+        if (cmd[flag1][1]=='L' || cmd[flag1][1]=='l') {
+            // default behaviour: -L (edge case: conflicting flag entry)
+        } else if (cmd[flag1][1]=='P' || cmd[flag1][1]=='p') {
+            if (flag2==-1 || (flag2!=-1 && (cmd[flag2][1]=='P' || cmd[flag2][1]=='p'))) {
+                //no flag2 or flag condition -P -P
+                physical = 1;
+            }
+        }
     }
     
     
@@ -68,10 +73,15 @@ void pwd(char cmd[512][512], int flag1, int flag2) {
 
     //flag handling
     int logical = 0;
-    if (cmd[flag1][1]=='P' || cmd[flag2][1]=='P' || cmd[flag1][1]=='p' || cmd[flag2][1]=='p') {
-        // default behaviour: -P (edge case: conflicting flag entry)
-    } else if (cmd[flag1][1]=='L' || cmd[flag2][1]=='L' || cmd[flag1][1]=='l' || cmd[flag2][1]=='l') {
-        logical = 1;
+    if (flag1!=-1) {
+        if (cmd[flag1][1]=='P' || cmd[flag1][1]=='p') {
+            // default behaviour: -P (edge case: conflicting flag entry)
+        } else if (cmd[flag1][1]=='L' || cmd[flag1][1]=='l') {
+            if (flag2==-1 || (flag2!=-1 && (cmd[flag2][1]=='L' || cmd[flag2][1]=='l'))) {
+                //no flag2 or flag condition -P -P
+                logical = 1;
+            }
+        }
     }
     
     //generate cwd
@@ -153,9 +163,9 @@ void shell() {
             puts("Exiting...");
             return;
         } else if (strcmp(splitString[0], "cd")==0) {
-            // reminder: handle "cd\n" case
-            // printf(splitString[1 + flag1Taken + flag2Taken]);
             cd(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken);
+        } else if (strcmp(splitString[0], "pwd")==0) {
+            cd(splitString, flag1, flag2); 
         } else {
             puts("Error: command not found.");
         }
