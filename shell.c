@@ -338,7 +338,6 @@ void mkdir_(char cmd[512][512], int flag1, int flag2, int posn, int last) {
     int i = posn;
     for (i; i<(last+1); i++) {
         char modeChar;
-        printf("%s\n", mode);
         if (modeFlag == 0 || (strcmp(mode, "rwx")==0) || (strcmp(mode, "RWX")==0)) {
             mkdirResult = mkdir(cmd[i], S_IRWXU);
             modeChar='A';
@@ -366,7 +365,6 @@ void mkdir_(char cmd[512][512], int flag1, int flag2, int posn, int last) {
     }
 
     if (mkdirResult==0) {
-        printf("Directory created.\n");
         return;
     } else {
         perror("Error");
