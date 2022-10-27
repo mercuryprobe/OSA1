@@ -197,15 +197,19 @@ void rm(char cmd[512][512], int flag1, int flag2, int posn, int last) {
     }
     if (recursive==0) {
         for (i; i<last; i++){
+            printf("posn: %d\ni: %d\nlast: %d\n", posn, i, last);
             removeResult = remove(cmd[i]);
+            
             if (removeResult!=0 & multiple==1) {
                 printf("Error encountered while deleting file: %s\n");
                 break;
             }
         }
     } else {
-        removeResult = nftw(cmd[posn], remover, FOPEN_MAX, FTW_DEPTH);
         for (i; i<last; i++){
+            printf("posn: %d\ni: %d\nlast: %d\n", posn, i, last);
+            removeResult = nftw(cmd[posn], remover, FOPEN_MAX, FTW_DEPTH);
+
             if (removeResult!=0 & multiple==1) {
                 printf("Error encountered while deleting file: %s\n");
                 break;
