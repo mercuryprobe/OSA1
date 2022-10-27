@@ -196,10 +196,11 @@ void rm(char cmd[512][512], int flag1, int flag2, int posn, int last) {
         multiple = 0;
     }
     if (recursive==0) {
+        printf("hello\n");
         for (i; i<last; i++){
             printf("posn: %d\ni: %d\nlast: %d\n", posn, i, last);
             removeResult = remove(cmd[i]);
-            
+
             if (removeResult!=0 & multiple==1) {
                 printf("Error encountered while deleting file: %s\n");
                 break;
