@@ -189,11 +189,28 @@ void rm(char cmd[512][512], int flag1, int flag2, int posn, int last) {
         }
     }
     
-    int removeResult;
+    int removeResult=0;
+    int i = posn;
+    int multiple = 1;
+    if (posn >= (last-1)) {
+        multiple = 0;
+    }
     if (recursive==0) {
-        removeResult = remove(cmd[posn]);
+        for (i; i<last; i++){
+            removeResult = remove(cmd[i]);
+            if (removeResult!=0 & multiple==1) {
+                printf("Error encountered while deleting file: %s\n");
+                break;
+            }
+        }
     } else {
         removeResult = nftw(cmd[posn], remover, FOPEN_MAX, FTW_DEPTH);
+        for (i; i<last; i++){
+            if (removeResult!=0 & multiple==1) {
+                printf("Error encountered while deleting file: %s\n");
+                break;
+            }
+        }
     }
     
     if (removeResult==0) {
@@ -207,13 +224,29 @@ void rm(char cmd[512][512], int flag1, int flag2, int posn, int last) {
             char userAns[256];
             fgets(userAns, sizeof(userAns), stdin);
             if (userAns[0]=='N' || userAns[0]=='N') {
-                printf("Exiting.\n");
-                return;
+                if (multiple == 0) {
+                    printf("Exiting.\n");
+                    return;
+                } else {
+                    if (i!=(last-1)){
+                        rm(cmd, flag1, flag2, i+1, last);
+                    }
+                }
             }
         }
 
-        nftw(cmd[posn], remover, FOPEN_MAX, FTW_DEPTH); //FOPEN_MAX: max number of open files allowed, FTW_DEPTH: file tree walk depth
+        if (multiple == 0){
+            nftw(cmd[posn], remover, FOPEN_MAX, FTW_DEPTH); //FOPEN_MAX: max number of open files allowed, FTW_DEPTH: file tree walk depth
+        } else {
+            nftw(cmd[i], remover, FOPEN_MAX, FTW_DEPTH); //FOPEN_MAX: max number of open files allowed, FTW_DEPTH: file tree walk depth
+        }
         printf("Non empty directory deleted.\n");
+
+        if (multiple == 1) {
+            if (i!=(last-1)){
+                rm(cmd, flag1, flag2, i+1, last);
+            }
+        }
     } else {
         perror("Error");
     }
