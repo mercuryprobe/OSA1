@@ -27,7 +27,13 @@ void cd(char cmd[512][512], int flag1, int flag2, int posn) {
             if (flag2==-1 || (flag2!=-1 && (cmd[flag2][1]=='P' || cmd[flag2][1]=='p'))) {
                 //no flag2 or flag condition -P -P
                 physical = 1;
+            } else if ((flag2!=-1 && (cmd[flag2][1]!='L' && cmd[flag2][1]!='l'))) {
+                printf("Error: Invalid flag.\n");
+                return;
             }
+        } else {
+            printf("Error: Invalid flag.\n");
+            return;
         }
     }
     
@@ -87,7 +93,13 @@ void pwd(char cmd[512][512], int flag1, int flag2) {
             if (flag2==-1 || (flag2!=-1 && (cmd[flag2][1]=='L' || cmd[flag2][1]=='l'))) {
                 //no flag2 or flag condition -P -P
                 logical = 1;
+            } else if ((flag2!=-1 && (cmd[flag2][1]!='P' && cmd[flag2][1]!='p'))) {
+                printf("Error: Invalid flag.\n");
+                return;
             }
+        } else {
+            printf("Error: Invalid flag.\n");
+            return;
         }
     }
     
@@ -116,7 +128,13 @@ void echo(char cmd[512][512], int flag1, int flag2, int posn, int last) {
             if (flag2==-1 || (flag2!=-1 && (cmd[flag2][1]=='N' || cmd[flag2][1]=='n'))) {
                 //no flag2 or flag condition -N -N
                 newline = 0;
+            } else if ((flag2!=-1 && (cmd[flag2][1]!='H' && cmd[flag2][1]!='h'))) {
+                printf("Error: Invalid flag.\n");
+                return;
             }
+        } else {
+            printf("Error: Invalid flag.\n");
+            return;
         }
     }
     
@@ -146,13 +164,56 @@ void rm(char cmd[512][512], int flag1, int flag2, int posn, int last) {
     //removes file
 
     cmd[last-1][strcspn(cmd[last-1], "\n")]=0;
-    printf("Deleting <%s>\n", cmd[posn]);
-    int removeResult = remove(cmd[posn]);
+
+    int directory = 0;
+    int recursive = 0;
+
+    if (flag1!=-1){
+        if (cmd[flag1][1]=='D' || cmd[flag1][1]=='d') {
+            directory = 1;
+        } else if (cmd[flag1][1]=='R' || cmd[flag1][1]=='r') {
+            recursive = 1;
+        } else {
+            printf("Error: Invalid flag.\n");
+            return;
+        }
+    }
+    if (flag2!=-1) {
+        if (cmd[flag2][1]=='D' || cmd[flag2][1]=='d') {
+            directory = 1;
+        } else if (cmd[flag2][1]=='R' || cmd[flag2][1]=='r') {
+            recursive = 1;
+        } else {
+            printf("Error: Invalid flag.\n");
+            return;
+        }
+    }
+    
+    int removeResult;
+    if (recursive==0) {
+        removeResult = remove(cmd[posn]);
+    } else {
+        removeResult = nftw(cmd[posn], remover, FOPEN_MAX, FTW_DEPTH);
+    }
+    
     if (removeResult==0) {
         printf("Deleted.\n");
-    } else if (errno==39) { //remove sets errno=39 if directory is not empty
+    } else if (recursive==0 && errno==39) { //remove sets errno=39 if directory is not empty
         //corner case: non empty directory entered without -r flag
+
+        if (directory==1) {
+            //edge case: directory flag entered, but path is non empty directory
+            printf("Directory is non empty. Do you still wish to delete (Y [d]/N)? ");
+            char userAns[256];
+            fgets(userAns, sizeof(userAns), stdin);
+            if (userAns[0]=='N') {
+                printf("Exiting.\n");
+                return;
+            }
+        }
+
         nftw(cmd[posn], remover, FOPEN_MAX, FTW_DEPTH); //FOPEN_MAX: max number of open files allowed, FTW_DEPTH: file tree walk depth
+        printf("Non empty directory deleted.\n");
     } else {
         perror("Error");
     }
