@@ -332,6 +332,8 @@ void mkdir_(char cmd[512][512], int flag1, int flag2, int posn, int last) {
         multiple = 0;
     }
 
+    cmd[last][strcspn(cmd[last], "\n")]=0;
+
     int mkdirResult = 0;
     int i = posn;
     for (i; i<(last+1); i++) {
