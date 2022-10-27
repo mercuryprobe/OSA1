@@ -3,7 +3,11 @@
 #include <string.h>
 #include <unistd.h>
 #include <errno.h>
+
+//rm
 #include <ftw.h>
+#include <limits.h>
+#include <sys/stat.h>
 
 void cd(char cmd[512][512], int flag1, int flag2, int posn) {
     //Change directory
