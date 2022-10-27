@@ -341,7 +341,8 @@ void mkdir_(char cmd[512][512], int flag1, int flag2, int posn, int last) {
     }
 
     int mkdirResult = 0;
-    for (int i = posn; i<(last+1); i++) {
+    int i = posn;
+    for (i; i<(last+1); i++) {
         char modeChar;
         if (modeFlag == 0 || strcmp(mode, "rwx") || strcmp(mode, "RWX")) {
             mkdirResult = mkdir(cmd[i], S_IRWXU);
