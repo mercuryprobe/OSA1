@@ -3,6 +3,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <errno.h>
+#include <ftw.h>
 
 void cd(char cmd[512][512], int flag1, int flag2, int posn) {
     //Change directory
@@ -124,14 +125,29 @@ void echo(char cmd[512][512], int flag1, int flag2, int posn, int last) {
     }
 }
 
+int remover(const char *path, const struct stat *s, int flag, struct FTW *ftw) {
+    //removes file if its not a directory (used with nftw)
+    //reference[1]: https://stackoverflow.com/questions/70695049/nftw-remove-the-directory-content-without-removing-the-top-dir-itself
+    //reference[2]: https://stackoverflow.com/questions/1149764/delete-folder-and-all-files-subdirectories
+    //reference[3]: https://man7.org/linux/man-pages/man3/ftw.3.html
+
+    if(flag != FTW_D) { //flag==FTW_D if path is a directory
+        return remove(path);
+    }
+    return 0;
+}
 void rm(char cmd[512][512], int flag1, int flag2, int posn, int last) {
+    //removes file
+
     cmd[last-1][strcspn(cmd[last-1], "\n")]=0;
     printf("Deleting <%s>\n", cmd[posn]);
     int removeResult = remove(cmd[posn]);
     if (removeResult==0) {
         printf("Deleted.\n");
+    } else if (errno==39) { //remove sets errno=39 if directory is not empty
+        //corner case: non empty directory entered without -r flag
+        nftw(cmd[posn], remover, OPEN_MAX, FTW_DEPTH) //OPEN_MAX: max number of open files allowed, FTW_DEPTH: file tree walk depth
     } else {
-        printf("%d\n", removeResult);
         perror("Error");
     }
 }
