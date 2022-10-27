@@ -139,7 +139,7 @@ int remover(const char *path, const struct stat *s, int flag, struct FTW *ftw) {
     //reference[3]: https://stackoverflow.com/questions/1149764/delete-folder-and-all-files-subdirectories
     //reference[4]: https://stackoverflow.com/questions/782338/warning-with-nftw
 
-    int (*rm_func)(const char *) = flag == remove;
+    int (*rm_func)(const char *) = remove;
     return rm_func(path);
 }
 void rm(char cmd[512][512], int flag1, int flag2, int posn, int last) {
