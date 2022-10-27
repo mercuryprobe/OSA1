@@ -125,7 +125,7 @@ void echo(char cmd[512][512], int flag1, int flag2, int posn, int last) {
 }
 
 void rm(char cmd[512][512], int flag1, int flag2, int posn, int last) {
-    printf("Deleting...\n");
+    printf("Deleting <%s>\n", cmd[posn]);
     int removeResult = remove(cmd[posn]);
     if (removeResult==0) {
         printf("Deleted.\n");
