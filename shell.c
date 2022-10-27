@@ -339,9 +339,7 @@ void mkdir_(char cmd[512][512], int flag1, int flag2, int posn, int last) {
     for (i; i<(last+1); i++) {
         char modeChar;
         printf("%s\n", mode);
-        if (modeFlag == 0 || strcmp(mode, "rwx") || strcmp(mode, "RWX")) {
-            printf("%d\n", strcmp(mode, "RWX"));
-            printf("%d\n", strcmp(mode, "rwx"));
+        if (modeFlag == 0 || (strcmp(mode, "rwx")==0) || (strcmp(mode, "RWX")==0)) {
             mkdirResult = mkdir(cmd[i], S_IRWXU);
             modeChar='A';
         } else if (mode[0]=='r' || mode[0]=='R') {
@@ -361,7 +359,7 @@ void mkdir_(char cmd[512][512], int flag1, int flag2, int posn, int last) {
             printf("Error while making directory: %s\n", cmd[i]);
             break;
         }
-        if (verbose==1) {
+        if (verbose==1 && mkdirResult==0) {
             printf("Directory created: %s [mode: %c]\n", cmd[i], modeChar);
         }
         
