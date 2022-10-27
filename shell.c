@@ -9,6 +9,7 @@
 #include <limits.h>
 #include <sys/stat.h>
 #define _XOPEN_SOURCE 500 
+#define __USE_XOPEN_EXTENDED 500
 
 void cd(char cmd[512][512], int flag1, int flag2, int posn) {
     //Change directory
