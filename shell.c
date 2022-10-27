@@ -366,6 +366,7 @@ void mkdir_(char cmd[512][512], int flag1, int flag2, int posn, int last) {
     }
 
     if (mkdirResult==0) {
+        printf("Directory created.\n");
         return;
     } else {
         perror("Error");
