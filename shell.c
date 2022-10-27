@@ -13,6 +13,7 @@
 
 //date
 #include <time.h>
+#include <dos.h>
 
 void cd(char cmd[512][512], int flag1, int flag2, int posn) {
     //Change directory
@@ -378,24 +379,39 @@ void mkdir_(char cmd[512][512], int flag1, int flag2, int posn, int last) {
     }
 }
 
-void date(char cmd[512][512], int flag1, int flag2) {
+void date_(char cmd[512][512], int flag1, int flag2, int posn, int last) {
 
     int u = 0;
+    int s = 0;
     if (flag1!=-1) {
         if (cmd[flag1][1]=='u' || cmd[flag1][1]=='U') {
             u = 1;
         }
     }
+    if (flag2!=-1) {
+        if ((u!=1) && (cmd[flag2][1]=='s' || cmd[flag2][1]=='S')) {
+            s = 1;
+        }
+    }
 
-    time_t t;
-    time(&t);
-    
-    if (u==0) {
-        printf(ctime(&t));
+    if (s==0) {
+        time_t t;
+        time(&t);
+        
+        if (u==0) {
+            printf(ctime(&t));
+        } else {
+            struct tm *gmtTm = gmtime(&t);
+            time_t gmt = mktime(gmtTm);
+            printf(ctime(&gmt));
+        }
     } else {
-        struct tm *gmtTm = gmtime(&t);
-        time_t gmt = mktime(gmtTm);
-        printf(ctime(&gmt));
+        struct date inpDate;
+        inpDate.da_day->cmd[posn];
+        inpDate.da_mon->cmd[posn+1];
+        inpDate.da_year->cmd[posn+2];
+        setdate(inpDate);
+        printf("Date set\n");
     }
 }
 
@@ -472,7 +488,7 @@ void shell() {
         } else if (strcmp(splitString[0], "mkdir")==0) {
             mkdir_(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, argLen);
         } else if (strcmp(splitString[0], "date")==0) {
-            date(splitString, flag1, flag2); 
+            date_(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, argLen); 
         } else {
             puts("Error: command not found.");
         }
