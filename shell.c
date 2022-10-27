@@ -395,7 +395,7 @@ void date(char cmd[512][512], int flag1, int flag2) {
     } else {
         struct tm *gmtTm = gmtime(&t);
         time_t gmt = mktime(gmtTm);
-        printf(ctime(gmt));
+        printf(ctime(&gmt));
     }
 }
 
