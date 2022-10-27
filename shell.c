@@ -11,6 +11,9 @@
 #include <limits.h>
 #include <sys/stat.h>  //mdkir
 
+//date
+#include <time.h>
+
 void cd(char cmd[512][512], int flag1, int flag2, int posn) {
     //Change directory
     char originalCwd[256];
@@ -375,6 +378,12 @@ void mkdir_(char cmd[512][512], int flag1, int flag2, int posn, int last) {
     }
 }
 
+void date(char cmd[512][512], int flag1, int flag2) {
+    time_t t;
+    time(&t);
+    printf(ctime(&t));
+}
+
 
 void shell() {
     // cd echo pwd
@@ -447,6 +456,8 @@ void shell() {
             rm(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, argLen);
         } else if (strcmp(splitString[0], "mkdir")==0) {
             mkdir_(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, argLen);
+        } else if (strcmp(splitString[0], "date")==0) {
+            date(splitString, flag1, flag2); 
         } else {
             puts("Error: command not found.");
         }
