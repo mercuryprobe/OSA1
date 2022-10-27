@@ -382,19 +382,25 @@ void mkdir_(char cmd[512][512], int flag1, int flag2, int posn, int last) {
 void date_(char cmd[512][512], int flag1, int flag2, int posn, int last) {
 
     int u = 0;
-    int s = 0;
+    int d = 0;
     if (flag1!=-1) {
         if (cmd[flag1][1]=='u' || cmd[flag1][1]=='U') {
             u = 1;
         }
+        if ((cmd[flag1][1]=='s' || cmd[flag1][1]=='S')) {
+            s = 1;
+        }
     }
     if (flag2!=-1) {
-        if ((u!=1) && (cmd[flag2][1]=='s' || cmd[flag2][1]=='S')) {
+        if (cmd[flag2][1]=='u' || cmd[flag2][1]=='U') {
+            u = 1;
+        }
+        if ((cmd[flag2][1]=='s' || cmd[flag2][1]=='S')) {
             s = 1;
         }
     }
 
-    if (s==0) {
+    if (d==0) {
         time_t t;
         time(&t);
         
@@ -406,12 +412,7 @@ void date_(char cmd[512][512], int flag1, int flag2, int posn, int last) {
             printf(ctime(&gmt));
         }
     } else {
-        struct date inpDate;
-        inpDate.da_day->cmd[posn];
-        inpDate.da_mon->cmd[posn+1];
-        inpDate.da_year->cmd[posn+2];
-        setdate(inpDate);
-        printf("Date set\n");
+        
     }
 }
 
