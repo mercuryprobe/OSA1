@@ -201,7 +201,7 @@ void rm(char cmd[512][512], int flag1, int flag2, int posn, int last) {
             removeResult = remove(cmd[i]);
 
             if (removeResult!=0 & multiple==1) {
-                printf("Error encountered while deleting file: %s\n", cmd[i]);
+                printf("Error encountered while deleting %s\n", cmd[i]);
                 break;
             }
         }
@@ -210,7 +210,7 @@ void rm(char cmd[512][512], int flag1, int flag2, int posn, int last) {
             removeResult = nftw(cmd[posn], remover, FOPEN_MAX, FTW_DEPTH);
 
             if (removeResult!=0 & multiple==1) {
-                printf("Error encountered while deleting file: %s\n", cmd[i]);
+                printf("Error encountered while deleting %s\n", cmd[i]);
                 break;
             }
         }
