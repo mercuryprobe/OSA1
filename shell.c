@@ -206,7 +206,7 @@ void rm(char cmd[512][512], int flag1, int flag2, int posn, int last) {
             printf("Directory is non empty. Do you still wish to delete (Y [d]/N)? ");
             char userAns[256];
             fgets(userAns, sizeof(userAns), stdin);
-            if (userAns[0]=='N') {
+            if (userAns[0]=='N' || userAns[0]=='N') {
                 printf("Exiting.\n");
                 return;
             }
