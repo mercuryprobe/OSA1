@@ -389,7 +389,7 @@ void shell() {
     // cd echo pwd
     // ls cat date rm mkdir
     while (1)
-    {    printf("[rmnShell]>");
+    {    printf("[rmnShell]$ ");
         
         char userInp[512]; //will store user input
         fgets(userInp, sizeof(userInp), stdin);
