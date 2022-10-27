@@ -134,11 +134,12 @@ void echo(char cmd[512][512], int flag1, int flag2, int posn, int last) {
 
 int remover(const char *path, const struct stat *s, int flag, struct FTW *ftw) {
     //removes file if its not a directory (used with nftw)
-    //reference[1]: https://stackoverflow.com/questions/70695049/nftw-remove-the-directory-content-without-removing-the-top-dir-itself
-    //reference[2]: https://stackoverflow.com/questions/1149764/delete-folder-and-all-files-subdirectories
-    //reference[3]: https://man7.org/linux/man-pages/man3/ftw.3.html
+    //reference[1]: https://man7.org/linux/man-pages/man3/ftw.3.html
+    //reference[2]: https://stackoverflow.com/questions/70695049/nftw-remove-the-directory-content-without-removing-the-top-dir-itself
+    //reference[3]: https://stackoverflow.com/questions/1149764/delete-folder-and-all-files-subdirectories
+    //reference[4]: https://stackoverflow.com/questions/782338/warning-with-nftw
 
-    int (*rm_func)(const char *) = flag == FTW_DP ? rmdir : unlink;
+    int (*rm_func)(const char *) = flag == remove;
     return rm_func(path);
 }
 void rm(char cmd[512][512], int flag1, int flag2, int posn, int last) {
