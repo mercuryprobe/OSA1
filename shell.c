@@ -276,8 +276,8 @@ void mkdir_(char cmd[512][512], int flag1, int flag2, int posn, int last) {
                 if (last!=flag1) {
                     //edge case: input mode is a string longer than 3 chars
                     mode[0] = cmd[flag1+1][0];
-                    mode[1] = cmd[flag1+1][0];
-                    mode[2] = cmd[flag1+1][0];
+                    mode[1] = cmd[flag1+1][1];
+                    mode[2] = cmd[flag1+1][2];
                     modeFlag = 1;
 
                     posn+=1;
@@ -306,9 +306,9 @@ void mkdir_(char cmd[512][512], int flag1, int flag2, int posn, int last) {
         } else if (cmd[flag2][1] == 'M' || cmd[flag2][1] == 'm') {
             if (last!=flag2) {
                     //edge case: input mode is a string longer than 3 chars
-                    mode[1] = cmd[flag2+1][0];
-                    mode[2] = cmd[flag2+1][0];
                     mode[0] = cmd[flag2+1][0];
+                    mode[1] = cmd[flag2+1][1];
+                    mode[2] = cmd[flag2+1][2];
                     modeFlag = 1;
 
                     posn+=1;
@@ -339,7 +339,6 @@ void mkdir_(char cmd[512][512], int flag1, int flag2, int posn, int last) {
     for (i; i<(last+1); i++) {
         char modeChar;
         printf("%s\n", mode);
-        printf("%d\n", modeFlag);
         if (modeFlag == 0 || strcmp(mode, "rwx") || strcmp(mode, "RWX")) {
             mkdirResult = mkdir(cmd[i], S_IRWXU);
             modeChar='A';
