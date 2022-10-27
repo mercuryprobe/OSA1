@@ -9,7 +9,7 @@
 #define __USE_XOPEN_EXTENDED 500
 #include <ftw.h>
 #include <limits.h>
-#include <sys/stat.h>
+#include <sys/stat.h>  //mdkir
 
 
 void cd(char cmd[512][512], int flag1, int flag2, int posn) {
@@ -257,6 +257,62 @@ void rm(char cmd[512][512], int flag1, int flag2, int posn, int last) {
                 printf("Skipping...\n");
                 rm(cmd, flag1, flag2, i+1, last);
             }
+        }
+    }
+}
+
+void mkdir_(char cmd[512][512], int flag1, int flag2, int posn, int last) {
+    //makes dir, supports multiple input
+    //flags: -p, -v
+    last -= 1;
+
+    int verbose = 0;
+    int parents = 0;
+    if (flag1!=-1) {
+        if (cmd[flag1][1] == 'v' || cmd[flag1][1] == 'V') {
+            verbose = 1;
+        } else if (cmd[flag1][1] == 'P' || cmd[flag1][1] == 'p') {
+            parents = 1;
+        } else {
+            printf("Error: Invalid flag.\n");
+            return;
+        }
+    }
+    if (flag2!=-1) {
+        if (cmd[flag2][1] == 'v' || cmd[flag2][1] == 'V') {
+            verbose = 1;
+        } else if (cmd[flag2][1] == 'P' || cmd[flag2][1] == 'p') {
+            parents = 1;
+        } else {
+            printf("Error: Invalid flag.\n");
+            return;
+        }
+    }
+
+    int multiple = 1;    
+    if (posn==last) {
+        multiple = 0;
+    }
+
+    int mkdirResult = 0;
+    for (int i = posn; i<(last+1); i++) {
+        mkdirResult = mkdir(cmd[i]);
+        if ((mkdirResult!=0) && (multiple==1)) {
+            printf("Error while making directory: %s\n", cmd[i]);
+            break;
+        }
+        if (verbose==1) {
+            printf("Directory created: %s", cmd[i]);
+        }
+    }
+
+    if (mkdirResult==0) {
+        return;
+    } else {
+        perror("Error");
+        if (multiple==1 && (i!=last)) {
+            printf("Skipping...\n");
+            mkdir_(cmd, flag1, flag2, i+1, last+1);
         }
     }
 }
