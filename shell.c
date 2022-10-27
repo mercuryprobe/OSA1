@@ -202,7 +202,7 @@ void rm(char cmd[512][512], int flag1, int flag2, int posn, int last) {
             removeResult = remove(cmd[i]);
 
             if (removeResult!=0 & multiple==1) {
-                printf("Error encountered while deleting file.\n");
+                printf("Error encountered while deleting file: %s\n", cmd[i]);
                 break;
             }
         }
@@ -212,12 +212,12 @@ void rm(char cmd[512][512], int flag1, int flag2, int posn, int last) {
             removeResult = nftw(cmd[posn], remover, FOPEN_MAX, FTW_DEPTH);
 
             if (removeResult!=0 & multiple==1) {
-                printf("Error encountered while deleting file.\n");
+                printf("Error encountered while deleting file: %s\n", cmd[i]);
                 break;
             }
         }
     }
-    printf("checkl\n");
+    printf("checkl\n")
     
     if (removeResult==0) {
         printf("Deleted.\n");
@@ -255,6 +255,12 @@ void rm(char cmd[512][512], int flag1, int flag2, int posn, int last) {
         }
     } else {
         perror("Error");
+        if (multiple == 1) {
+            if (i!=(last-1)){
+                printf("Skipping...\n");
+                rm(cmd, flag1, flag2, i+1, last);
+            }
+        }
     }
 }
 
