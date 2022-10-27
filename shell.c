@@ -11,6 +11,13 @@
 #include <limits.h>
 #include <sys/stat.h>  //mdkir
 
+//mkdir
+#define S_IRWXU 0000700    /* RWX mask for owner */
+#define S_IRUSR 0000400    /* R for owner */
+#define S_IWUSR 0000200    /* W for owner */
+#define S_IXUSR 0000100    /* X for owner */
+//reference: https://jameshfisher.com/2017/02/24/what-is-mode_t/
+
 
 void cd(char cmd[512][512], int flag1, int flag2, int posn) {
     //Change directory
@@ -263,16 +270,39 @@ void rm(char cmd[512][512], int flag1, int flag2, int posn, int last) {
 
 void mkdir_(char cmd[512][512], int flag1, int flag2, int posn, int last) {
     //makes dir, supports multiple input
-    //flags: -p, -v
+    //flags: -m, -v
     last -= 1;
 
     int verbose = 0;
-    int parents = 0;
+    int modeFlag = 0;
+    char mode[4];
     if (flag1!=-1) {
         if (cmd[flag1][1] == 'v' || cmd[flag1][1] == 'V') {
             verbose = 1;
-        } else if (cmd[flag1][1] == 'P' || cmd[flag1][1] == 'p') {
-            parents = 1;
+        } else if (cmd[flag1][1] == 'M' || cmd[flag1][1] == 'm') {
+            if (flag2==-1) {
+                if (last!=flag1) {
+                    //edge case: input mode is a string longer than 3 chars
+                    mode[0] = cmd[flag1+1][0];
+                    mode[1] = cmd[flag1+1][0];
+                    mode[2] = cmd[flag1+1][0];
+                    modeFlag = 1;
+
+                    posn+=1;
+                    if (posn>last) {
+                        printf("Error: No directory entered.\n");
+                        return;
+                    }
+                } else {
+                    //edge case: mode not entered
+                    printf("Error: Mode not entered.\n");
+                    return;
+                }
+            } else {
+                //edge case: mode may/not be entered but not immediately after -m flag
+                printf("Error: Improper mode input.\n");
+                return;
+            }
         } else {
             printf("Error: Invalid flag.\n");
             return;
@@ -281,8 +311,24 @@ void mkdir_(char cmd[512][512], int flag1, int flag2, int posn, int last) {
     if (flag2!=-1) {
         if (cmd[flag2][1] == 'v' || cmd[flag2][1] == 'V') {
             verbose = 1;
-        } else if (cmd[flag2][1] == 'P' || cmd[flag2][1] == 'p') {
-            parents = 1;
+        } else if (cmd[flag2][1] == 'M' || cmd[flag2][1] == 'm') {
+            if (last!=flag2) {
+                    //edge case: input mode is a string longer than 3 chars
+                    mode[1] = cmd[flag2+1][0];
+                    mode[2] = cmd[flag2+1][0];
+                    mode[0] = cmd[flag2+1][0];
+                    modeFlag = 1;
+
+                    posn+=1;
+                    if (posn>last) {
+                        printf("Error: No directory entered.\n");
+                        return;
+                    }
+                } else {
+                    //edge case: mode not entered
+                    printf("Error: Mode not entered.\n");
+                    return;
+                }
         } else {
             printf("Error: Invalid flag.\n");
             return;
@@ -296,14 +342,31 @@ void mkdir_(char cmd[512][512], int flag1, int flag2, int posn, int last) {
 
     int mkdirResult = 0;
     for (int i = posn; i<(last+1); i++) {
-        mkdirResult = mkdir(cmd[i]);
+        char modeChar;
+        if (modeFlag == 0 || strcmp(mode, "rwx") || strcmp(mode, "RWX")) {
+            mkdirResult = mkdir(cmd[i], S_IRWXU);
+            modeChar='A';
+        } else if (mode[0]=='r' || mode[0]=='R') {
+            mkdirResult = mkdir(cmd[i], S_IRUSR);
+            modeChar='R';
+        } else if (mode[0]=='w' || mode[0]=='W') {
+            mkdirResult = mkdir(cmd[i], S_IWUSR);
+            modeChar='W';
+        } else if (mode[0]=='x' || mode[0]=='X') {
+            mkdirResult = mkdir(cmd[i], S_IXUSR);
+            modeChar='X';
+        } else {
+            printf("Error: Invalid mode entered.\n");
+            return;
+        }
         if ((mkdirResult!=0) && (multiple==1)) {
             printf("Error while making directory: %s\n", cmd[i]);
             break;
         }
         if (verbose==1) {
-            printf("Directory created: %s", cmd[i]);
+            printf("Directory created: %s, mode: %c", cmd[i], modeChar);
         }
+        
     }
 
     if (mkdirResult==0) {
