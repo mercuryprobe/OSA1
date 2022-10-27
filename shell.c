@@ -379,9 +379,21 @@ void mkdir_(char cmd[512][512], int flag1, int flag2, int posn, int last) {
 }
 
 void date(char cmd[512][512], int flag1, int flag2) {
+
+    int u = 0;
+    if (flag1!=-1) {
+        if (cmd[flag1][1]=='u' || cmd[flag1][1]=='u') {
+            u = 1;
+        }
+    }
+
     time_t t;
     time(&t);
-    printf(ctime(&t));
+    if (u==0) {
+        printf(ctime(&t));
+    } else {
+        printf(gmtime(&t));
+    }
 }
 
 
