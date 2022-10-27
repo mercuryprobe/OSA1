@@ -382,17 +382,20 @@ void date(char cmd[512][512], int flag1, int flag2) {
 
     int u = 0;
     if (flag1!=-1) {
-        if (cmd[flag1][1]=='u' || cmd[flag1][1]=='u') {
+        if (cmd[flag1][1]=='u' || cmd[flag1][1]=='U') {
             u = 1;
         }
     }
 
     time_t t;
-    time(&t);
+    
+    
     if (u==0) {
+        time(&t);
         printf(ctime(&t));
     } else {
-        printf(gmtime(&t));
+        struct tm gmt = gmtime(&t)
+        printf(ctime(&gmt));
     }
 }
 
