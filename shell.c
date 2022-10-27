@@ -8,6 +8,7 @@
 #include <ftw.h>
 #include <limits.h>
 #include <sys/stat.h>
+#define _XOPEN_SOURCE 500 
 
 void cd(char cmd[512][512], int flag1, int flag2, int posn) {
     //Change directory
@@ -135,10 +136,8 @@ int remover(const char *path, const struct stat *s, int flag, struct FTW *ftw) {
     //reference[2]: https://stackoverflow.com/questions/1149764/delete-folder-and-all-files-subdirectories
     //reference[3]: https://man7.org/linux/man-pages/man3/ftw.3.html
 
-    if(flag != FTW_D) { //flag==FTW_D if path is a directory
-        return remove(path);
-    }
-    return 0;
+    int (*rm_func)(const char *) = flag == FTW_DP ? rmdir : unlink;
+    return rm_func(path);
 }
 void rm(char cmd[512][512], int flag1, int flag2, int posn, int last) {
     //removes file
