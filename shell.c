@@ -161,7 +161,8 @@ int remover(const char *path, const struct stat *s, int flag, struct FTW *ftw) {
     return rm_func(path);
 }
 void rm(char cmd[512][512], int flag1, int flag2, int posn, int last) {
-    //removes file
+    //removes file, supports multi input
+    //flags: -d (directory - delete empty dir) -r (recursive - delete non empty directory)
 
     cmd[last-1][strcspn(cmd[last-1], "\n")]=0;
 
