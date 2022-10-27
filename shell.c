@@ -197,9 +197,7 @@ void rm(char cmd[512][512], int flag1, int flag2, int posn, int last) {
         multiple = 0;
     }
     if (recursive==0) {
-        printf("hello\n");
         for (i; i<last; i++){
-            printf("posn: %d\ni: %d\nlast: %d\n", posn, i, last);
             removeResult = remove(cmd[i]);
 
             if (removeResult!=0 & multiple==1) {
@@ -209,7 +207,6 @@ void rm(char cmd[512][512], int flag1, int flag2, int posn, int last) {
         }
     } else {
         for (i; i<last; i++){
-            printf("posn: %d\ni: %d\nlast: %d\n", posn, i, last);
             removeResult = nftw(cmd[posn], remover, FOPEN_MAX, FTW_DEPTH);
 
             if (removeResult!=0 & multiple==1) {
@@ -218,7 +215,6 @@ void rm(char cmd[512][512], int flag1, int flag2, int posn, int last) {
             }
         }
     }
-    printf("checkl\n");
     
     if (removeResult==0) {
         printf("Deleted.\n");
