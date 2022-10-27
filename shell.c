@@ -340,6 +340,8 @@ void mkdir_(char cmd[512][512], int flag1, int flag2, int posn, int last) {
         char modeChar;
         printf("%s\n", mode);
         if (modeFlag == 0 || strcmp(mode, "rwx") || strcmp(mode, "RWX")) {
+            printf("%d\n", strcmp(mode, "RWX"));
+            printf("%d\n", strcmp(mode, "rwx"));
             mkdirResult = mkdir(cmd[i], S_IRWXU);
             modeChar='A';
         } else if (mode[0]=='r' || mode[0]=='R') {
