@@ -198,6 +198,8 @@ void shell() {
             pwd(splitString, flag1, flag2); 
         } else if (strcmp(splitString[0], "echo")==0) {
             echo(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, argLen);
+        } else if (strcmp(splitString[0], "rm")==0) {
+            rm(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, argLen);
         } else {
             puts("Error: command not found.");
         }
