@@ -359,7 +359,7 @@ void mkdir_(char cmd[512][512], int flag1, int flag2, int posn, int last) {
             break;
         }
         if (verbose==1) {
-            printf("Directory created: %s, mode: %c", cmd[i], modeChar);
+            printf("Directory created: %s [mode: %c]\n", cmd[i], modeChar);
         }
         
     }
