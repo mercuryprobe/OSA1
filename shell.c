@@ -131,6 +131,7 @@ void rm(char cmd[512][512], int flag1, int flag2, int posn, int last) {
     if (removeResult==0) {
         printf("Deleted.\n");
     } else {
+        printf("%d\n", errno);
         perror("Error");
     }
 }
