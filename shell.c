@@ -150,7 +150,7 @@ void rm(char cmd[512][512], int flag1, int flag2, int posn, int last) {
         printf("Deleted.\n");
     } else if (errno==39) { //remove sets errno=39 if directory is not empty
         //corner case: non empty directory entered without -r flag
-        nftw(cmd[posn], remover, OPEN_MAX, FTW_DEPTH) //OPEN_MAX: max number of open files allowed, FTW_DEPTH: file tree walk depth
+        nftw(cmd[posn], remover, OPEN_MAX, FTW_DEPTH); //OPEN_MAX: max number of open files allowed, FTW_DEPTH: file tree walk depth
     } else {
         perror("Error");
     }
