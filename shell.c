@@ -262,7 +262,7 @@ void rm(char cmd[512][512], int flag1, int flag2, int posn, int last) {
 
 void mkdir_(char cmd[512][512], int flag1, int flag2, int posn, int last) {
     //makes dir, supports multiple input
-    //flags: -m, -v
+    //flags: -m (modes), -v (verbose)
     last -= 1;
 
     int verbose = 0;
