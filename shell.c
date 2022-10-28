@@ -539,18 +539,17 @@ void cat(char cmd[512][512], int flag1, int flag2, int posn, int last) {
 
 static int a = 0;
 int lister(const char *path, const struct stat *s, int flag, struct FTW *ftw) {
-    
-    // printf("hello1\n");
+    // lister function, run on every node (directory) during file tree walk by nftw
+
     DIR *directory;
-    // printf("hello2\n");
     directory = opendir(path);
-    // printf("hello3\n");
 
     if (directory!=NULL) {    
         struct dirent *dirStruc = readdir(directory);
 
         if (dirStruc!=NULL) {
             for (int i =0; i<strlen(path); i++) {
+                //edge case: hidden subdirectories present
                 if (path[i]=='.') {
                     return 0;
                 }
@@ -559,6 +558,7 @@ int lister(const char *path, const struct stat *s, int flag, struct FTW *ftw) {
         }
         
         while (dirStruc!=NULL) {
+            //print files in a directory
             if ((a==1 && ((dirStruc->d_name)[0]=='.')) || ((dirStruc->d_name)[0]!='.')) {
                 printf("%s  ", dirStruc->d_name);
             }
@@ -596,9 +596,10 @@ void ls(char cmd[512][512], int flag1, int flag2, int posn, int last) {
     }
 
     if (r==0) {
+        //non recursive flag
         DIR *directory;
-        if (last==2) {
-            //input is <ls path>
+        if (last>=2) {
+            //input is <ls path> or edge case: <ls path ...(ignored)..>
             directory = opendir(cmd[posn]);
         } else {
             //input is <ls>
@@ -615,8 +616,19 @@ void ls(char cmd[512][512], int flag1, int flag2, int posn, int last) {
             dirStruc = readdir(directory);
         }
         printf("\n");
+
     } else {
-        int recurResult = nftw(cmd[posn], lister, FOPEN_MAX, FTW_DEPTH);
+        int recurResult = 0;
+        if (last>=3) {
+            //input is <ls -r path> or edge case: <ls -r path ...(ignored)..>
+            recurResult = nftw(cmd[posn], lister, FOPEN_MAX, FTW_DEPTH);
+        } else {
+            //input is <ls -r>
+            char cwd[256];
+            getcwd(cwd, sizeof(cwd));
+            recurResult = nftw(cwd, lister, FOPEN_MAX, FTW_DEPTH);
+        }
+
         if (recurResult!=0) {
             perror("Error");
         }
