@@ -600,7 +600,7 @@ void ls(char cmd[512][512], int flag1, int flag2, int posn, int last) {
             return;
         }
     }
-    
+    printf("oh3\n");
     if (r==0) {
         //non recursive flag
         DIR *directory;
