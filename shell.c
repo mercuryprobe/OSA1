@@ -453,7 +453,7 @@ void cat(char cmd[512][512], int flag1, int flag2, int posn, int last) {
     } 
 
     while (fgets(text, 1024, file)!=NULL) {
-        printf("%s\n", text);
+        printf("%s", text);
     }
     fclose(file);
     
