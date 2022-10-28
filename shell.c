@@ -557,6 +557,7 @@ int isSym(const char file[]) {
 }
 int lister(const char *path, const struct stat *s, int flag, struct FTW *ftw) {
     // lister function, run on every node (directory) during file tree walk by nftw
+    printf("tyr\n");
     DIR *directory;
     if (isSym(path)==0) {
         return 0;
