@@ -373,7 +373,9 @@ void mkdir_(char cmd[512][512], int flag1, int flag2, int posn, int last) {
     }
 
     if (mkdirResult==0) {
-        printf("done\n");
+        if (posn>=last) {
+            printf("Error: Missing operand\n");
+        }
         return;
     } else {
         perror("Error");
