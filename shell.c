@@ -527,6 +527,8 @@ void shell() {
             mkdir_(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, argLen);
         } else if (strcmp(splitString[0], "date")==0) {
             date_(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, argLen); 
+        } else if (strcmp(splitString[0], "cat")==0) {
+            cat(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, argLen); 
         } else {
             puts("Error: command not found.");
         }
