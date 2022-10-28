@@ -443,6 +443,13 @@ void cat(char cmd[512][512], int flag1, int flag2, int posn, int last) {
     // printf(cmd[posn]);
     cmd[last-1][strcspn(cmd[last-1], "\n")]=0;
 
+    int n = 0;
+    if (flag1!=-1) {
+        if (cmd[flag1][1]=='n' || cmd[flag1][1]=='N') {
+            n = 1;
+        }
+    }
+
     FILE *file;
     char text[1024];
     file = fopen(cmd[posn], "r");
@@ -452,9 +459,18 @@ void cat(char cmd[512][512], int flag1, int flag2, int posn, int last) {
         return;
     } 
 
-    while (fgets(text, 1024, file)!=NULL) {
-        printf("%s", text);
+    if (n == 0) {
+        while (fgets(text, 1024, file)!=NULL) {
+           printf("%s", text);
+        }
+    } else {
+        int line = 1;
+        while (fgets(text, 1024, file)!=NULL) {
+           printf("%d %s", line, text);
+           line +=1;
+        }
     }
+    
     fclose(file);
     
 }
