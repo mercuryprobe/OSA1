@@ -440,11 +440,11 @@ void cat(char cmd[512][512], int flag1, int flag2, int posn, int last) {
     // i (flag1!=-1) {
     //     if (cmf[flag1])
     // }
-    printf(cmd[posn]);
+    // printf(cmd[posn]);
     cmd[last-1][strcspn(cmd[last], "\n")]=0;
 
     FILE *file;
-    char text[1024*4];
+    char text[1024];
     file = fopen("hey", "r");
 
     if (file==NULL) {
