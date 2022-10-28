@@ -540,7 +540,23 @@ void cat(char cmd[512][512], int flag1, int flag2, int posn, int last) {
 void ls(char cmd[512][512], int flag1, int flag2, int posn, int last) {
     cmd[last-1][strcspn(cmd[last-1], "\n")]=0;
 
-    DIR *directory = opendir(cmd[posn]);
+    DIR *directory;
+    if (last==2) {
+        //input is <ls path>
+        directory = opendir(cmd[posn]);
+    } else {
+        //input is <ls>
+        char cwd[256];
+        int cwdResult = getcwd(cwd, sizeof(cwd));
+
+        if (cwdResult==0) {
+            directory = opendir(cwd);
+        } else {
+            perror("Error");
+            return;
+        }
+    }
+    
     struct dirent *dirStruc = readdir(directory);
     while (dirStruc!=NULL) {
         if ((dirStruc->d_name)[0]!='.') {
