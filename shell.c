@@ -18,6 +18,10 @@
 //cat
 #include <signal.h>
 
+//ls
+#include <sys/types.h>
+#include <dirent.h>
+
 
 void cd(char cmd[512][512], int flag1, int flag2, int posn) {
     //Change directory
@@ -533,6 +537,12 @@ void cat(char cmd[512][512], int flag1, int flag2, int posn, int last) {
     
 }
 
+void ls(char cmd[512][512], int flag1, int flag2, int posn, int last) {
+    DIR *directory = opendir(cmd[posn]);
+    struct dirent *dirStruc = readdir(directory);
+    printf(dirStruc->d_name);
+}
+
 void shell() {
     // cd echo pwd
     // ls cat date rm mkdir
@@ -608,6 +618,8 @@ void shell() {
             date_(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, argLen); 
         } else if (strcmp(splitString[0], "cat")==0) {
             cat(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, argLen); 
+        } else if (strcmp(splitString[0], "ls")==0) {
+            ls(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, argLen); 
         } else {
             puts("Error: command not found.");
         }
