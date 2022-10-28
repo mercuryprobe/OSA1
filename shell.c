@@ -502,6 +502,7 @@ void cat(char cmd[512][512], int flag1, int flag2, int posn, int last) {
             signal(SIGINT, interrupter);
             while(active) {
                 fgets(text, 1024, stdin);
+                printf(text);
                 fprintf(file, text);
             }
             active = 1;
