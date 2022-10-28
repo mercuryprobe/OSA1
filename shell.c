@@ -541,10 +541,14 @@ void ls(char cmd[512][512], int flag1, int flag2, int posn, int last) {
     cmd[last-1][strcspn(cmd[last-1], "\n")]=0;
 
     DIR *directory = opendir(cmd[posn]);
+    printf("1\n");
     struct dirent *dirStruc = readdir(directory);
+    printf("2\n");
     while (dirStruc!=NULL) {
+        printf("3\n");
         dirStruc = readdir(directory);
         printf(dirStruc->d_name);
+        printf("4\n");
     }
 }
 
