@@ -373,6 +373,7 @@ void mkdir_(char cmd[512][512], int flag1, int flag2, int posn, int last) {
     }
 
     if (mkdirResult==0) {
+        printf("done\n");
         return;
     } else {
         perror("Error");
@@ -438,17 +439,12 @@ void date_(char cmd[512][512], int flag1, int flag2, int posn, int last) {
 static volatile sig_atomic_t active = 1;
 static void interrupter(int x) {
     //reference: https://stackoverflow.com/questions/4217037/catch-ctrl-c-in-c
-    // (void) x;
     active = 0;
 }
 void cat(char cmd[512][512], int flag1, int flag2, int posn, int last) {
-    // fgets(userInp, sizeof(userInp), stdin);
-    // i (flag1!=-1) {
-    //     if (cmf[flag1])
-    // }
-    // printf(cmd[posn]);
     cmd[last-1][strcspn(cmd[last-1], "\n")]=0;
 
+    //flag check
     int n = 0;
     int c = 0;
     if (flag1!=-1) {
@@ -474,11 +470,13 @@ void cat(char cmd[512][512], int flag1, int flag2, int posn, int last) {
 
     FILE *file;
     char text[1024];
-    printf("uh0\n");
+    
     if (c==0) {
+        //if > isn't entered
         file = fopen(cmd[posn], "r");
 
         if (file==NULL) {
+            //edge case: input is empty
             printf("Error: File not found.\n");
             return;
         } 
@@ -495,16 +493,22 @@ void cat(char cmd[512][512], int flag1, int flag2, int posn, int last) {
             }
         }
     } else {
-        file = fopen(cmd[posn], "w");
-        printf("uh1\n");
-        signal(SIGINT, interrupter);
-        while(active) {
-            fgets(text, 1024, stdin);
-            fprintf(file, text);
+        if (posn!=last-1){
+            file = fopen(cmd[posn], "w");
+            
+            signal(SIGINT, interrupter);
+            while(active) {
+                fgets(text, 1024, stdin);
+                fprintf(file, text);
+            }
+            active = 1;
+        } else {
+            //edge case: no filename input after cat >
+            printf("Error: No filename entered.\n");
+            return;
         }
-        printf("uh2\n");
     }
-    printf("uh3\n");
+    
     fclose(file);
     
 }
