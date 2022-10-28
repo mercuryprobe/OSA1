@@ -538,12 +538,13 @@ void cat(char cmd[512][512], int flag1, int flag2, int posn, int last) {
 }
 
 int lister(const char *path, const struct stat *s, int flag, struct FTW *ftw) {
+    printf(path);
     printf("hello1\n");
     DIR *directory;
     printf("hello2\n");
     directory = opendir(path);
     printf("hello3\n");
-    printf(path);
+    
     struct dirent *dirStruc = readdir(directory);
     printf(path);
     
@@ -605,6 +606,7 @@ void ls(char cmd[512][512], int flag1, int flag2, int posn, int last) {
         printf("\n");
     } else {
         printf("prenftw\n");
+        printf("%s\n", cmd[posn]);
         nftw(cmd[posn], lister, FOPEN_MAX, FTW_DEPTH);
         printf("postnftw\n");
     }
