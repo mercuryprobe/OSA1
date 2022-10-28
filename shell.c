@@ -547,7 +547,13 @@ int lister(const char *path, const struct stat *s, int flag, struct FTW *ftw) {
 
     if (directory!=NULL) {    
         struct dirent *dirStruc = readdir(directory);
+
         if (dirStruc!=NULL) {
+            for (int i =0; i<(strlen(path) - strlen(dirStruc->d_name)); i++) {
+                if (path[i]=='.') {
+                    return;
+                }
+            }
             printf("%s:\n   ", path);
         }
         
