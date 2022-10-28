@@ -15,6 +15,9 @@
 // #define _XOPEN_SOURCE 1 
 #include <time.h>
 
+//cat
+#include <signal.h>
+
 
 void cd(char cmd[512][512], int flag1, int flag2, int posn) {
     //Change directory
@@ -164,7 +167,6 @@ int remover(const char *path, const struct stat *s, int flag, struct FTW *ftw) {
     int (*rm_func)(const char *) = remove;
     return rm_func(path);
 }
-
 void rm(char cmd[512][512], int flag1, int flag2, int posn, int last) {
     //removes file, supports multi input
     //flags: -d (directory - delete empty dir) -r (recursive - delete non empty directory)
@@ -432,6 +434,25 @@ void date_(char cmd[512][512], int flag1, int flag2, int posn, int last) {
     }
 }
 
+void cat(char cmd[512][512], int flag1, int flag2, int posn, int last) {
+    // fgets(userInp, sizeof(userInp), stdin);
+    // i (flag1!=-1) {
+    //     if (cmf[flag1])
+    // }
+
+    FILE *file;
+    char text[1024*4];
+    file = fopen(cmd[posn], "r");
+
+    if (file==NULL) {
+        printf("Error: File not found.");
+        return;
+    } 
+
+    fscanf(file, "%s", &text);
+    fclose(file);
+    printf(text);
+}
 
 void shell() {
     // cd echo pwd
@@ -471,7 +492,7 @@ void shell() {
         i=0;
         for (i; i<argLen; i++){
             // printf("%d\n", i);
-            if (splitString[i][0] == '-') {
+            if (splitString[i][0] == '-' || ((strcmp(splitString[0], "cat")==0) && (splitString[i][0] == '>'))) {
                 //detect flags, if any
                 // printf("Flag detected\n");
                 if (flag1Taken == 0){
