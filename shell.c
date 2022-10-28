@@ -435,7 +435,7 @@ void date_(char cmd[512][512], int flag1, int flag2, int posn, int last) {
     }
 }
 
-void cat(char cmd[512][512], int flag1, int flag2, int posn, int last) {
+void cat(char cmd[512][512], int flag1, int flag2, int posn) {
     // fgets(userInp, sizeof(userInp), stdin);
     // i (flag1!=-1) {
     //     if (cmf[flag1])
@@ -444,30 +444,65 @@ void cat(char cmd[512][512], int flag1, int flag2, int posn, int last) {
     cmd[last-1][strcspn(cmd[last-1], "\n")]=0;
 
     int n = 0;
+    int c = 0
     if (flag1!=-1) {
         if (cmd[flag1][1]=='n' || cmd[flag1][1]=='N') {
             n = 1;
+        } else if (cmd[flag1][0]=='>') {
+            c = 1;
+        } else {
+            printf("Invalid flag entered.\n");
+            return;
+        }
+    }
+    if (flag2!=-1) {
+        if (cmd[flag2][1]=='n' || cmd[flag2][1]=='N') {
+            n = 1;
+        } else if (cmd[flag2][0]=='>') {
+            c = 1;
+        } else {
+            printf("Invalid flag entered.\n");
+            return;
         }
     }
 
     FILE *file;
     char text[1024];
-    file = fopen(cmd[posn], "r");
 
-    if (file==NULL) {
-        printf("Error: File not found.\n");
-        return;
-    } 
+    if (c==0) {
+        file = fopen(cmd[posn], "r");
 
-    if (n == 0) {
-        while (fgets(text, 1024, file)!=NULL) {
-           printf("%s", text);
+        if (file==NULL) {
+            printf("Error: File not found.\n");
+            return;
+        } 
+
+        if (n == 0) {
+            while (fgets(text, 1024, file)!=NULL) {
+            printf(text);
+            }
+        } else {
+            int line = 1;
+            while (fgets(text, 1024, file)!=NULL) {
+            printf("%d %s", line, text);
+            line +=1;
+            }
         }
     } else {
-        int line = 1;
-        while (fgets(text, 1024, file)!=NULL) {
-           printf("%d %s", line, text);
-           line +=1;
+        file = fopen(cmd[posn], "w");
+
+        //reference: https://stackoverflow.com/questions/4217037/catch-ctrl-c-in-c
+        static volatile sig_atomic_t active = 1;
+        static void interrupter(int x) {
+            // (void) x;
+            active = 0;
+        }
+
+        signal(SIGINT, interrupter);
+
+        while(active) {
+            fgets(text, 1024, stdin);
+            fprintf(file, text);
         }
     }
     
@@ -549,7 +584,7 @@ void shell() {
         } else if (strcmp(splitString[0], "date")==0) {
             date_(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, argLen); 
         } else if (strcmp(splitString[0], "cat")==0) {
-            cat(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, argLen); 
+            cat(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken); 
         } else {
             puts("Error: command not found.");
         }
