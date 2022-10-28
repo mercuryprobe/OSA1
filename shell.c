@@ -540,9 +540,23 @@ void cat(char cmd[512][512], int flag1, int flag2, int posn, int last) {
 }
 
 static int a = 0;
+int isSym(const char file[]) {
+    //returns 0 if file is symlink, 1 otherwise
+    //reference[1]: https://man7.org/linux/man-pages/man3/lstat.3p.html
+    //reference[2]: https://www.linuxquestions.org/questions/programming-9/checking-whether-a-file-is-symbolic-link-or-not-274533/
+    
+    struct stat fileStat;
+    int res = lstat(file, &fileStat); 
+    
+    if (res==0) {
+        if (S_ISLNK(fileStat.st_mode) == 1) {
+            return 0;
+        }
+    }
+    return 1;
+}
 int lister(const char *path, const struct stat *s, int flag, struct FTW *ftw) {
     // lister function, run on every node (directory) during file tree walk by nftw
-
     DIR *directory;
     directory = opendir(path);
 
@@ -561,10 +575,12 @@ int lister(const char *path, const struct stat *s, int flag, struct FTW *ftw) {
         
         while (dirStruc!=NULL) {
             //print files in a directory
-            if ((a==1 && ((dirStruc->d_name)[0]=='.')) || ((dirStruc->d_name)[0]!='.')) {
-                printf("%s  ", dirStruc->d_name);
+            if (isSym(dirStruc->d_name)==0) {
+                if ((a==1 && ((dirStruc->d_name)[0]=='.')) || ((dirStruc->d_name)[0]!='.')) {
+                    printf("%s  ", dirStruc->d_name);
+                }
+                dirStruc = readdir(directory);
             }
-            dirStruc = readdir(directory);
         }
         printf("\n\n");
     }
