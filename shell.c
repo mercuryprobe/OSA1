@@ -218,7 +218,7 @@ void rm(char cmd[512][512], int flag1, int flag2, int posn, int last) {
         }
     } else {
         for (i; i<last; i++){
-            removeResult = nftw(cmd[posn], remover, FOPEN_MAX, FTW_DEPTH);
+            removeResult = nftw(cmd[i], remover, FOPEN_MAX, FTW_DEPTH);
 
             if (removeResult!=0 & multiple==1) {
                 printf("Error encountered while deleting %s\n", cmd[i]);
@@ -537,28 +537,68 @@ void cat(char cmd[512][512], int flag1, int flag2, int posn, int last) {
     
 }
 
-void ls(char cmd[512][512], int flag1, int flag2, int posn, int last) {
-    cmd[last-1][strcspn(cmd[last-1], "\n")]=0;
-
+int lister(const char *path, const struct stat *s, int flag, struct FTW *ftw) {
     DIR *directory;
-    if (last==2) {
-        //input is <ls path>
-        directory = opendir(cmd[posn]);
-    } else {
-        //input is <ls>
-        char cwd[256];
-        getcwd(cwd, sizeof(cwd));
-        directory = opendir(cwd);
-    }
-    
-    struct dirent *dirStruc = readdir(directory);
+    directory = opendir(path);
+    printf(path);
     while (dirStruc!=NULL) {
-        if ((dirStruc->d_name)[0]!='.') {
-                printf("%s   ", dirStruc->d_name);
-            }
+        if ((a==0) && ((dirStruc->d_name)[0]!='.')) {
+            printf("%s  ", dirStruc->d_name);
+        }
         dirStruc = readdir(directory);
     }
     printf("\n");
+    return 0;
+}
+void ls(char cmd[512][512], int flag1, int flag2, int posn, int last) {
+    cmd[last-1][strcspn(cmd[last-1], "\n")]=0;
+
+    //flag check
+    int a = 0;
+    int r = 0;
+    if (flag1!=-1) {
+        if (cmd[flag1][1]=='a') {
+            a = 1;
+        } else if (cmd[flag1][1]=='r' || cmd[flag1][1]=='R') {
+            r = 1;
+        } else {
+            printf("Invalid flag entered.\n");
+            return;
+        }
+    }
+    if (flag2!=-1) {
+        if (cmd[flag2][1]=='a') {
+            a = 1;
+        } else if (cmd[flag2][1]=='r' || cmd[flag2][1]=='R') {
+            r = 1;
+        } else {
+            printf("Invalid flag entered.\n");
+            return;
+        }
+    }
+
+    if (r==0) {DIR *directory;
+        if (last==2) {
+            //input is <ls path>
+            directory = opendir(cmd[posn]);
+        } else {
+            //input is <ls>
+            char cwd[256];
+            getcwd(cwd, sizeof(cwd));
+            directory = opendir(cwd);
+        }
+        
+        struct dirent *dirStruc = readdir(directory);
+        while (dirStruc!=NULL) {
+            if ((a==0) && ((dirStruc->d_name)[0]!='.')) {
+                printf("%s  ", dirStruc->d_name);
+            }
+            dirStruc = readdir(directory);
+        }
+        printf("\n");
+    } else {
+        nftw(cmd[posn], lister, FOPEN_MAX, FTW_DEPTH);
+    }
 }
 
 void shell() {
