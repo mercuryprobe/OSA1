@@ -617,7 +617,7 @@ void ls(char cmd[512][512], int flag1, int flag2, int posn, int last) {
             getcwd(cwd, sizeof(cwd));
             directory = opendir(cwd);
         }
-        
+
         struct dirent *dirStruc = readdir(directory);
         while (dirStruc!=NULL) {
             if ((a==1 && ((dirStruc->d_name)[0]=='.')) || ((dirStruc->d_name)[0]!='.')) {
@@ -634,6 +634,7 @@ void ls(char cmd[512][512], int flag1, int flag2, int posn, int last) {
             recurResult = nftw(cmd[posn], lister, FOPEN_MAX, FTW_DEPTH);
         } else {
             //input is <ls -r>
+            //DOES NOT WORK IF SYMLINKS PRESENT IN DIRECTORY. Handled by perror.
             char cwd[256];
             getcwd(cwd, sizeof(cwd));
             recurResult = nftw(cwd, lister, FOPEN_MAX, FTW_DEPTH);
