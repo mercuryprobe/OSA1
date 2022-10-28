@@ -540,9 +540,10 @@ void cat(char cmd[512][512], int flag1, int flag2, int posn, int last) {
 int lister(const char *path, const struct stat *s, int flag, struct FTW *ftw) {
     DIR *directory;
     directory = opendir(path);
+    struct dirent *dirStruc = readdir(directory);
     printf(path);
     while (dirStruc!=NULL) {
-        if ((a==0) && ((dirStruc->d_name)[0]!='.')) {
+        if ((dirStruc->d_name)[0]!='.') {
             printf("%s  ", dirStruc->d_name);
         }
         dirStruc = readdir(directory);
