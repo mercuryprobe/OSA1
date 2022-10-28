@@ -547,8 +547,9 @@ void ls(char cmd[512][512], int flag1, int flag2, int posn, int last) {
     while (dirStruc!=NULL) {
         printf("3\n");
         dirStruc = readdir(directory);
-        printf(dirStruc->d_name);
         printf("4\n");
+        printf(dirStruc->d_name);
+        printf("5\n");
     }
 }
 
