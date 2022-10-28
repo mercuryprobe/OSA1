@@ -559,9 +559,9 @@ int lister(const char *path, const struct stat *s, int flag, struct FTW *ftw) {
     // lister function, run on every node (directory) during file tree walk by nftw
     // printf("%s\n", path);
     DIR *directory;
-    if (isSym(path)==0) {
-        return 0;
-    }
+    // if (isSym(path)==0) {
+    //     return 0;
+    // }
     directory = opendir(path);
 
 
