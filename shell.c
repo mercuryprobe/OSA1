@@ -13,7 +13,6 @@
 
 //date
 #include <time.h>
-#include <dos.h>
 
 void cd(char cmd[512][512], int flag1, int flag2, int posn) {
     //Change directory
