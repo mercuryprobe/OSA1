@@ -6,6 +6,7 @@
         "stdio.h": "c",
         "stat.h": "c",
         "errno.h": "c",
-        "date_.h": "c"
+        "date_.h": "c",
+        "types.h": "c"
     }
 }

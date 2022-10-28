@@ -5,6 +5,11 @@
 #include <errno.h>
 #include <sys/types.h>
 #include <dirent.h>
+#define _XOPEN_SOURCE 500 
+#define __USE_XOPEN_EXTENDED 500
+#include <ftw.h>
+#include <limits.h>
+#include <sys/stat.h>  //mdkir
 
 static int a = 0;
 // int isSym(const char file[]) {

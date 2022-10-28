@@ -4,11 +4,11 @@
 #include <unistd.h>
 #include <errno.h>
 
-#include <cat_.h>
-#include <date_.h>
-#include <ls_.h>
-#include <mkdir_.h>
-#include <rm_.h>
+#include "cat_.h"
+#include "date_.h"
+#include "ls_.h"
+#include "mkdir_.h"
+#include "rm_.h"
 
 void cd(char cmd[512][512], int flag1, int flag2, int posn) {
     //Change directory
