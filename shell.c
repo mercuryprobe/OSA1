@@ -572,6 +572,7 @@ void ls(char cmd[512][512], int flag1, int flag2, int posn, int last) {
     cmd[last-1][strcspn(cmd[last-1], "\n")]=0;
 
     //flag check
+    printf("%s\n", last);
     int r = 0;
     if (flag1!=-1) {
         if (cmd[flag1][1]=='a') {
@@ -594,7 +595,7 @@ void ls(char cmd[512][512], int flag1, int flag2, int posn, int last) {
             return;
         }
     }
-    printf("%s\n", last);
+    
     if (r==0) {
         //non recursive flag
         DIR *directory;
