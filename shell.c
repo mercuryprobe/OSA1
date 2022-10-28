@@ -544,6 +544,7 @@ void ls(char cmd[512][512], int flag1, int flag2, int posn, int last) {
     struct dirent *dirStruc = readdir(directory);
     printf("3\n");
     printf(dirStruc->d_name);
+    printf("4\n");
 }
 
 void shell() {
