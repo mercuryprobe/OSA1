@@ -573,9 +573,10 @@ int lister(const char *path, const struct stat *s, int flag, struct FTW *ftw) {
 void ls(char cmd[512][512], int flag1, int flag2, int posn, int last) {
     printf("oh\n");
     if (last!=1) {
+        printf("oh1\n");
         cmd[last-1][strcspn(cmd[last-1], "\n")]=0;
     }
-    
+    printf("oh2\n");
     //flag check
     int r = 0;
     if (flag1!=-1) {
