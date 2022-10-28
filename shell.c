@@ -537,6 +537,7 @@ void cat(char cmd[512][512], int flag1, int flag2, int posn, int last) {
     
 }
 
+static int a = 0;
 int lister(const char *path, const struct stat *s, int flag, struct FTW *ftw) {
     
     // printf("hello1\n");
@@ -558,7 +559,7 @@ int lister(const char *path, const struct stat *s, int flag, struct FTW *ftw) {
         }
         
         while (dirStruc!=NULL) {
-            if ((dirStruc->d_name)[0]!='.') {
+            if ((a==1 && ((dirStruc->d_name)[0]=='.')) || ((dirStruc->d_name)[0]!='.')) {
                 printf("%s  ", dirStruc->d_name);
             }
             dirStruc = readdir(directory);
@@ -571,7 +572,6 @@ void ls(char cmd[512][512], int flag1, int flag2, int posn, int last) {
     cmd[last-1][strcspn(cmd[last-1], "\n")]=0;
 
     //flag check
-    int a = 0;
     int r = 0;
     if (flag1!=-1) {
         if (cmd[flag1][1]=='a') {
@@ -590,6 +590,7 @@ void ls(char cmd[512][512], int flag1, int flag2, int posn, int last) {
             r = 1;
         } else {
             printf("Invalid flag entered.\n");
+            a = 0;
             return;
         }
     }
@@ -608,18 +609,19 @@ void ls(char cmd[512][512], int flag1, int flag2, int posn, int last) {
         
         struct dirent *dirStruc = readdir(directory);
         while (dirStruc!=NULL) {
-            if ((a==0) && ((dirStruc->d_name)[0]!='.')) {
+            if ((a==1 && ((dirStruc->d_name)[0]=='.')) || ((dirStruc->d_name)[0]!='.')) {
                 printf("%s  ", dirStruc->d_name);
             }
             dirStruc = readdir(directory);
         }
         printf("\n");
     } else {
-        // printf("prenftw\n");
-        // printf("%s\n", cmd[posn]);
-        nftw(cmd[posn], lister, FOPEN_MAX, FTW_DEPTH);
-        // printf("postnftw\n");
+        int recurResult = nftw(cmd[posn], lister, FOPEN_MAX, FTW_DEPTH);
+        if (recurResult!=0) {
+            perror("Error");
+        }
     }
+    a = 0;
 }
 
 void shell() {
