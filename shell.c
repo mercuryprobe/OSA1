@@ -12,8 +12,9 @@
 #include <sys/stat.h>  //mdkir
 
 //date
-#define _XOPEN_SOURCE 1 
+// #define _XOPEN_SOURCE 1 
 #include <time.h>
+
 
 void cd(char cmd[512][512], int flag1, int flag2, int posn) {
     //Change directory
@@ -119,7 +120,6 @@ void pwd(char cmd[512][512], int flag1, int flag2) {
     printf("\n");
 }
 
-
 void echo(char cmd[512][512], int flag1, int flag2, int posn, int last) {
     //echoes input
     int newline = 1;
@@ -153,6 +153,7 @@ void echo(char cmd[512][512], int flag1, int flag2, int posn, int last) {
     }
 }
 
+
 int remover(const char *path, const struct stat *s, int flag, struct FTW *ftw) {
     //removes file if its not a directory (used with nftw)
     //reference[1]: https://man7.org/linux/man-pages/man3/ftw.3.html
@@ -163,6 +164,7 @@ int remover(const char *path, const struct stat *s, int flag, struct FTW *ftw) {
     int (*rm_func)(const char *) = remove;
     return rm_func(path);
 }
+
 void rm(char cmd[512][512], int flag1, int flag2, int posn, int last) {
     //removes file, supports multi input
     //flags: -d (directory - delete empty dir) -r (recursive - delete non empty directory)
@@ -423,7 +425,7 @@ void date_(char cmd[512][512], int flag1, int flag2, int posn, int last) {
             strcat(input, cmd[posn+2]);
 
             printf("%s\n", input);
-            strptime(input, format, inpTime);
+            // strptime(input, format, inpTime);
             time_t time = mktime(inpTime);
             printf(ctime(&time));
         }
