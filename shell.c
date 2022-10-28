@@ -554,7 +554,7 @@ void ls(char cmd[512][512], int flag1, int flag2, int posn, int last) {
     struct dirent *dirStruc = readdir(directory);
     while (dirStruc!=NULL) {
         if ((dirStruc->d_name)[0]!='.') {
-                printf("%s\t", dirStruc->d_name);
+                printf("%s   ", dirStruc->d_name);
             }
         dirStruc = readdir(directory);
     }
