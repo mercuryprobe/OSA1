@@ -604,7 +604,7 @@ void ls(char cmd[512][512], int flag1, int flag2, int posn, int last) {
         printf("1\n");
         printf("%d\n", last);
         DIR *directory;
-        if (last==2 && cmd[posn]=='') {
+        if (last==2 && (strcmp(cmd[posn], "")==0)) {
             last-=1;
         }
         if (last>=2) {
