@@ -601,25 +601,23 @@ void ls(char cmd[512][512], int flag1, int flag2, int posn, int last) {
     
     if (r==0) {
         //non recursive flag
-        printf("1\n");
-        printf("%d\n", last);
         DIR *directory;
+
         if (last==2 && (strcmp(cmd[posn], "")==0)) {
+            //edge case: input <ls >
             last-=1;
         }
+
         if (last>=2) {
             //input is <ls path> or edge case: <ls path ...(ignored)..>
             directory = opendir(cmd[posn]);
         } else {
             //input is <ls>
-            printf("2\n");
             char cwd[256];
             getcwd(cwd, sizeof(cwd));
-            printf("3\n");
             directory = opendir(cwd);
-            printf("4\n");
         }
-        printf("5\n");
+        
         struct dirent *dirStruc = readdir(directory);
         while (dirStruc!=NULL) {
             if ((a==1 && ((dirStruc->d_name)[0]=='.')) || ((dirStruc->d_name)[0]!='.')) {
