@@ -547,14 +547,8 @@ void ls(char cmd[512][512], int flag1, int flag2, int posn, int last) {
     } else {
         //input is <ls>
         char cwd[256];
-        int cwdResult = getcwd(cwd, sizeof(cwd));
-
-        if (cwdResult==0) {
-            directory = opendir(cwd);
-        } else {
-            perror("Error");
-            return;
-        }
+        getcwd(cwd, sizeof(cwd));
+        directory = opendir(cwd);
     }
     
     struct dirent *dirStruc = readdir(directory);
