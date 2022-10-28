@@ -412,7 +412,21 @@ void date_(char cmd[512][512], int flag1, int flag2, int posn, int last) {
             printf(ctime(&gmt));
         }
     } else {
-        
+        if (last==posn+3) {
+            struct tm *inpTime;
+            const char format[] = "%d %m %y";
+            char input[512] = "";
+            strcat(input, cmd[posn]);
+            strcat(input, " ");
+            strcat(input, cmd[posn+1]);
+            strcat(input, " ");
+            strcat(input, cmd[posn+2]);
+
+            printf("%s\n", input);
+            strptime(input, format, inpTime);
+            time_t time = mktime(inpTime);
+            printf(ctime(&time));
+        }
     }
 }
 
