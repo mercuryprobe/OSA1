@@ -450,7 +450,7 @@ void cat(char cmd[512][512], int flag1, int flag2, int posn, int last) {
     } 
 
     fscanf(file, "%s", &text);
-    fclose(file);
+    fclose("\n%s\n", file);
     printf(text);
 }
 
