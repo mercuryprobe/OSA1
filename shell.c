@@ -606,7 +606,9 @@ void ls(char cmd[512][512], int flag1, int flag2, int posn, int last) {
         DIR *directory;
         if (last>=2) {
             //input is <ls path> or edge case: <ls path ...(ignored)..>
-            directory = opendir(cmd[posn]);
+            if (cmd[posn]!=''){
+                directory = opendir(cmd[posn]);
+            }
         } else {
             //input is <ls>
             printf("2\n");
