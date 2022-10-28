@@ -603,7 +603,7 @@ void ls(char cmd[512][512], int flag1, int flag2, int posn, int last) {
         //non recursive flag
         printf("1\n");
         printf(last);
-        prntf("\n");
+        printf("\n");
         DIR *directory;
         if (last>=2) {
             //input is <ls path> or edge case: <ls path ...(ignored)..>
