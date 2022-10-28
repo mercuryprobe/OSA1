@@ -544,10 +544,10 @@ int lister(const char *path, const struct stat *s, int flag, struct FTW *ftw) {
     // printf("hello2\n");
     directory = opendir(path);
     // printf("hello3\n");
-    
+
     if (directory!=NULL) {    
         struct dirent *dirStruc = readdir(directory);
-        printf("%s\n\t"path);
+        printf("%s\n\t", path);
         
         while (dirStruc!=NULL) {
             if ((dirStruc->d_name)[0]!='.') {
