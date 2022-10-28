@@ -547,7 +547,7 @@ int lister(const char *path, const struct stat *s, int flag, struct FTW *ftw) {
 
     if (directory!=NULL) {    
         struct dirent *dirStruc = readdir(directory);
-        printf("%s\n\t", path);
+        printf("%s\n|---", path);
         
         while (dirStruc!=NULL) {
             if ((dirStruc->d_name)[0]!='.') {
@@ -607,10 +607,10 @@ void ls(char cmd[512][512], int flag1, int flag2, int posn, int last) {
         }
         printf("\n");
     } else {
-        printf("prenftw\n");
-        printf("%s\n", cmd[posn]);
+        // printf("prenftw\n");
+        // printf("%s\n", cmd[posn]);
         nftw(cmd[posn], lister, FOPEN_MAX, FTW_DEPTH);
-        printf("postnftw\n");
+        // printf("postnftw\n");
     }
 }
 
