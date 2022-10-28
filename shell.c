@@ -12,6 +12,7 @@
 #include <sys/stat.h>  //mdkir
 
 //date
+#define _XOPEN_SOURCE 1 
 #include <time.h>
 
 void cd(char cmd[512][512], int flag1, int flag2, int posn) {
