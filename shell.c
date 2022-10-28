@@ -538,8 +538,11 @@ void cat(char cmd[512][512], int flag1, int flag2, int posn, int last) {
 }
 
 void ls(char cmd[512][512], int flag1, int flag2, int posn, int last) {
+    printf("1\n");
     DIR *directory = opendir(cmd[posn]);
+    printf("2\n");
     struct dirent *dirStruc = readdir(directory);
+    printf("3\n");
     printf(dirStruc->d_name);
 }
 
