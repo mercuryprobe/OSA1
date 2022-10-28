@@ -404,6 +404,7 @@ void date_(char cmd[512][512], int flag1, int flag2, int posn, int last) {
         }
     }
 
+    cmd[last-1][strcspn(cmd[last], "\n")]=0;
     if (d==0) {
         time_t t;
         time(&t);
@@ -439,7 +440,7 @@ void cat(char cmd[512][512], int flag1, int flag2, int posn, int last) {
     // i (flag1!=-1) {
     //     if (cmf[flag1])
     // }
-
+    cmd[last-1][strcspn(cmd[last], "\n")]=0;
     FILE *file;
     char text[1024*4];
     file = fopen(cmd[posn], "r");
