@@ -452,9 +452,11 @@ void cat(char cmd[512][512], int flag1, int flag2, int posn, int last) {
         return;
     } 
 
-    fscanf(file, "%s", &text);
+    while (fgets(text, 1024, file)!=NULL) {
+        printf("%s\n", text);
+    }
     fclose(file);
-    printf("\n%s\n", text);
+    
 }
 
 void shell() {
