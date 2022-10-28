@@ -539,15 +539,13 @@ void cat(char cmd[512][512], int flag1, int flag2, int posn, int last) {
 
 void ls(char cmd[512][512], int flag1, int flag2, int posn, int last) {
     cmd[last-1][strcspn(cmd[last-1], "\n")]=0;
-    printf("1\n");
+
     DIR *directory = opendir(cmd[posn]);
-    printf("2\n");
     struct dirent *dirStruc = readdir(directory);
-    printf("3\n");
-    printf(dirStruc->d_name);
-    printf(dirStruc->d_name);
-    printf(dirStruc->d_name);
-    printf("4\n");
+    while (dirStruc!=NULL) {
+        dirStruc = readdir(directory);
+        printf(dirStruc->d_name);
+    }
 }
 
 void shell() {
