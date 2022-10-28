@@ -115,7 +115,7 @@ void mkdir_(char cmd[512][512], int flag1, int flag2, int posn, int last) {
     }
 
     if (mkdirResult==0) {
-        if (posn>=last) {
+        if (posn>last) {
             //edge case: no dirname entered
             printf("Error: Missing operand\n");
         }
