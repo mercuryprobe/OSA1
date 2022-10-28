@@ -175,7 +175,9 @@ void rm(char cmd[512][512], int flag1, int flag2, int posn, int last) {
     //removes file, supports multi input
     //flags: -d (directory - delete empty dir) -r (recursive - delete non empty directory)
 
-    cmd[last-1][strcspn(cmd[last-1], "\n")]=0;
+    if (last!=1) {
+        cmd[last-1][strcspn(cmd[last-1], "\n")]=0;
+    }
 
     int directory = 0;
     int recursive = 0;
@@ -570,7 +572,9 @@ int lister(const char *path, const struct stat *s, int flag, struct FTW *ftw) {
 }
 void ls(char cmd[512][512], int flag1, int flag2, int posn, int last) {
     printf("oh\n");
-    cmd[last-1][strcspn(cmd[last-1], "\n")]=0;
+    if (last!=1) {
+        cmd[last-1][strcspn(cmd[last-1], "\n")]=0;
+    }
     
     //flag check
     int r = 0;
