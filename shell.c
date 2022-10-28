@@ -273,6 +273,7 @@ void mkdir_(char cmd[512][512], int flag1, int flag2, int posn, int last) {
     //flags: -m (modes), -v (verbose)
     last -= 1;
 
+    //flag detection
     int verbose = 0;
     int modeFlag = 0;
     char mode[4];
@@ -321,6 +322,7 @@ void mkdir_(char cmd[512][512], int flag1, int flag2, int posn, int last) {
 
                     posn+=1;
                     if (posn>last) {
+                        //edge case: dirname not entered
                         printf("Error: No directory entered.\n");
                         return;
                     }
@@ -345,6 +347,7 @@ void mkdir_(char cmd[512][512], int flag1, int flag2, int posn, int last) {
     int mkdirResult = 0;
     int i = posn;
     for (i; i<(last+1); i++) {
+        //makes directory, A: All permissions (rwx) is default
         char modeChar;
         if (modeFlag == 0 || (strcmp(mode, "rwx")==0) || (strcmp(mode, "RWX")==0)) {
             mkdirResult = mkdir(cmd[i], S_IRWXU);
@@ -363,6 +366,7 @@ void mkdir_(char cmd[512][512], int flag1, int flag2, int posn, int last) {
             return;
         }
         if ((mkdirResult!=0) && (multiple==1)) {
+            //edge case: error making one of multiple dirnames
             printf("Error while making directory: %s\n", cmd[i]);
             break;
         }
@@ -374,12 +378,14 @@ void mkdir_(char cmd[512][512], int flag1, int flag2, int posn, int last) {
 
     if (mkdirResult==0) {
         if (posn>=last) {
+            //edge case: no dirname entered
             printf("Error: Missing operand\n");
         }
         return;
     } else {
         perror("Error");
         if (multiple==1 && (i!=last)) {
+            //if multiple dirs have been mentioned
             printf("Skipping...\n");
             mkdir_(cmd, flag1, flag2, i+1, last+1);
         }
@@ -387,7 +393,10 @@ void mkdir_(char cmd[512][512], int flag1, int flag2, int posn, int last) {
 }
 
 void date_(char cmd[512][512], int flag1, int flag2, int posn, int last) {
+    //date
+    //flags: -u (UTC-Time), -R (RTF time)
 
+    //flag detection
     int u = 0;
     int d = 0;
     if (flag1!=-1) {
@@ -413,8 +422,10 @@ void date_(char cmd[512][512], int flag1, int flag2, int posn, int last) {
         time(&t);
         
         if (u==0) {
+            //default output
             printf(ctime(&t));
         } else {
+            //GMT time
             struct tm *gmtTm = gmtime(&t);
             time_t gmt = mktime(gmtTm);
             printf(ctime(&gmt));
@@ -444,6 +455,9 @@ static void interrupter(int x) {
     active = 0;
 }
 void cat(char cmd[512][512], int flag1, int flag2, int posn, int last) {
+    //cat
+    //flags: -n (line numbering) and > (newfile)
+    //press Ctrl+C to exit newfile text input
     cmd[last-1][strcspn(cmd[last-1], "\n")]=0;
 
     //flag check
@@ -499,7 +513,7 @@ void cat(char cmd[512][512], int flag1, int flag2, int posn, int last) {
             // printf("posn: %d\nlast: %d\n");
             file = fopen(cmd[posn], "w");
             
-            signal(SIGINT, interrupter);
+            signal(SIGINT, interrupter); //detect sys interrupt
             while(active) {
                 fgets(text, 1024, stdin);
                 if (active ==1) {
