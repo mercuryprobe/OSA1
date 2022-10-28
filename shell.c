@@ -538,23 +538,24 @@ void cat(char cmd[512][512], int flag1, int flag2, int posn, int last) {
 }
 
 int lister(const char *path, const struct stat *s, int flag, struct FTW *ftw) {
-    printf(path);
-    // printf("hello1\n");
-    // DIR *directory;
-    // printf("hello2\n");
-    // directory = opendir(path);
-    // printf("hello3\n");
     
-    // struct dirent *dirStruc = readdir(directory);
-    // printf(path);
-    
-    // while (dirStruc!=NULL) {
-    //     if ((dirStruc->d_name)[0]!='.') {
-    //         printf("%s  ", dirStruc->d_name);
-    //     }
-    //     dirStruc = readdir(directory);
-    // }
-    // printf("\n");
+    printf("hello1\n");
+    DIR *directory;
+    printf("hello2\n");
+    directory = opendir(path);
+    printf("hello3\n");
+    if (directory!=NULL) {    
+        struct dirent *dirStruc = readdir(directory);
+        printf(path);
+        
+        while (dirStruc!=NULL) {
+            if ((dirStruc->d_name)[0]!='.') {
+                printf("%s  ", dirStruc->d_name);
+            }
+            dirStruc = readdir(directory);
+        }
+        printf("\n");
+    }
     return 0;
 }
 void ls(char cmd[512][512], int flag1, int flag2, int posn, int last) {
