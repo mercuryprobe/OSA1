@@ -495,7 +495,7 @@ void cat(char cmd[512][512], int flag1, int flag2, int posn, int last) {
             }
         }
     } else {
-        if (posn!=last-1){
+        if (last==2){
             file = fopen(cmd[posn], "w");
             
             signal(SIGINT, interrupter);
