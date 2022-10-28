@@ -445,7 +445,7 @@ void cat(char cmd[512][512], int flag1, int flag2, int posn, int last) {
 
     FILE *file;
     char text[1024*4];
-    file = fopen(cmd[posn], "r");
+    file = fopen("hey", "r");
 
     if (file==NULL) {
         printf("Error: File not found.\n");
