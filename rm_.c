@@ -3,13 +3,11 @@
 #include <string.h>
 #include <unistd.h>
 #include <errno.h>
-
-//rm
 #define _XOPEN_SOURCE 500 
 #define __USE_XOPEN_EXTENDED 500
 #include <ftw.h>
 #include <limits.h>
-#include <sys/stat.h>  //mdkir
+#include <sys/stat.h> 
 
 
 int remover(const char *path, const struct stat *s, int flag, struct FTW *ftw) {
