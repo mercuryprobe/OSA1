@@ -559,6 +559,9 @@ int lister(const char *path, const struct stat *s, int flag, struct FTW *ftw) {
     // lister function, run on every node (directory) during file tree walk by nftw
     DIR *directory;
     directory = opendir(path);
+    if (isSym(path)==0) {
+        return 0;
+    }
 
     if (directory!=NULL) {    
         struct dirent *dirStruc = readdir(directory);
