@@ -543,6 +543,7 @@ int lister(const char *path, const struct stat *s, int flag, struct FTW *ftw) {
     printf("hello2\n");
     directory = opendir(path);
     printf("hello3\n");
+    printf(path);
     struct dirent *dirStruc = readdir(directory);
     printf(path);
     
@@ -582,7 +583,8 @@ void ls(char cmd[512][512], int flag1, int flag2, int posn, int last) {
         }
     }
 
-    if (r==0) {DIR *directory;
+    if (r==0) {
+        DIR *directory;
         if (last==2) {
             //input is <ls path>
             directory = opendir(cmd[posn]);
