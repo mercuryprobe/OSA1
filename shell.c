@@ -435,7 +435,13 @@ void date_(char cmd[512][512], int flag1, int flag2, int posn, int last) {
     }
 }
 
-void cat(char cmd[512][512], int flag1, int flag2, int posn) {
+static volatile sig_atomic_t active = 1;
+static void interrupter(int x) {
+    //reference: https://stackoverflow.com/questions/4217037/catch-ctrl-c-in-c
+    // (void) x;
+    active = 0;
+}
+void cat(char cmd[512][512], int flag1, int flag2, int posn, int last) {
     // fgets(userInp, sizeof(userInp), stdin);
     // i (flag1!=-1) {
     //     if (cmf[flag1])
@@ -444,7 +450,7 @@ void cat(char cmd[512][512], int flag1, int flag2, int posn) {
     cmd[last-1][strcspn(cmd[last-1], "\n")]=0;
 
     int n = 0;
-    int c = 0
+    int c = 0;
     if (flag1!=-1) {
         if (cmd[flag1][1]=='n' || cmd[flag1][1]=='N') {
             n = 1;
@@ -491,15 +497,7 @@ void cat(char cmd[512][512], int flag1, int flag2, int posn) {
     } else {
         file = fopen(cmd[posn], "w");
 
-        //reference: https://stackoverflow.com/questions/4217037/catch-ctrl-c-in-c
-        static volatile sig_atomic_t active = 1;
-        static void interrupter(int x) {
-            // (void) x;
-            active = 0;
-        }
-
         signal(SIGINT, interrupter);
-
         while(active) {
             fgets(text, 1024, stdin);
             fprintf(file, text);
@@ -584,7 +582,7 @@ void shell() {
         } else if (strcmp(splitString[0], "date")==0) {
             date_(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, argLen); 
         } else if (strcmp(splitString[0], "cat")==0) {
-            cat(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken); 
+            cat(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, , argLen); 
         } else {
             puts("Error: command not found.");
         }
