@@ -184,8 +184,12 @@ void shell() {
         int flag1Taken = 0;
         int flag2Taken = 0;
         i=0;
+        int thread = 0;
         for (i; i<argLen; i++){
             // printf("%d\n", i);
+            if (strcmp(splitString[i], "&t")==0) {
+                thread = 1;
+            }
             if (splitString[i][0] == '-' || ((strcmp(splitString[0], "cat")==0) && (splitString[i][0] == '>'))) {
                 //detect flags, if any
                 // printf("Flag detected\n");
