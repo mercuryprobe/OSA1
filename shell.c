@@ -386,16 +386,16 @@ void date_(char cmd[512][512], int flag1, int flag2, int posn, int last) {
         if (cmd[flag1][1]=='u' || cmd[flag1][1]=='U') {
             u = 1;
         }
-        if ((cmd[flag1][1]=='s' || cmd[flag1][1]=='S')) {
-            s = 1;
+        if ((cmd[flag1][1]=='d' || cmd[flag1][1]=='D')) {
+            d = 1;
         }
     }
     if (flag2!=-1) {
         if (cmd[flag2][1]=='u' || cmd[flag2][1]=='U') {
             u = 1;
         }
-        if ((cmd[flag2][1]=='s' || cmd[flag2][1]=='S')) {
-            s = 1;
+        if ((cmd[flag2][1]=='d' || cmd[flag2][1]=='D')) {
+            d = 1;
         }
     }
 
