@@ -474,7 +474,7 @@ void cat(char cmd[512][512], int flag1, int flag2, int posn, int last) {
 
     FILE *file;
     char text[1024];
-
+    printf("uh0\n");
     if (c==0) {
         file = fopen(cmd[posn], "r");
 
@@ -496,14 +496,15 @@ void cat(char cmd[512][512], int flag1, int flag2, int posn, int last) {
         }
     } else {
         file = fopen(cmd[posn], "w");
-
+        printf("uh1\n");
         signal(SIGINT, interrupter);
         while(active) {
             fgets(text, 1024, stdin);
             fprintf(file, text);
         }
+        printf("uh2\n");
     }
-    
+    printf("uh3\n");
     fclose(file);
     
 }
