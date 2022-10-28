@@ -404,7 +404,7 @@ void date_(char cmd[512][512], int flag1, int flag2, int posn, int last) {
         }
     }
 
-    cmd[last-1][strcspn(cmd[last], "\n")]=0;
+    cmd[last-1][strcspn(cmd[last-1], "\n")]=0;
     if (d==0) {
         time_t t;
         time(&t);
@@ -441,7 +441,7 @@ void cat(char cmd[512][512], int flag1, int flag2, int posn, int last) {
     //     if (cmf[flag1])
     // }
     // printf(cmd[posn]);
-    cmd[last-1][strcspn(cmd[last], "\n")]=0;
+    cmd[last-1][strcspn(cmd[last-1], "\n")]=0;
 
     FILE *file;
     char text[1024];
