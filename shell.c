@@ -163,7 +163,7 @@ void shell() {
         fgets(userInp, sizeof(userInp), stdin);
         
         //tokenise input
-        struct splitStruc tokens = tokenise(char userInp[512]);
+        struct splitStruc tokens = tokenise(userInp);
         char splitString[512][512] = tokens.splitString;
         int argLen = tokens.argLen;
 
