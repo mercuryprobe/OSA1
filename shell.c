@@ -170,21 +170,21 @@ void shell() {
         char* tokenInput;
         tokenInput = strtok(userInp, space);
 
-        struct splitStruc tokens;
+        char splitString[512][512];
         int i = 0;
         while (tokenInput!=NULL) {
-            strcpy(tokens.splitString[i], tokenInput);
+            strcpy(splitString[i], tokenInput);
             tokenInput = strtok(NULL, space);
             i+=1;
         }
-        tokens.argLen = i;
+        int argLen = i;
 
         while (i<512) {
-            tokens.splitString[i][0] = 0;
+            splitString[i][0] = 0;
             i+=1;
         }
 
-        tokens.splitString[0][strcspn(tokens.splitString[0], "\n")]=0;
+        splitString[0][strcspn(splitString[0], "\n")]=0;
 
         //get flag info
         int flag1 = -1;
@@ -196,10 +196,10 @@ void shell() {
         int thread = 0;
         for (i; i<argLen; i++) {
             // printf("%d\n", i);
-            if (strcmp(tokens.splitString[i], "&t")==0) {
+            if (strcmp(splitString[i], "&t")==0) {
                 thread = 1;
             }
-            if (tokens.splitString[i][0] == '-' || ((strcmp(tokens.[0], "cat")==0) && (tokens.splitString[i][0] == '>'))) {
+            if (splitString[i][0] == '-' || ((strcmp(splitString[0], "cat")==0) && (splitString[i][0] == '>'))) {
                 //detect flags, if any
                 // printf("Flag detected\n");
                 if (flag1Taken == 0){
@@ -215,27 +215,27 @@ void shell() {
             }
         }
 
-        if ((strcmp(tokens.splitString[0], "exit")==0) || (strcmp(tokens.splitString[0], "e")==0)) {
+        if ((strcmp(splitString[0], "exit")==0) || (strcmp(splitString[0], "e")==0)) {
             //exit
             puts("Exiting...");
             return;
 
         //internals
-        } else if (strcmp(tokens.splitString[0], "cd")==0) {
-            cd(tokens.splitString, flag1, flag2, 1 + flag1Taken + flag2Taken);
-        } else if (strcmp(tokens.splitString[0], "pwd")==0) {
-            pwd(tokens.splitString, flag1, flag2); 
-        } else if (strcmp(tokens.splitString[0], "echo")==0) {
-            echo(tokens.splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, tokens.argLen);
+        } else if (strcmp(splitString[0], "cd")==0) {
+            cd(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken);
+        } else if (strcmp(splitString[0], "pwd")==0) {
+            pwd(splitString, flag1, flag2); 
+        } else if (strcmp(splitString[0], "echo")==0) {
+            echo(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, argLen);
 
         //internals
-        } else if (strcmp(tokens.splitString[0], "rm")==0) {
-            rm(tokens.splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, tokens.argLen);
-        } else if (strcmp(tokens.splitString[0], "mkdir")==0) {
-            mkdir_(tokens.splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, tokens.argLen);
-        } else if (strcmp(tokens.splitString[0], "date")==0) {
-            date_(tokens.splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, tokens.argLen); 
-        } else if (strcmp(tokens.splitString[0], "cat")==0) {
+        } else if (strcmp(splitString[0], "rm")==0) {
+            rm(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, tokens.argLen);
+        } else if (strcmp(splitString[0], "mkdir")==0) {
+            mkdir_(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, argLen);
+        } else if (strcmp(splitString[0], "date")==0) {
+            date_(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, argLen); 
+        } else if (strcmp(splitString[0], "cat")==0) {
             pid_t pid = fork();
             if (pid==0) {
                 char curLoc[1024];
@@ -247,9 +247,9 @@ void shell() {
             } else {
                 puts("Critical Error: fork failure.");
             }
-            // cat(tokens.splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, tokens.argLen); 
-        } else if (strcmp(tokens.splitString[0], "ls")==0) {
-            ls(tokens.splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, tokens.argLen); 
+            // cat(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, argLen); 
+        } else if (strcmp(splitString[0], "ls")==0) {
+            ls(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, argLen); 
         } else {
             puts("Error: command not found.");
         }
