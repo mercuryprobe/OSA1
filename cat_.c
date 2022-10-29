@@ -96,6 +96,7 @@ void cat(char **cmd, int flag1, int flag2, int posn, int last) {
 int main(int argc, char *argv[]) {
     //tokenise input
     // struct splitStruc tokens = tokenise(argv[0]);
+    puts("UH");
 
     argv[0][strcspn(argv[0], "\n")]=0;
     //get flag info
