@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "flagStruc.h"
 
-int* flagger(char splitString[512][512], int argLen) {
+struct flagStruc flagger(char splitString[512][512], int argLen) {
     int flag1 = -1;
     int flag2 = -1;
 
@@ -30,6 +31,12 @@ int* flagger(char splitString[512][512], int argLen) {
             }
         }
     }
-    int flags[] = {flag1, flag2, flag1Taken, flag2Taken, thread};
-    return flags;
+    
+    struct flagStruc floogs;
+    floogs.flag1 = flag1;
+    floogs.flag2 = flag2;
+    floogs.flag1Taken = flag1Taken;
+    floogs.flag2Taken = flag2Taken;
+    floogs.thread = thread;
+    return floogs;
 }

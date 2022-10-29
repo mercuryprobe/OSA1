@@ -13,6 +13,7 @@
 //general
 #include "flags.h"
 #include "splitStruc.h"
+#include "flagStruc.h"
 #include "tokeniser.h"
 
 void cd(char cmd[512][512], int flag1, int flag2, int posn) {
@@ -166,13 +167,12 @@ void shell() {
         struct splitStruc tokens = tokenise(userInp);
 
         //get flag info
-        int flags[8];
-        memcpy(flags, flagger(tokens.splitString, tokens.argLen), 8);
-        int flag1 = flags[0];
-        int flag2 = flags[1];
-        int flag1Taken = flags[2];
-        int flag2Taken = flags[3];
-        int thread = flags[4]; //0 if no, 1 if yes
+        struct flagStruc floogs = flagger(tokens.splitString);
+        int flag1 = floogs.flag1;
+        int flag2 = floogs.flag2;
+        int flag1Taken = floogs.flag1Taken;
+        int flag2Taken = floogs.flag2Taken;
+        int thread = floogs.thread; //0 if no, 1 if yes
 
         if ((strcmp(tokens.splitString[0], "exit")==0) || (strcmp(tokens.splitString[0], "e")==0)) {
             //exit
