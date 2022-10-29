@@ -106,7 +106,7 @@ int main(int argc, char *argv[]) {
     int flag2Taken = floogs.flag2Taken;
 
     //run function
-    cat(argv, flag1, flag2, 1 + flag1Taken + flag2Taken, tokens.argLen);
+    cat(argv, flag1, flag2, 1 + flag1Taken + flag2Taken, argc+1);
 
     return 0;
 }
