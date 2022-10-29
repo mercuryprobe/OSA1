@@ -20,7 +20,7 @@ void cat(char **cmd, int flag1, int flag2, int posn, int last) {
     //flags: -n (line numbering) and > (newfile)
     //press Ctrl+C to exit newfile text input
     cmd[last-1][strcspn(cmd[last-1], "\n")]=0;
-
+    printf(cmd[posn]);
     //flag check
     int n = 0;
     int c = 0;
