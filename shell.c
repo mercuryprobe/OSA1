@@ -177,12 +177,14 @@ void shell() {
             //exit
             puts("Exiting...");
             return;
+            
         } else if (strcmp(splitString[0], "cd")==0) {
             cd(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken);
         } else if (strcmp(splitString[0], "pwd")==0) {
             pwd(splitString, flag1, flag2); 
         } else if (strcmp(splitString[0], "echo")==0) {
             echo(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, argLen);
+
         } else if (strcmp(splitString[0], "rm")==0) {
             rm(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, argLen);
         } else if (strcmp(splitString[0], "mkdir")==0) {
