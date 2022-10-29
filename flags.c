@@ -4,6 +4,7 @@
 #include "flagStruc.h"
 
 struct flagStruc flagger(char **splitString, int argLen) {
+    //uh test
     int flag1 = -1;
     int flag2 = -1;
 
