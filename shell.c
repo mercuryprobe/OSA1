@@ -204,7 +204,7 @@ void shell() {
                 strcat(curLoc, "/cat_.out");
                 execl(curLoc, curLoc, userInp, NULL);
             } else if(pid>0) {
-                wait();
+                wait(NULL);
             } else {
                 puts("Critical Error: fork failure.");
             }
