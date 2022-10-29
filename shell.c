@@ -192,7 +192,7 @@ void shell() {
 
         int flag1Taken = 0;
         int flag2Taken = 0;
-        int i=0;
+        i=0;
         int thread = 0;
         for (i; i<argLen; i++) {
             // printf("%d\n", i);
@@ -230,7 +230,7 @@ void shell() {
 
         //internals
         } else if (strcmp(splitString[0], "rm")==0) {
-            rm(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, tokens.argLen);
+            rm(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, argLen);
         } else if (strcmp(splitString[0], "mkdir")==0) {
             mkdir_(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, argLen);
         } else if (strcmp(splitString[0], "date")==0) {
