@@ -164,39 +164,37 @@ void shell() {
         
         //tokenise input
         struct splitStruc tokens = tokenise(userInp);
-        char splitString[512][512] = tokens.splitString;
-        int argLen = tokens.argLen;
 
         //get flag info
-        int flags[] = flagger(splitString, argLen);
+        int flags[] = flagger(tokens.splitString, tokens.argLen);
         int flag1 = flags[0];
         int flag2 = flags[1];
         int flag1Taken = flags[2];
         int flag2Taken = flags[3];
         int thread = flags[4]; //0 if no, 1 if yes
 
-        if ((strcmp(splitString[0], "exit")==0) || (strcmp(splitString[0], "e")==0)) {
+        if ((strcmp(tokens.splitString[0], "exit")==0) || (strcmp(tokens.splitString[0], "e")==0)) {
             //exit
             puts("Exiting...");
             return;
 
-        } else if (strcmp(splitString[0], "cd")==0) {
-            cd(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken);
-        } else if (strcmp(splitString[0], "pwd")==0) {
-            pwd(splitString, flag1, flag2); 
-        } else if (strcmp(splitString[0], "echo")==0) {
-            echo(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, argLen);
+        } else if (strcmp(tokens.splitString[0], "cd")==0) {
+            cd(tokens.splitString, flag1, flag2, 1 + flag1Taken + flag2Taken);
+        } else if (strcmp(tokens.splitString[0], "pwd")==0) {
+            pwd(tokens.splitString, flag1, flag2); 
+        } else if (strcmp(tokens.splitString[0], "echo")==0) {
+            echo(tokens.splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, tokens.argLen);
 
-        } else if (strcmp(splitString[0], "rm")==0) {
-            rm(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, argLen);
-        } else if (strcmp(splitString[0], "mkdir")==0) {
-            mkdir_(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, argLen);
-        } else if (strcmp(splitString[0], "date")==0) {
-            date_(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, argLen); 
-        } else if (strcmp(splitString[0], "cat")==0) {
-            cat(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, argLen); 
-        } else if (strcmp(splitString[0], "ls")==0) {
-            ls(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, argLen); 
+        } else if (strcmp(tokens.splitString[0], "rm")==0) {
+            rm(tokens.splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, tokens.argLen);
+        } else if (strcmp(tokens.splitString[0], "mkdir")==0) {
+            mkdir_(tokens.splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, tokens.argLen);
+        } else if (strcmp(tokens.splitString[0], "date")==0) {
+            date_(tokens.splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, tokens.argLen); 
+        } else if (strcmp(tokens.splitString[0], "cat")==0) {
+            cat(tokens.splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, tokens.argLen); 
+        } else if (strcmp(tokens.splitString[0], "ls")==0) {
+            ls(tokens.splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, tokens.argLen); 
         } else {
             puts("Error: command not found.");
         }
