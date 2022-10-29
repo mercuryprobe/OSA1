@@ -107,6 +107,7 @@ int main(int argc, char *argv[]) {
     for (int i = 1; i<argc; i++) {
         strcpy(splitString[i-1], argv[i]);
     }
+    printf("%d\n", argc);
     struct flagStruc floogs = flagger(argv, argc+1);
     puts("2");
     int flag1 = floogs.flag1;
