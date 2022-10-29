@@ -103,8 +103,8 @@ int main(int argc, char *argv[]) {
     puts("1");
     //get flag info
     
-    char *splitString[];
-    while(int i = 1; i<argc; i++) {
+    char *splitString[512];
+    for (int i = 1; i<argc; i++) {
         strcpy(splitString[i-1], argv[i]);
     }
     struct flagStruc floogs = flagger(argv, argc+1);
