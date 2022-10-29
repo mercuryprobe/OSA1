@@ -3,7 +3,7 @@
 #include <string.h>
 #include "flagStruc.h"
 
-struct flagStruc flagger(char splitString[512][512], int argLen) {
+struct flagStruc flagger(char **splitString, int argLen) {
     int flag1 = -1;
     int flag2 = -1;
 

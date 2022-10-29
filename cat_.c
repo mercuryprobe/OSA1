@@ -99,14 +99,14 @@ int main(int argc, char *argv[]) {
 
     argv[0][strcspn(argv[0], "\n")]=0;
     //get flag info
-    struct flagStruc floogs = flagger((char[512][512]) argv, argc+1);
+    struct flagStruc floogs = flagger(argv, argc+1);
     int flag1 = floogs.flag1;
     int flag2 = floogs.flag2;
     int flag1Taken = floogs.flag1Taken;
     int flag2Taken = floogs.flag2Taken;
 
     //run function
-    cat((char[512][512]) argv, flag1, flag2, 1 + flag1Taken + flag2Taken, argc+1);
+    cat(argv, flag1, flag2, 1 + flag1Taken + flag2Taken, argc+1);
 
     return 0;
 }
