@@ -94,7 +94,7 @@ void cat(char **cmd, int flag1, int flag2, int posn, int last) {
     fclose(file);
 } 
 
-int main(int argc, char *argv[]) {
+int main(char *argv[], int argc) {
     //tokenise input
     // struct splitStruc tokens = tokenise(argv[0]);
     
