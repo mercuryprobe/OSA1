@@ -15,7 +15,7 @@ static void interrupter(int x) {
     //reference: https://stackoverflow.com/questions/4217037/catch-ctrl-c-in-c
     active = 0;
 }
-void cat(char **cmd, int flag1, int flag2, int posn, int last) {
+void cat(char cmd[512][512], int flag1, int flag2, int posn, int last) {
     //cat
     //flags: -n (line numbering) and > (newfile)
     //press Ctrl+C to exit newfile text input
@@ -94,14 +94,14 @@ void cat(char **cmd, int flag1, int flag2, int posn, int last) {
     fclose(file);
 } 
 
-int main(char *argv[], int argc) {
+int main(int argc, char *argv[]) {
     //tokenise input
     // struct splitStruc tokens = tokenise(argv[0]);
     
     puts("1");
 
     //get flag info
-    char *splitString[512];
+    char splitString[512][512];
     for (int i = 1; i<argc; i++) {
         strcpy(splitString[i-1], argv[i]);
     }

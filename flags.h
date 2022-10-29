@@ -1,1 +1,1 @@
-struct flagStruc flagger(char **splitString, int argLen);
+struct flagStruc flagger(char splitString[512][512], int argLen);
