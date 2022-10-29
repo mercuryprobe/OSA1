@@ -179,6 +179,7 @@ void shell() {
             puts("Exiting...");
             return;
 
+        //internals
         } else if (strcmp(tokens.splitString[0], "cd")==0) {
             cd(tokens.splitString, flag1, flag2, 1 + flag1Taken + flag2Taken);
         } else if (strcmp(tokens.splitString[0], "pwd")==0) {
@@ -186,6 +187,7 @@ void shell() {
         } else if (strcmp(tokens.splitString[0], "echo")==0) {
             echo(tokens.splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, tokens.argLen);
 
+        //internals
         } else if (strcmp(tokens.splitString[0], "rm")==0) {
             rm(tokens.splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, tokens.argLen);
         } else if (strcmp(tokens.splitString[0], "mkdir")==0) {
