@@ -50,6 +50,7 @@ void cat(char cmd[512][512], int flag1, int flag2, int posn, int last) {
     
     if (c==0) {
         //if > isn't entered
+        printf(cmd[posn]);
         file = fopen(cmd[posn], "r");
 
         if (file==NULL) {
