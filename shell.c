@@ -13,10 +13,10 @@
 #include "rm_.h"
 
 //general
-#include "flags.h"
+// #include "flags.h"
 #include "splitStruc.h"
-#include "flagStruc.h"
-#include "tokeniser.h"
+// #include "flagStruc.h"
+// #include "tokeniser.h"
 
 void cd(char cmd[512][512], int flag1, int flag2, int posn) {
     //Change directory
@@ -166,15 +166,54 @@ void shell() {
         fgets(userInp, sizeof(userInp), stdin);
         
         //tokenise input
-        struct splitStruc tokens = tokenise(userInp);
+        const char space[2] = " ";
+        char* tokenInput;
+        tokenInput = strtok(userInp, space);
+
+        struct splitStruc tokens;
+        int i = 0;
+        while (tokenInput!=NULL) {
+            strcpy(tokens.splitString[i], tokenInput);
+            tokenInput = strtok(NULL, space);
+            i+=1;
+        }
+        tokens.argLen = i;
+
+        while (i<512) {
+            tokens.splitString[i][0] = 0;
+            i+=1;
+        }
+
+        tokens.splitString[0][strcspn(tokens.splitString[0], "\n")]=0;
 
         //get flag info
-        struct flagStruc floogs = flagger(tokens.splitString, tokens.argLen);
-        int flag1 = floogs.flag1;
-        int flag2 = floogs.flag2;
-        int flag1Taken = floogs.flag1Taken;
-        int flag2Taken = floogs.flag2Taken;
-        int thread = floogs.thread; //0 if no, 1 if yes
+        int flag1 = -1;
+        int flag2 = -1;
+
+        int flag1Taken = 0;
+        int flag2Taken = 0;
+        int i=0;
+        int thread = 0;
+        for (i; i<argLen; i++) {
+            // printf("%d\n", i);
+            if (strcmp(tokens.splitString[i], "&t")==0) {
+                thread = 1;
+            }
+            if (tokens.splitString[i][0] == '-' || ((strcmp(tokens.[0], "cat")==0) && (tokens.splitString[i][0] == '>'))) {
+                //detect flags, if any
+                // printf("Flag detected\n");
+                if (flag1Taken == 0){
+                    flag1 = i;
+                    flag1Taken = 1;
+                } else if (flag2Taken==0) {
+                    flag2 = i;
+                    flag2Taken = 1;
+                } else {
+                    printf("Error: Invalid number of flags detected.");
+                    continue;
+                }
+            }
+        }
 
         if ((strcmp(tokens.splitString[0], "exit")==0) || (strcmp(tokens.splitString[0], "e")==0)) {
             //exit
