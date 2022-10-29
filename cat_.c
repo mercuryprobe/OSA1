@@ -102,6 +102,8 @@ int main(int argc, char *argv[]) {
     argv[0][strcspn(argv[0], "\n")]=0;
     puts("1");
     //get flag info
+    puts(argv[0]);
+    puts(argv[1]);
     struct flagStruc floogs = flagger(argv, argc+1);
     puts("2");
     int flag1 = floogs.flag1;
