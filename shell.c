@@ -195,7 +195,17 @@ void shell() {
         } else if (strcmp(tokens.splitString[0], "date")==0) {
             date_(tokens.splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, tokens.argLen); 
         } else if (strcmp(tokens.splitString[0], "cat")==0) {
-            cat(tokens.splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, tokens.argLen); 
+            pid_t pid = fork();
+            if (pid==0) {
+                char curLoc[1024] = getcwd(NULL, 0);
+                strcat(curLoc, "/cat_.out");
+                execl(curLoc, curLoc, userInp, NULL);
+            } else if(pid>0) {
+                wait();
+            } else {
+                puts("Critical Error: fork failure.");
+            }
+            // cat(tokens.splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, tokens.argLen); 
         } else if (strcmp(tokens.splitString[0], "ls")==0) {
             ls(tokens.splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, tokens.argLen); 
         } else {

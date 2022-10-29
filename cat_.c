@@ -5,6 +5,11 @@
 #include <errno.h>
 #include <signal.h>
 
+#include "flags.h"
+#include "splitStruc.h"
+#include "flagStruc.h"
+#include "tokeniser.h"
+
 static volatile sig_atomic_t active = 1;
 static void interrupter(int x) {
     //reference: https://stackoverflow.com/questions/4217037/catch-ctrl-c-in-c
@@ -86,5 +91,21 @@ void cat(char cmd[512][512], int flag1, int flag2, int posn, int last) {
     }
     
     fclose(file);
-    
+} 
+
+int main(int argc, char *argv[]) {
+    //tokenise input
+    struct splitStruc tokens = tokenise(argv[0]);
+
+    //get flag info
+    struct flagStruc floogs = flagger(tokens.splitString, tokens.argLen);
+    int flag1 = floogs.flag1;
+    int flag2 = floogs.flag2;
+    int flag1Taken = floogs.flag1Taken;
+    int flag2Taken = floogs.flag2Taken;
+
+    //run function
+    cat(tokens.splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, tokens.argLen);
+
+    return 0;
 }
