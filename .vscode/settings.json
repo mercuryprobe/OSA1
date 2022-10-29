@@ -7,6 +7,8 @@
         "stat.h": "c",
         "errno.h": "c",
         "date_.h": "c",
-        "types.h": "c"
+        "types.h": "c",
+        "flags.h": "c",
+        "splitstruc.h": "c"
     }
 }

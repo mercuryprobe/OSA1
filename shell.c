@@ -10,6 +10,10 @@
 #include "mkdir_.h"
 #include "rm_.h"
 
+//general
+#include "flags.h"
+#include "splitStruc.h"
+
 void cd(char cmd[512][512], int flag1, int flag2, int posn) {
     //Change directory
     char originalCwd[256];
@@ -158,57 +162,17 @@ void shell() {
         fgets(userInp, sizeof(userInp), stdin);
         
         //tokenise input
-        const char space[2] = " ";
-        char* tokenInput;
-        tokenInput = strtok(userInp, space);
+        struct splitStruc tokens = tokenise(char userInp[512]);
+        char splitString[512][512] = tokens.splitString;
+        int argLens = tokens.argLen;
 
-        char splitString[512][512];
-        int i = 0;
-        while (tokenInput!=NULL) {
-            strcpy(splitString[i], tokenInput);
-            tokenInput = strtok(NULL, space);
-            i+=1;
-        }
-        int argLen = i;
-        // printf("%d\n", argLen);
+        //get flag info
+        int flags[] = flagger(splitString, argLen);
+        flag1 = flags[0];
+        flag2 = flags[1];
+        flag1Taken = flags[2];
+        flag2Taken = flags[3];
 
-        while (i<512) {
-            splitString[i][0] = 0;
-            i+=1;
-        }
-
-        
-        int flag1 = -1;
-        int flag2 = -1;
-
-        int flag1Taken = 0;
-        int flag2Taken = 0;
-        i=0;
-        int thread = 0;
-        for (i; i<argLen; i++){
-            // printf("%d\n", i);
-            if (strcmp(splitString[i], "&t")==0) {
-                thread = 1;
-            }
-            if (splitString[i][0] == '-' || ((strcmp(splitString[0], "cat")==0) && (splitString[i][0] == '>'))) {
-                //detect flags, if any
-                // printf("Flag detected\n");
-                if (flag1Taken == 0){
-                    flag1 = i;
-                    flag1Taken = 1;
-                } else if (flag2Taken==0) {
-                    flag2 = i;
-                    flag2Taken = 1;
-                } else {
-                    printf("Error: Invalid number of flags detected.");
-                    continue;
-                }
-            }
-        }
-        // printf("%d\n", flag1);
-        // printf("%d\n", flag2);
-        
-        splitString[0][strcspn(splitString[0], "\n")]=0;
         if ((strcmp(splitString[0], "exit")==0) || (strcmp(splitString[0], "e")==0)) {
             //exit
             puts("Exiting...");
