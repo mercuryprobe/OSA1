@@ -114,7 +114,7 @@ int main(int argc, char *argv[]) {
     int flag2 = floogs.flag2;
     int flag1Taken = floogs.flag1Taken;
     int flag2Taken = floogs.flag2Taken;
-    printf("%d %d %d %d\n", flags1, flag2, flag1Taken, flag2Taken);
+    printf("%d %d %d %d\n", flag1, flag2, flag1Taken, flag2Taken);
     //run function
     puts("3");
     cat(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, argc+1);
