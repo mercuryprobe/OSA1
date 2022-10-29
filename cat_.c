@@ -99,7 +99,7 @@ int main(int argc, char *argv[]) {
 
     argv[0][strcspn(argv[0], "\n")]=0;
     //get flag info
-    struct flagStruc floogs = flagger(argv, tokens.argLen);
+    struct flagStruc floogs = flagger(argv, argc+1);
     int flag1 = floogs.flag1;
     int flag2 = floogs.flag2;
     int flag1Taken = floogs.flag1Taken;
