@@ -3,6 +3,8 @@
 #include <string.h>
 #include <unistd.h>
 #include <errno.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 
 #include "cat_.h"
 #include "date_.h"
@@ -197,7 +199,8 @@ void shell() {
         } else if (strcmp(tokens.splitString[0], "cat")==0) {
             pid_t pid = fork();
             if (pid==0) {
-                char curLoc[1024] = getcwd(NULL, 0);
+                char curLoc[1024];
+                getcwd(curLoc, sizeof(curLoc));
                 strcat(curLoc, "/cat_.out");
                 execl(curLoc, curLoc, userInp, NULL);
             } else if(pid>0) {
