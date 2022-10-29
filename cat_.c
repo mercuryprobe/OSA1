@@ -99,16 +99,15 @@ int main(char *argv[], int argc) {
     // struct splitStruc tokens = tokenise(argv[0]);
     
     puts("1");
-    argv[0][strcspn(argv[0], "\n")]=0;
-    puts("1");
+
     //get flag info
-    
     char *splitString[512];
     for (int i = 1; i<argc; i++) {
         strcpy(splitString[i-1], argv[i]);
     }
     printf("%d\n", argc);
-    struct flagStruc floogs = flagger(argv, argc+1);
+    splitString[0][strcspn(splitString[0], "\n")]=0;
+    struct flagStruc floogs = flagger(splitString, argc+1);
     puts("2");
     int flag1 = floogs.flag1;
     int flag2 = floogs.flag2;
@@ -117,7 +116,7 @@ int main(char *argv[], int argc) {
 
     //run function
     puts("3");
-    cat(argv, flag1, flag2, 1 + flag1Taken + flag2Taken, argc+1);
+    cat(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, argc+1);
     puts("4");
 
     return 0;
