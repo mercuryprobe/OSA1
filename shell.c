@@ -13,6 +13,7 @@
 //general
 #include "flags.h"
 #include "splitStruc.h"
+#include "tokeniser.h"
 
 void cd(char cmd[512][512], int flag1, int flag2, int posn) {
     //Change directory
@@ -164,20 +165,21 @@ void shell() {
         //tokenise input
         struct splitStruc tokens = tokenise(char userInp[512]);
         char splitString[512][512] = tokens.splitString;
-        int argLens = tokens.argLen;
+        int argLen = tokens.argLen;
 
         //get flag info
         int flags[] = flagger(splitString, argLen);
-        flag1 = flags[0];
-        flag2 = flags[1];
-        flag1Taken = flags[2];
-        flag2Taken = flags[3];
+        int flag1 = flags[0];
+        int flag2 = flags[1];
+        int flag1Taken = flags[2];
+        int flag2Taken = flags[3];
+        int thread = flags[4]; //0 if no, 1 if yes
 
         if ((strcmp(splitString[0], "exit")==0) || (strcmp(splitString[0], "e")==0)) {
             //exit
             puts("Exiting...");
             return;
-            
+
         } else if (strcmp(splitString[0], "cd")==0) {
             cd(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken);
         } else if (strcmp(splitString[0], "pwd")==0) {

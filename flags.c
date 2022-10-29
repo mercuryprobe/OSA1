@@ -26,6 +26,6 @@ int* flagger(char splitString[512][512], int argLen) {
             }
         }
     }
-    int flags[] = {flag1, flag2, flag1Taken, flag2Taken};
+    int flags[] = {flag1, flag2, flag1Taken, flag2Taken, thread};
     return flags;
 }
