@@ -166,7 +166,8 @@ void shell() {
         struct splitStruc tokens = tokenise(userInp);
 
         //get flag info
-        int flags[] = flagger(tokens.splitString, tokens.argLen);
+        int flags[8];
+        memcpy(flags, flagger(tokens.splitString, tokens.argLen), 8);
         int flag1 = flags[0];
         int flag2 = flags[1];
         int flag1Taken = flags[2];
