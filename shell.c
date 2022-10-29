@@ -167,7 +167,7 @@ void shell() {
         struct splitStruc tokens = tokenise(userInp);
 
         //get flag info
-        struct flagStruc floogs = flagger(tokens.splitString);
+        struct flagStruc floogs = flagger(tokens.splitString, tokens.argLen);
         int flag1 = floogs.flag1;
         int flag2 = floogs.flag2;
         int flag1Taken = floogs.flag1Taken;
