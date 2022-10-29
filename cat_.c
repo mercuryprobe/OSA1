@@ -19,8 +19,9 @@ void cat(char **cmd, int flag1, int flag2, int posn, int last) {
     //cat
     //flags: -n (line numbering) and > (newfile)
     //press Ctrl+C to exit newfile text input
-    cmd[last-1][strcspn(cmd[last-1], "\n")]=0;
     printf(cmd[posn]);
+    cmd[last-1][strcspn(cmd[last-1], "\n")]=0;
+    
     //flag check
     int n = 0;
     int c = 0;
@@ -96,18 +97,22 @@ void cat(char **cmd, int flag1, int flag2, int posn, int last) {
 int main(int argc, char *argv[]) {
     //tokenise input
     // struct splitStruc tokens = tokenise(argv[0]);
-    puts("UH");
+    
 
     argv[0][strcspn(argv[0], "\n")]=0;
+    puts("1");
     //get flag info
     struct flagStruc floogs = flagger(argv, argc+1);
+    puts("2");
     int flag1 = floogs.flag1;
     int flag2 = floogs.flag2;
     int flag1Taken = floogs.flag1Taken;
     int flag2Taken = floogs.flag2Taken;
 
     //run function
+    puts("3");
     cat(argv, flag1, flag2, 1 + flag1Taken + flag2Taken, argc+1);
+    puts("4");
 
     return 0;
 }
