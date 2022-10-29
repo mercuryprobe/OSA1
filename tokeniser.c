@@ -1,4 +1,6 @@
+#include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "splitStruc.h"
 
 struct splitStruc tokenise(char userInp[512]) {

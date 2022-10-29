@@ -1,3 +1,7 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
 int* flagger(char splitString[512][512], int argLen) {
     int flag1 = -1;
     int flag2 = -1;
