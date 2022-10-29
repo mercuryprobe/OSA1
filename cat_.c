@@ -98,7 +98,7 @@ int main(char *argv[], int argc) {
     //tokenise input
     // struct splitStruc tokens = tokenise(argv[0]);
     
-
+    puts("1");
     argv[0][strcspn(argv[0], "\n")]=0;
     puts("1");
     //get flag info
