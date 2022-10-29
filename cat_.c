@@ -50,7 +50,6 @@ void cat(char cmd[512][512], int flag1, int flag2, int posn, int last) {
     
     if (c==0) {
         //if > isn't entered
-        printf(cmd[posn]);
         file = fopen(cmd[posn], "r");
 
         if (file==NULL) {
@@ -96,17 +95,18 @@ void cat(char cmd[512][512], int flag1, int flag2, int posn, int last) {
 
 int main(int argc, char *argv[]) {
     //tokenise input
-    struct splitStruc tokens = tokenise(argv[0]);
+    // struct splitStruc tokens = tokenise(argv[0]);
 
+    argv[0][strcspn(tokens.splitString[0], "\n")]=0;
     //get flag info
-    struct flagStruc floogs = flagger(tokens.splitString, tokens.argLen);
+    struct flagStruc floogs = flagger(argv, tokens.argLen);
     int flag1 = floogs.flag1;
     int flag2 = floogs.flag2;
     int flag1Taken = floogs.flag1Taken;
     int flag2Taken = floogs.flag2Taken;
 
     //run function
-    cat(tokens.splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, tokens.argLen);
+    cat(argv, flag1, flag2, 1 + flag1Taken + flag2Taken, tokens.argLen);
 
     return 0;
 }
