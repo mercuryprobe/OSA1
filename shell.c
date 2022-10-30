@@ -160,10 +160,10 @@ void echo(char cmd[512][512], int flag1, int flag2, int posn, int last) {
 }
 
 static volatile sig_atomic_t active = 1;
-static int cat = 0;
+static int catC = 0;
 static void interrupter(int x) {
     //reference: https://stackoverflow.com/questions/4217037/catch-ctrl-c-in-c
-    if (cat==0) {active = 0; cat = 1;}
+    if (catC==0) {active = 0; catC = 1;}
 }
 
 
@@ -300,7 +300,7 @@ void shell() {
                 getcwd(curLoc, sizeof(curLoc));
                 strcat(curLoc, "/cat_.out");
 
-                cat = 1;
+                catC = 1;
                 execl(curLoc, inp2, NULL);
                 
             } else if(pid>0) {
