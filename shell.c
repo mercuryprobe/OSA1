@@ -231,13 +231,55 @@ void shell() {
         } else if (strcmp(splitString[0], "echo")==0) {
             echo(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, argLen);
 
-        //internals
+        //externals
         } else if (strcmp(splitString[0], "rm")==0) {
-            rm(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, argLen);
+            pid_t pid = fork();
+            if (pid==0) {
+                char curLoc[1024];
+                getcwd(curLoc, sizeof(curLoc));
+                strcat(curLoc, "/rm_.out");
+                
+                execl(curLoc, inp2, NULL);
+                
+            } else if(pid>0) {
+                wait(NULL);
+            } else {
+                puts("Critical Error: fork failure.");
+            }
+            // rm(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, argLen);
+
         } else if (strcmp(splitString[0], "mkdir")==0) {
-            mkdir_(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, argLen);
+            pid_t pid = fork();
+            if (pid==0) {
+                char curLoc[1024];
+                getcwd(curLoc, sizeof(curLoc));
+                strcat(curLoc, "/mkdir_.out");
+                
+                execl(curLoc, inp2, NULL);
+                
+            } else if(pid>0) {
+                wait(NULL);
+            } else {
+                puts("Critical Error: fork failure.");
+            }
+            // mkdir_(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, argLen);
+
         } else if (strcmp(splitString[0], "date")==0) {
-            date_(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, argLen); 
+            pid_t pid = fork();
+            if (pid==0) {
+                char curLoc[1024];
+                getcwd(curLoc, sizeof(curLoc));
+                strcat(curLoc, "/date_.out");
+                
+                execl(curLoc, inp2, NULL);
+                
+            } else if(pid>0) {
+                wait(NULL);
+            } else {
+                puts("Critical Error: fork failure.");
+            }
+            // date_(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, argLen); 
+
         } else if (strcmp(splitString[0], "cat")==0) {
             prctl(PR_SET_CHILD_SUBREAPER, 1, 0, 0, 0); //define shell as subreaper to ensure system interrupts work
             pid_t pid = fork();
@@ -256,7 +298,21 @@ void shell() {
             // cat(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, argLen); 
             prctl(PR_SET_CHILD_SUBREAPER, 0, 0, 0, 0);
         } else if (strcmp(splitString[0], "ls")==0) {
-            ls(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, argLen); 
+            pid_t pid = fork();
+            if (pid==0) {
+                char curLoc[1024];
+                getcwd(curLoc, sizeof(curLoc));
+                strcat(curLoc, "/ls_.out");
+                
+                execl(curLoc, inp2, NULL);
+                
+            } else if(pid>0) {
+                wait(NULL);
+            } else {
+                puts("Critical Error: fork failure.");
+            }
+            // ls(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, argLen); 
+
         } else {
             puts("Error: command not found.");
         }

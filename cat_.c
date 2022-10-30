@@ -95,7 +95,6 @@ void cat(char cmd[512][512], int flag1, int flag2, int posn, int last) {
 } 
 
 int main(int argc, char *argv[]) {
-    puts("hmm");
     //tokenise input
     struct splitStruc tokens = tokenise(argv[0]);
     tokens.splitString[0][strcspn(tokens.splitString[0], "\n")]=0;
