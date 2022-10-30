@@ -96,19 +96,16 @@ void cat(char cmd[512][512], int flag1, int flag2, int posn, int last) {
 
 int main(int argc, char *argv[]) {
     //tokenise input
-    // struct splitStruc tokens = tokenise(argv[0]);
+    struct splitStruc tokens = tokenise(argv[0]);
     
-    // puts("1");
-
     //get flag info
-    char splitString[512][512];
-    for (int i = 0; i<argc; i++) {
-        strcpy(splitString[i], argv[i]);
-        puts(splitString[i]);
-    }
-    printf("argc: %d\n", argc);
-    splitString[0][strcspn(splitString[0], "\n")]=0;
-    struct flagStruc floogs = flagger(splitString, argc+1);
+    // char splitString[512][512];
+    // for (int i = 0; i<argc; i++) {
+    //     strcpy(splitString[i], argv[i]);
+    // }
+
+    tokens.splitString[0][strcspn(tokens.splitString[0], "\n")]=0;
+    struct flagStruc floogs = flagger(tokens.splitString, argc+1);
     // puts("2");
     int flag1 = floogs.flag1;
     int flag2 = floogs.flag2;
@@ -117,7 +114,7 @@ int main(int argc, char *argv[]) {
     printf("%d %d %d %d\n", flag1, flag2, flag1Taken, flag2Taken);
     //run function
     // puts("3");
-    cat(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, argc+1);
+    cat(tokens.splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, argc+1);
     // puts("4");
 
     return 0;

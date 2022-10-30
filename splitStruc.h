@@ -1,4 +1,4 @@
 struct splitStruc {
-    char **splitString;
+    char splitString[512][512];
     int argLen;
 };
