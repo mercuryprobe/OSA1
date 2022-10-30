@@ -23,7 +23,7 @@ void date_(char cmd[512][512], int flag1, int flag2, int posn, int last) {
             u = 1;
         }
         if ((cmd[flag1][1]=='r' || cmd[flag1][1]=='R')) {
-            d = 1;
+            r = 1;
         }
     }
     if (flag2!=-1) {
