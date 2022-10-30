@@ -15,7 +15,7 @@ static void interrupter(int x) {
     //reference: https://stackoverflow.com/questions/4217037/catch-ctrl-c-in-c
     active = 0;
 }
-void cat(char cmd[512][512], int flag1, int flag2, int posn, int last) {
+void cat(char cmd[512][512], int flag1, int flag2, int posn, int last, int t) {
     //cat
     //flags: -n (line numbering) and > (newfile)
     //press Ctrl+C to exit newfile text input
@@ -94,6 +94,24 @@ void cat(char cmd[512][512], int flag1, int flag2, int posn, int last) {
     fclose(file);
 } 
 
+int cat_t(char* inpString) {
+    //tokenise input
+    struct splitStruc tokens = tokenise(inpString);
+    tokens.splitString[0][strcspn(tokens.splitString[0], "\n")]=0;
+
+    //flag detection
+    struct flagStruc floogs = flagger(tokens.splitString, argc+1);
+    int flag1 = floogs.flag1;
+    int flag2 = floogs.flag2;
+    int flag1Taken = floogs.flag1Taken;
+    int flag2Taken = floogs.flag2Taken;
+
+    //run function
+    cat(tokens.splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, tokens.argLen, 1);
+
+    return 0;
+}
+
 int main(int argc, char *argv[]) {
     //tokenise input
     struct splitStruc tokens = tokenise(argv[0]);
@@ -107,7 +125,8 @@ int main(int argc, char *argv[]) {
     int flag2Taken = floogs.flag2Taken;
 
     //run function
-    cat(tokens.splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, tokens.argLen);
+    cat(tokens.splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, tokens.argLen, 0);
 
     return 0;
 }
+

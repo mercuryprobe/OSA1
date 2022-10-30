@@ -11,7 +11,7 @@
 #include "flagStruc.h"
 #include "tokeniser.h"
 
-void date_(char cmd[512][512], int flag1, int flag2, int posn, int last) {
+void date_(char cmd[512][512], int flag1, int flag2, int posn, int last, int t) {
     //date
     //flags: -u (UTC-Time), -R (RFCs 5322 date)
 
@@ -58,6 +58,25 @@ void date_(char cmd[512][512], int flag1, int flag2, int posn, int last) {
     }
 }
 
+int date_t(char* inpString) {
+    //tokenise input
+    struct splitStruc tokens = tokenise(inpString);
+    tokens.splitString[0][strcspn(tokens.splitString[0], "\n")]=0;
+
+    //flag detection
+    struct flagStruc floogs = flagger(tokens.splitString, argc+1);
+    int flag1 = floogs.flag1;
+    int flag2 = floogs.flag2;
+    int flag1Taken = floogs.flag1Taken;
+    int flag2Taken = floogs.flag2Taken;
+
+    //run function
+    date_(tokens.splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, tokens.argLen, 1);
+
+    return 0;
+}
+
+
 int main(int argc, char *argv[]) {
     //tokenise input
     struct splitStruc tokens = tokenise(argv[0]);
@@ -71,7 +90,7 @@ int main(int argc, char *argv[]) {
     int flag2Taken = floogs.flag2Taken;
 
     //run function
-    date_(tokens.splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, tokens.argLen);
+    date_(tokens.splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, tokens.argLen, 0);
 
     return 0;
 }
