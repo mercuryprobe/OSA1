@@ -164,7 +164,7 @@ void shell() {
         
         char userInp[512]; //will store user input
         fgets(userInp, sizeof(userInp), stdin);
-        
+        printf(userInp);
         //tokenise input
         const char space[2] = " ";
         char* tokenInput;
