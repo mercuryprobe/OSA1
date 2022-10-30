@@ -24,6 +24,9 @@ void date_(char cmd[512][512], int flag1, int flag2, int posn, int last, int t) 
         }
         if ((cmd[flag1][1]=='r' || cmd[flag1][1]=='R')) {
             r = 1;
+        } else {
+            puts("Invalid flag entered.");
+            return;
         }
     }
     if (flag2!=-1) {
@@ -32,6 +35,9 @@ void date_(char cmd[512][512], int flag1, int flag2, int posn, int last, int t) 
         }
         if ((cmd[flag2][1]=='r' || cmd[flag2][1]=='R')) {
             r = 1;
+        } else {
+            puts("Invalid flag entered.");
+            return;
         }
     }
 

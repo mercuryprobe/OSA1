@@ -44,7 +44,7 @@ void rm(char cmd[512][512], int flag1, int flag2, int posn, int last, int t) {
         } else if (cmd[flag1][1]=='R' || cmd[flag1][1]=='r') {
             recursive = 1;
         } else {
-            printf("Error: Invalid flag.\n");
+            printf("Error: Invalid flag entered.\n");
             return;
         }
     }
@@ -54,7 +54,7 @@ void rm(char cmd[512][512], int flag1, int flag2, int posn, int last, int t) {
         } else if (cmd[flag2][1]=='R' || cmd[flag2][1]=='r') {
             recursive = 1;
         } else {
-            printf("Error: Invalid flag.\n");
+            printf("Error: Invalid flag entered.\n");
             return;
         }
     }
