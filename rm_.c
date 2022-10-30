@@ -130,24 +130,6 @@ void rm(char cmd[512][512], int flag1, int flag2, int posn, int last, int t) {
     }
 }
 
-int rm_t(char* inpString) {
-    //tokenise input
-    struct splitStruc tokens = tokenise(inpString);
-    tokens.splitString[0][strcspn(tokens.splitString[0], "\n")]=0;
-
-    //flag detection
-    struct flagStruc floogs = flagger(tokens.splitString, argc+1);
-    int flag1 = floogs.flag1;
-    int flag2 = floogs.flag2;
-    int flag1Taken = floogs.flag1Taken;
-    int flag2Taken = floogs.flag2Taken;
-
-    //run function
-    rm(tokens.splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, tokens.argLen, 1);
-
-    return 0;
-}
-
 int main(int argc, char *argv[]) {
     //tokenise input
     struct splitStruc tokens = tokenise(argv[0]);
@@ -161,7 +143,7 @@ int main(int argc, char *argv[]) {
     int flag2Taken = floogs.flag2Taken;
 
     //run function
-    rm(tokens.splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, tokens.argLen, 0);
+    rm(tokens.splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, tokens.argLen, floogs.thread);
 
     return 0;
 }
