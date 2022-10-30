@@ -163,7 +163,7 @@ static volatile sig_atomic_t active = 1;
 static int cat = 0;
 static void interrupter(int x) {
     //reference: https://stackoverflow.com/questions/4217037/catch-ctrl-c-in-c
-    printf("cat: %d\n", cat);
+    printf("\ncat: %d\n", cat);
     active = 0;
 }
 
@@ -306,6 +306,7 @@ void shell() {
                 strcat(curLoc, "/cat_.out");
 
                 cat = 1;
+                printf("%d\n", cat);
                 execl(curLoc, inp2, NULL);
                 
             } else if(pid>0) {
