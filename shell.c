@@ -159,6 +159,12 @@ void echo(char cmd[512][512], int flag1, int flag2, int posn, int last) {
     }
 }
 
+static volatile sig_atomic_t interrupted = 0;
+static void interrupter(int x) {
+    //reference: https://stackoverflow.com/questions/4217037/catch-ctrl-c-in-c
+    interrupted = 0;
+}
+
 
 void shell() {
     // cd echo pwd
@@ -284,14 +290,18 @@ void shell() {
             // date_(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, argLen); 
 
         } else if (strcmp(splitString[0], "cat")==0) {
-            prctl(PR_SET_CHILD_SUBREAPER, 1, 0, 0, 0); //define shell as subreaper to ensure system interrupts work
+                        
             pid_t pid = fork();
             if (pid==0) {
                 char curLoc[1024];
                 getcwd(curLoc, sizeof(curLoc));
                 strcat(curLoc, "/cat_.out");
-                
+
+                signal(SIGINT, interrupter); //detect sys interrupt
                 execl(curLoc, inp2, NULL);
+                while (!interrupted) {
+                    return;
+                }
                 
             } else if(pid>0) {
                 wait(NULL);
@@ -299,7 +309,7 @@ void shell() {
                 puts("Critical Error: fork failure.");
             }
             // cat(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, argLen); 
-            prctl(PR_SET_CHILD_SUBREAPER, 0, 0, 0, 0);
+            
         } else if (strcmp(splitString[0], "ls")==0) {
             pid_t pid = fork();
             if (pid==0) {

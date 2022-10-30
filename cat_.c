@@ -12,7 +12,6 @@
 
 static volatile sig_atomic_t active = 1;
 static void interrupter(int x) {
-    //reference: https://stackoverflow.com/questions/4217037/catch-ctrl-c-in-c
     active = 0;
 }
 void cat(char cmd[512][512], int flag1, int flag2, int posn, int last, int t) {
