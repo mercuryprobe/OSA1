@@ -163,8 +163,10 @@ void shell() {
     {    printf("[rmnShell]$ ");
         
         char userInp[512]; //will store user input
+        char inpCheck[512];
         fgets(userInp, sizeof(userInp), stdin);
-        puts(userInp);
+        strcpy(inpCheck, userInp);
+        puts(inpCheck);
         //tokenise input
         const char space[2] = " ";
         char* tokenInput;
