@@ -30,6 +30,9 @@ void rm(char cmd[512][512], int flag1, int flag2, int posn, int last) {
 
     if (last!=1) {
         cmd[last-1][strcspn(cmd[last-1], "\n")]=0;
+    } else {
+        puts("Error: Missing operand.");
+        return;
     }
 
     int directory = 0;
