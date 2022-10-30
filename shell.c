@@ -307,7 +307,6 @@ void shell() {
 
                 cat = 1;
                 execl(curLoc, inp2, NULL);
-                cat = 0;
                 
             } else if(pid>0) {
                 wait(NULL);
