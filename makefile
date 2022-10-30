@@ -1,5 +1,5 @@
 shell: cat_.out date_.out ls_.out mkdir_.out rm_.out
-	gcc shell.c date_.c flags.c ls_.c mkdir_.c rm_.c tokeniser.c
+	gcc shell.c tokeniser.c
 	./a.out
 	rm -f *.out *.o
 

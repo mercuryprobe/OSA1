@@ -15,7 +15,7 @@
 
 //general
 // #include "flags.h"
-#include "splitStruc.h"
+// #include "splitStruc.h"
 // #include "flagStruc.h"
 // #include "tokeniser.h"
 
