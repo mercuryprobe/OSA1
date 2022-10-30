@@ -239,20 +239,22 @@ void shell() {
         } else if (strcmp(splitString[0], "date")==0) {
             date_(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, argLen); 
         } else if (strcmp(splitString[0], "cat")==0) {
+            prctl(PR_SET_CHILD_SUBREAPER, 1, 0, 0, 0); //define shell as subreaper to ensure system interrupts work
             pid_t pid = fork();
             if (pid==0) {
                 char curLoc[1024];
                 getcwd(curLoc, sizeof(curLoc));
                 strcat(curLoc, "/cat_.out");
-                prctl(PR_SET_CHILD_SUBREAPER, 1, 0, 0, 0); //define shell as subreaper to ensure system interrupts work
+                
                 execl(curLoc, inp2, NULL);
-                prctl(PR_SET_CHILD_SUBREAPER, 0, 0, 0, 0);
+                
             } else if(pid>0) {
                 wait(NULL);
             } else {
                 puts("Critical Error: fork failure.");
             }
             // cat(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, argLen); 
+            prctl(PR_SET_CHILD_SUBREAPER, 0, 0, 0, 0);
         } else if (strcmp(splitString[0], "ls")==0) {
             ls(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, argLen); 
         } else {
