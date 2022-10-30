@@ -328,9 +328,7 @@ void shell() {
             // ls(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, argLen); 
 
         } else {
-            if (active = 1) {
-                puts("Error: command not found.");
-            }
+            puts("Error: command not found.");
         }
     }
 }
