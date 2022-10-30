@@ -300,6 +300,7 @@ void shell() {
                 signal(SIGINT, interrupter); //detect sys interrupt
                 execl(curLoc, inp2, NULL);
                 while (!interrupted) {
+                    interrupted=0;
                     return;
                 }
                 
