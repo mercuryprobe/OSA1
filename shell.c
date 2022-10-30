@@ -164,12 +164,12 @@ void shell() {
         
         char userInp[512]; //will store user input
         fgets(userInp, sizeof(userInp), stdin);
-        printf(userInp);
+        puts(userInp);
         //tokenise input
         const char space[2] = " ";
         char* tokenInput;
         tokenInput = strtok(userInp, space);
-
+        puts(userInp);
         char splitString[512][512];
         int i = 0;
         while (tokenInput!=NULL) {
