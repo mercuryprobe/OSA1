@@ -60,7 +60,7 @@ void date_(char cmd[512][512], int flag1, int flag2, int posn, int last) {
             strcat(input, " ");
             strcat(input, cmd[posn+2]);
 
-            printf("%s\n", input);
+            // printf("%s\n", input);
             // strptime(input, format, inpTime);
             time_t time = mktime(inpTime);
             printf(ctime(&time));
