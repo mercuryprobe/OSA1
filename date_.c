@@ -13,7 +13,7 @@
 
 void date_(char cmd[512][512], int flag1, int flag2, int posn, int last) {
     //date
-    //flags: -u (UTC-Time), -R (RTF time)
+    //flags: -u (UTC-Time), -R (RFCs 5322 date)
 
     //flag detection
     int u = 0;
