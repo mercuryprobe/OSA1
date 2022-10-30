@@ -166,6 +166,7 @@ void shell() {
         char inpCheck[512];
         fgets(userInp, sizeof(userInp), stdin);
         strcpy(inpCheck, userInp);
+        puts(userInp);
         puts(inpCheck);
         //tokenise input
         const char space[2] = " ";
