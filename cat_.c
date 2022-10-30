@@ -106,16 +106,14 @@ int main(int argc, char *argv[]) {
 
     tokens.splitString[0][strcspn(tokens.splitString[0], "\n")]=0;
     struct flagStruc floogs = flagger(tokens.splitString, argc+1);
-    // puts("2");
+
     int flag1 = floogs.flag1;
     int flag2 = floogs.flag2;
     int flag1Taken = floogs.flag1Taken;
     int flag2Taken = floogs.flag2Taken;
-    printf("%d %d %d %d\n", flag1, flag2, flag1Taken, flag2Taken);
+
     //run function
-    // puts("3");
     cat(tokens.splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, tokens.argLen);
-    // puts("4");
 
     return 0;
 }
