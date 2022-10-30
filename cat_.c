@@ -114,7 +114,7 @@ int main(int argc, char *argv[]) {
     printf("%d %d %d %d\n", flag1, flag2, flag1Taken, flag2Taken);
     //run function
     // puts("3");
-    cat(tokens.splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, argc+1);
+    cat(tokens.splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, tokens.argLen);
     // puts("4");
 
     return 0;
