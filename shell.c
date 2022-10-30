@@ -160,10 +160,8 @@ void echo(char cmd[512][512], int flag1, int flag2, int posn, int last) {
 }
 
 static volatile sig_atomic_t active = 1;
-static int cat = 0;
 static void interrupter(int x) {
     //reference: https://stackoverflow.com/questions/4217037/catch-ctrl-c-in-c
-    printf("\ncat: %d\n", cat);
     active = 0;
 }
 
@@ -172,6 +170,7 @@ void shell() {
     // cd echo pwd
     // ls cat date rm mkdir
     signal(SIGINT, interrupter); //detect sys interrupt
+    int cat = 0;
     while (active || (cat && !active))
     {    
         if (cat && !active) {
