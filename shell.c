@@ -7,7 +7,7 @@
 #include <sys/wait.h>
 #include <sys/prctl.h>
 
-#define blue "\x1b[34m"
+#define blue "\x1b[94m"
 #define reset "\x1b[0m"
 
 // #include "cat_.h"
@@ -324,7 +324,6 @@ void shell() {
 
 
 int main() {
-    puts("Welcome to Aryaman's shell!");
     shell();
     return 0;
 }
