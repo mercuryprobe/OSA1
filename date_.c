@@ -36,7 +36,12 @@ void date_(char cmd[512][512], int flag1, int flag2, int posn, int last, int t) 
     }
 
     cmd[last-1][strcspn(cmd[last-1], "\n")]=0;
-
+    
+    int flag1Taken;
+    int flag2Taken;
+    if (flag1==-1) {flag1Taken = 0;} else {flag1Taken = 1;}
+    if (flag2==-1) {flag2Taken = 0;} else {flag2Taken = 1;}
+    if (last>1+flag1Taken+flag2Taken) {puts("Ignoring invalid argument...");} //edge case: arguments given to date beyond flags
     time_t ti;
     time(&ti);
     
