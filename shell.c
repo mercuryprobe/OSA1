@@ -7,6 +7,9 @@
 #include <sys/wait.h>
 #include <sys/prctl.h>
 
+#define blue "\x1b[34m"
+#define reset "\x1b[0m"
+
 // #include "cat_.h"
 // #include "date_.h"
 // #include "ls_.h"
@@ -161,7 +164,7 @@ void shell() {
     // cd echo pwd
     // ls cat date rm mkdir
     while (1)
-    {    printf("[rmnShell]$ ");
+    {    printf(blue "[rmnShell]$ " reset);
         
         char userInp[512]; //will store user input
         char inp2[512];

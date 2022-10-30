@@ -11,6 +11,7 @@
         "flags.h": "c",
         "splitstruc.h": "c",
         "time.h": "c",
-        "tokeniser.h": "c"
+        "tokeniser.h": "c",
+        "flagstruc.h": "c"
     }
 }
