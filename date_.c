@@ -38,11 +38,11 @@ void date_(char cmd[512][512], int flag1, int flag2, int posn, int last, int t) 
     cmd[last-1][strcspn(cmd[last-1], "\n")]=0;
 
     time_t ti;
-    time(&t);
+    time(&ti);
     
     if (u==0 && r==0) {
         //default output
-        printf(ctime(&t));
+        printf(ctime(&ti));
     } else if (u==1){
         //GMT time
         struct tm *gmtTm = gmtime(&ti);
