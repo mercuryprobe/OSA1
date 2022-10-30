@@ -101,7 +101,7 @@ void rm(char cmd[512][512], int flag1, int flag2, int posn, int last, int t) {
                     return;
                 } else {
                     if (i!=(last-1)){
-                        rm(cmd, flag1, flag2, i+1, last);
+                        rm(cmd, flag1, flag2, i+1, last, t);
                     }
                 }
             }
@@ -116,7 +116,7 @@ void rm(char cmd[512][512], int flag1, int flag2, int posn, int last, int t) {
 
         if (multiple == 1) {
             if (i!=(last-1)){
-                rm(cmd, flag1, flag2, i+1, last);
+                rm(cmd, flag1, flag2, i+1, last, t);
             }
         }
     } else {
@@ -124,7 +124,7 @@ void rm(char cmd[512][512], int flag1, int flag2, int posn, int last, int t) {
         if (multiple == 1) {
             if (i!=(last-1)){
                 printf("Skipping...\n");
-                rm(cmd, flag1, flag2, i+1, last);
+                rm(cmd, flag1, flag2, i+1, last, t);
             }
         }
     }

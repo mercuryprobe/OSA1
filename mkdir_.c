@@ -129,7 +129,7 @@ void mkdir_(char cmd[512][512], int flag1, int flag2, int posn, int last, int t)
         if (multiple==1 && (i!=last)) {
             //if multiple dirs have been mentioned
             printf("Skipping...\n");
-            mkdir_(cmd, flag1, flag2, i+1, last+1);
+            mkdir_(cmd, flag1, flag2, i+1, last+1, t);
         }
     }
 }
