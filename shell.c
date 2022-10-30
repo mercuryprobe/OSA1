@@ -297,8 +297,9 @@ void shell() {
                 getcwd(curLoc, sizeof(curLoc));
                 strcat(curLoc, "/cat_.out");
 
-                signal(SIGINT, interrupter); //detect sys interrupt
+                
                 execl(curLoc, inp2, NULL);
+                signal(SIGINT, interrupter); //detect sys interrupt
                 while (!interrupted) {
                     interrupted=0;
                     return;
