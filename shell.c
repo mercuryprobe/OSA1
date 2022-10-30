@@ -163,11 +163,10 @@ void shell() {
     {    printf("[rmnShell]$ ");
         
         char userInp[512]; //will store user input
-        char inpCheck[512];
+        char inp2[512];
         fgets(userInp, sizeof(userInp), stdin);
-        strcpy(inpCheck, userInp);
-        puts(userInp);
-        puts(inpCheck);
+        strcpy(inp2, userInp);
+
         //tokenise input
         const char space[2] = " ";
         char* tokenInput;
@@ -245,7 +244,7 @@ void shell() {
                 getcwd(curLoc, sizeof(curLoc));
                 strcat(curLoc, "/cat_.out");
                 puts(userInp);
-                execl(curLoc, userInp, NULL);
+                execl(curLoc, inp2, NULL);
             } else if(pid>0) {
                 wait(NULL);
             } else {
