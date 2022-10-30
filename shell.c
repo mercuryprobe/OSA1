@@ -7,11 +7,11 @@
 #include <sys/wait.h>
 #include <sys/prctl.h>
 
-#include "cat_.h"
-#include "date_.h"
-#include "ls_.h"
-#include "mkdir_.h"
-#include "rm_.h"
+// #include "cat_.h"
+// #include "date_.h"
+// #include "ls_.h"
+// #include "mkdir_.h"
+// #include "rm_.h"
 
 //general
 // #include "flags.h"
