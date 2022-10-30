@@ -171,7 +171,7 @@ void shell() {
         const char space[2] = " ";
         char* tokenInput;
         tokenInput = strtok(userInp, space);
-        puts(userInp);
+        
         char splitString[512][512];
         int i = 0;
         while (tokenInput!=NULL) {
@@ -243,7 +243,6 @@ void shell() {
                 char curLoc[1024];
                 getcwd(curLoc, sizeof(curLoc));
                 strcat(curLoc, "/cat_.out");
-                puts(userInp);
                 execl(curLoc, inp2, NULL);
             } else if(pid>0) {
                 wait(NULL);
