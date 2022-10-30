@@ -6,6 +6,10 @@
 #define _XOPEN_SOURCE 1 
 #include <time.h>
 
+#include "flags.h"
+#include "splitStruc.h"
+#include "flagStruc.h"
+#include "tokeniser.h"
 
 void date_(char cmd[512][512], int flag1, int flag2, int posn, int last) {
     //date

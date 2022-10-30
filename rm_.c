@@ -9,6 +9,10 @@
 #include <limits.h>
 #include <sys/stat.h> 
 
+#include "flags.h"
+#include "splitStruc.h"
+#include "flagStruc.h"
+#include "tokeniser.h"
 
 int remover(const char *path, const struct stat *s, int flag, struct FTW *ftw) {
     //removes file if its not a directory (used with nftw)

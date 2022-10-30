@@ -9,7 +9,12 @@
 #define __USE_XOPEN_EXTENDED 500
 #include <ftw.h>
 #include <limits.h>
-#include <sys/stat.h>  //mdkir
+#include <sys/stat.h> 
+
+#include "flags.h"
+#include "splitStruc.h"
+#include "flagStruc.h"
+#include "tokeniser.h"
 
 static int a = 0;
 // int isSym(const char file[]) {

@@ -9,6 +9,8 @@
         "date_.h": "c",
         "types.h": "c",
         "flags.h": "c",
-        "splitstruc.h": "c"
+        "splitstruc.h": "c",
+        "time.h": "c",
+        "tokeniser.h": "c"
     }
 }

@@ -5,6 +5,10 @@
 #include <errno.h>
 #include <sys/stat.h>
 
+#include "flags.h"
+#include "splitStruc.h"
+#include "flagStruc.h"
+#include "tokeniser.h"
 
 void mkdir_(char cmd[512][512], int flag1, int flag2, int posn, int last) {
     //makes dir, supports multiple input
