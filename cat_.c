@@ -102,14 +102,14 @@ int main(int argc, char *argv[]) {
 
     //get flag info
     char splitString[512][512];
-    for (int i = 1; i<argc; i++) {
-        strcpy(splitString[i-1], argv[i]);
-        puts(splitString[i-1]);
+    for (int i = 0; i<argc; i++) {
+        strcpy(splitString[i], argv[i]);
+        puts(splitString[i]);
     }
-    printf("%d\n", argc);
+    printf("argc: %d\n", argc);
     splitString[0][strcspn(splitString[0], "\n")]=0;
     struct flagStruc floogs = flagger(splitString, argc+1);
-    puts("2.1");
+    puts("2");
     int flag1 = floogs.flag1;
     int flag2 = floogs.flag2;
     int flag1Taken = floogs.flag1Taken;
