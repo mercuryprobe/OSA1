@@ -159,18 +159,25 @@ void echo(char cmd[512][512], int flag1, int flag2, int posn, int last) {
     }
 }
 
-static volatile sig_atomic_t interrupted = 0;
+static volatile sig_atomic_t active = 1;
+static volatile sig_atomic_t cat = 0;
 static void interrupter(int x) {
     //reference: https://stackoverflow.com/questions/4217037/catch-ctrl-c-in-c
-    interrupted = 1;
+    active = 0;
 }
 
 
 void shell() {
     // cd echo pwd
     // ls cat date rm mkdir
-    while (1)
-    {    printf(blue "[rmnShell]$ " reset);
+    signal(SIGINT, interrupter); //detect sys interrupt
+    while (active || (cat && !active))
+    {    
+        if (cat && !active) {
+            active = 1;
+            cat = 0;
+        }
+        printf(blue "[rmnShell]$ " reset);
         
         char userInp[512]; //will store user input
         char inp2[512];
@@ -297,13 +304,9 @@ void shell() {
                 getcwd(curLoc, sizeof(curLoc));
                 strcat(curLoc, "/cat_.out");
 
-                
+                cat = 1;
                 execl(curLoc, inp2, NULL);
-                signal(SIGINT, interrupter); //detect sys interrupt
-                while (!interrupted) {
-                    interrupted=0;
-                    return;
-                }
+                cat = 0;
                 
             } else if(pid>0) {
                 wait(NULL);
