@@ -5,6 +5,7 @@
 #include <errno.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <sys/prctl.h>
 
 #include "cat_.h"
 #include "date_.h"
@@ -171,7 +172,7 @@ void shell() {
         const char space[2] = " ";
         char* tokenInput;
         tokenInput = strtok(userInp, space);
-        
+
         char splitString[512][512];
         int i = 0;
         while (tokenInput!=NULL) {
@@ -243,7 +244,9 @@ void shell() {
                 char curLoc[1024];
                 getcwd(curLoc, sizeof(curLoc));
                 strcat(curLoc, "/cat_.out");
+                prctl(PR_SET_CHILD_SUBREAPER, 1, 0, 0, 0); //define shell as subreaper to ensure system interrupts work
                 execl(curLoc, inp2, NULL);
+                prctl(PR_SET_CHILD_SUBREAPER, 0, 0, 0, 0);
             } else if(pid>0) {
                 wait(NULL);
             } else {
