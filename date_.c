@@ -37,7 +37,7 @@ void date_(char cmd[512][512], int flag1, int flag2, int posn, int last, int t) 
 
     cmd[last-1][strcspn(cmd[last-1], "\n")]=0;
 
-    time_t t;
+    time_t ti;
     time(&t);
     
     if (u==0 && r==0) {
@@ -45,12 +45,12 @@ void date_(char cmd[512][512], int flag1, int flag2, int posn, int last, int t) 
         printf(ctime(&t));
     } else if (u==1){
         //GMT time
-        struct tm *gmtTm = gmtime(&t);
+        struct tm *gmtTm = gmtime(&ti);
         time_t gmt = mktime(gmtTm);
         printf(ctime(&gmt));
 
     } else {
-        struct tm *inpTime = localtime(&t);
+        struct tm *inpTime = localtime(&ti);
         const char format[] = "%a, %d %b %Y %H:%M:%S %z";
         char rfcDate[64];
         strftime(rfcDate, sizeof(rfcDate), format, inpTime);
