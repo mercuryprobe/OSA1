@@ -162,7 +162,7 @@ void echo(char cmd[512][512], int flag1, int flag2, int posn, int last) {
 static volatile sig_atomic_t interrupted = 0;
 static void interrupter(int x) {
     //reference: https://stackoverflow.com/questions/4217037/catch-ctrl-c-in-c
-    interrupted = 0;
+    interrupted = 1;
 }
 
 
