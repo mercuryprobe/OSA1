@@ -294,13 +294,14 @@ void shell() {
 
         } else if (strcmp(splitString[0], "cat")==0) {
                         
+            catC = 1;            
             pid_t pid = fork();
             if (pid==0) {
                 char curLoc[1024];
                 getcwd(curLoc, sizeof(curLoc));
                 strcat(curLoc, "/cat_.out");
 
-                catC = 1;
+                
                 execl(curLoc, inp2, NULL);
                 
             } else if(pid>0) {
