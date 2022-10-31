@@ -171,6 +171,8 @@ void shell() {
     // cd echo pwd
     // ls cat date rm mkdir
     signal(SIGINT, interrupter); //detect sys interrupt
+    char originalLoc[1024];
+    getcwd(originalLoc, sizeof(originalLoc));
     while (active)
     {    
         printf(blue "[rmnShell]$ " reset);
@@ -248,7 +250,7 @@ void shell() {
             pid_t pid = fork();
             if (pid==0) {
                 char curLoc[1024];
-                getcwd(curLoc, sizeof(curLoc));
+                strcpy(curLoc, originalLoc);
                 strcat(curLoc, "/rm_.out");
                 
                 execl(curLoc, inp2, NULL);
@@ -264,7 +266,7 @@ void shell() {
             pid_t pid = fork();
             if (pid==0) {
                 char curLoc[1024];
-                getcwd(curLoc, sizeof(curLoc));
+                strcpy(curLoc, originalLoc);
                 strcat(curLoc, "/mkdir_.out");
                 
                 execl(curLoc, inp2, NULL);
@@ -280,7 +282,7 @@ void shell() {
             pid_t pid = fork();
             if (pid==0) {
                 char curLoc[1024];
-                getcwd(curLoc, sizeof(curLoc));
+                strcpy(curLoc, originalLoc);
                 strcat(curLoc, "/date_.out");
                 
                 execl(curLoc, inp2, NULL);
@@ -298,7 +300,7 @@ void shell() {
             pid_t pid = fork();
             if (pid==0) {
                 char curLoc[1024];
-                getcwd(curLoc, sizeof(curLoc));
+                strcpy(curLoc, originalLoc);
                 strcat(curLoc, "/cat_.out");
 
                 
@@ -315,7 +317,7 @@ void shell() {
             pid_t pid = fork();
             if (pid==0) {
                 char curLoc[1024];
-                getcwd(curLoc, sizeof(curLoc));
+                strcpy(curLoc, originalLoc);
                 strcat(curLoc, "/ls_.out");
                 
                 execl(curLoc, inp2, NULL);
