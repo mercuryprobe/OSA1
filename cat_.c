@@ -97,10 +97,10 @@ void cat(char cmd[512][512], int flag1, int flag2, int posn, int last, int t) {
 int main(int argc, char *argv[]) {
     //tokenise input
     struct splitStruc tokens;
-    int t = 0;
+    int thr = 0;
 
     if (argc>1) {
-        t = 1;
+        thr = 1;
         for (int i =1; i<argc; i++) {
             strcpy(tokens.splitString[i-1], argv[i]);
         }
@@ -121,7 +121,7 @@ int main(int argc, char *argv[]) {
 
     //run function
     cat(tokens.splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, tokens.argLen, floogs.thread);
-    if (t==1) {pthread_exit(NULL);};
+    if (thr==1) {pthread_exit(NULL);};
     return 0;
 }
 
