@@ -270,7 +270,7 @@ void shell() {
                 char curLoc[1024];
                 strcpy(curLoc, originalLoc);
                 strcat(curLoc, "/rm_.out ");
-                printf(inp2);
+                printf("input: %s", inp2);
                 strcat(curLoc, inp2);
                 system(curLoc);
             }
