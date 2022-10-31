@@ -271,7 +271,7 @@ void shell() {
                 strcpy(curLoc, originalLoc);
                 strcat(curLoc, "/rm_.out ");
                 strcat(curLoc, inp2);
-                printf("command: %s", inp2);
+                printf("command: %s\n", inp2);
                 system(curLoc);
             }
             pthread_t tid;
