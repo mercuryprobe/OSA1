@@ -379,7 +379,7 @@ void shell() {
                         curLoc[i] = 't';
                     }
                 }
-                
+                puts(curlock);
                 system(curLoc);
             }
             catC = 1; 
