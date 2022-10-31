@@ -136,7 +136,12 @@ void mkdir_(char cmd[512][512], int flag1, int flag2, int posn, int last, int t)
 
 int main(int argc, char *argv[]) {
     //tokenise input
-    struct splitStruc tokens = tokenise(argv[0]);
+    struct splitStruc tokens;
+    for (int i =0; i<argc; i++) {
+        strcpy(tokens.splitString[i], argv[i]);
+    }
+    tokens.argLen = argc;
+    
     tokens.splitString[0][strcspn(tokens.splitString[0], "\n")]=0;
 
     //flag detection
