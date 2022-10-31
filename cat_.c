@@ -97,11 +97,14 @@ void cat(char cmd[512][512], int flag1, int flag2, int posn, int last, int t) {
 int main(int argc, char *argv[]) {
     //tokenise input
     struct splitStruc tokens;
-    if (argc!=1) {
-        for (int i =0; i<argc; i++) {
-            strcpy(tokens.splitString[i], argv[i]);
+    int t = 0;
+
+    if (argc>1) {
+        t = 1;
+        for (int i =1; i<argc; i++) {
+            strcpy(tokens.splitString[i-1], argv[i]);
         }
-        tokens.argLen = argc;
+        tokens.argLen = argc-1;
         
     } else {
         struct splitStruc tokens = tokenise(argv[0]);
