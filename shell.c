@@ -266,11 +266,15 @@ void shell() {
 
         } else if (strcmp(splitString[0], "rm&t")==0) {
             void* syscaller(void* f) {
-                char func[2048];
                 char curLoc[1024];
                 strcpy(curLoc, originalLoc);
                 strcat(curLoc, "/rm_.out ");
                 strcat(curLoc, inp2);
+                for (int i =0; i<strlen(curLoc); i++) {
+                    if (curLoc[i] == '&') {
+                        curLoc[i] == 't';
+                    }
+                }
                 system(curLoc);
                 puts("test3");
             }
