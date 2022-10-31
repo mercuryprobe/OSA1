@@ -377,10 +377,10 @@ void shell() {
                 for (int i =0; i<strlen(curLoc); i++) {
                     if (curLoc[i] == '&') {
                         curLoc[i] = 't';
-                        printf("%d\n",i);
+                        // printf("%d",i);
                     }
                 }
-                puts(curLoc);
+                // puts(curLoc);
                 system(curLoc);
             }
             catC = 1; 
