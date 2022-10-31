@@ -271,6 +271,7 @@ void shell() {
                 strcpy(curLoc, originalLoc);
                 strcat(curLoc, "/rm_.out");
                 strcat(curLoc, " ");
+                printf(inp2);
                 strcat(curLoc, inp2);
                 system(curLoc);
             }
