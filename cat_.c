@@ -20,6 +20,7 @@ void cat(char cmd[512][512], int flag1, int flag2, int posn, int last, int t) {
     //flags: -n (line numbering) and > (newfile)
     //press Ctrl+C to exit newfile text input
     // printf(cmd[posn]);
+    puts("Run");
     cmd[last-1][strcspn(cmd[last-1], "\n")]=0;
     
     for (int k =0; k< last; k++) {
@@ -104,7 +105,7 @@ int main(int argc, char *argv[]) {
     //tokenise input
     struct splitStruc tokens;
     int t = 0;
-
+    puts("uhh");
     if (argc>1) {
         t = 1;
         for (int i =1; i<argc; i++) {
