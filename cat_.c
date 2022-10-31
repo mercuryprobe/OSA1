@@ -17,7 +17,7 @@ static void interrupter(int x) {
 }
 void cat(char cmd[512][512], int flag1, int flag2, int posn, int last, int t) {
     //cat
-    //flags: -n (line numbering) and > (newfile) [-f for threaded]
+    //flags: -n (line numbering) and > (newfile)
     //press Ctrl+C to exit newfile text input
     // printf(cmd[posn]);
     // puts("Run");
@@ -34,7 +34,7 @@ void cat(char cmd[512][512], int flag1, int flag2, int posn, int last, int t) {
     if (flag1!=-1) {
         if (cmd[flag1][1]=='n' || cmd[flag1][1]=='N') {
             n = 1;
-        } else if ((cmd[flag1][0]=='>') || (cmd[flag1][0]=='f') || (cmd[flag1][0]=='F')) {
+        } else if (cmd[flag1][0]=='>') {
             puts("newfile");
             c = 1;
         } else {
@@ -45,7 +45,7 @@ void cat(char cmd[512][512], int flag1, int flag2, int posn, int last, int t) {
     if (flag2!=-1) {
         if (cmd[flag2][1]=='n' || cmd[flag2][1]=='N') {
             n = 1;
-        } else if ((cmd[flag1][0]=='>') || (cmd[flag1][0]=='f') || (cmd[flag1][0]=='F')) {
+        } else if (cmd[flag2][0]=='>') {
             c = 1;
         } else {
             printf("Invalid flag entered.\n");

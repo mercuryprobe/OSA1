@@ -1,5 +1,4 @@
 shell: cat_.out date_.out ls_.out mkdir_.out rm_.out
-	#https://stackoverflow.com/questions/73435637/how-can-i-fix-usr-bin-ld-warning-trap-o-missing-note-gnu-stack-section-imp
 	gcc shell.c tokeniser.c -z noexecstack
 	./a.out
 	rm -f *.out *.o
