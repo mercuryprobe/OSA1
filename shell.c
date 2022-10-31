@@ -272,10 +272,10 @@ void shell() {
                 strcat(curLoc, inp2);
                 for (int i =0; i<strlen(curLoc); i++) {
                     if (curLoc[i] == '&') {
-                        curLoc[i] == 't';
+                        curLoc[i] = 't';
                     }
                 }
-                printf("Command: %s\n", curLoc);
+                // printf("Command: %s\n", curLoc);
                 system(curLoc);
                 // puts("test3");
             }
