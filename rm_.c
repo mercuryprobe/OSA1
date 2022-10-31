@@ -67,7 +67,7 @@ void rm(char cmd[512][512], int flag1, int flag2, int posn, int last, int t) {
     }
     if (recursive==0) {
         for (i; i<last; i++){
-            puts(cmd[i]); 
+            // puts(cmd[i]); 
             removeResult = remove(cmd[i]);
 
             if (removeResult!=0 & multiple==1) {

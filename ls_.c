@@ -167,6 +167,6 @@ int main(int argc, char *argv[]) {
 
     //run function
     ls(tokens.splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, tokens.argLen, floogs.thread);
-
+    if (t==1) {pthread_exit(NULL);};
     return 0;
 }

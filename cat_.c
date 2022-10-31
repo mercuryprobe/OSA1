@@ -19,7 +19,7 @@ void cat(char cmd[512][512], int flag1, int flag2, int posn, int last, int t) {
     //cat
     //flags: -n (line numbering) and > (newfile)
     //press Ctrl+C to exit newfile text input
-    printf(cmd[posn]);
+    // printf(cmd[posn]);
     cmd[last-1][strcspn(cmd[last-1], "\n")]=0;
     
     //flag check
@@ -118,7 +118,7 @@ int main(int argc, char *argv[]) {
 
     //run function
     cat(tokens.splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, tokens.argLen, floogs.thread);
-
+    if (t==1) {pthread_exit(NULL);};
     return 0;
 }
 
