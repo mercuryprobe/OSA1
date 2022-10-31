@@ -300,7 +300,7 @@ void shell() {
                 char curLoc[1024];
                 getcwd(curLoc, sizeof(curLoc));
                 strcat(curLoc, "/cat_.out");
-
+                
                 execv(curLoc, splitString);
                 
             } else if(pid>0) {
