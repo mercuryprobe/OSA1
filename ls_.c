@@ -10,6 +10,7 @@
 #include <ftw.h>
 #include <limits.h>
 #include <sys/stat.h> 
+#include <pthread.h>
 
 #include "flags.h"
 #include "splitStruc.h"

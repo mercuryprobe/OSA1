@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <errno.h>
 #include <sys/stat.h>
+#include <pthread.h>
 
 #include "flags.h"
 #include "splitStruc.h"

@@ -8,6 +8,7 @@
 #include <ftw.h>
 #include <limits.h>
 #include <sys/stat.h> 
+#include <pthread.h>
 
 #include "flags.h"
 #include "splitStruc.h"
@@ -133,9 +134,11 @@ void rm(char cmd[512][512], int flag1, int flag2, int posn, int last, int t) {
 int main(int argc, char *argv[]) {
     //tokenise input
     struct splitStruc tokens;
-    if (argc!=1) {
-        for (int i =0; i<argc; i++) {
-            strcpy(tokens.splitString[i], argv[i]);
+    int t = 0;
+    if (argc>1) {
+        t = 1;
+        for (int i =1; i<argc; i++) {
+            strcpy(tokens.splitString[i-1], argv[i]);
         }
         tokens.argLen = argc;
         
@@ -154,6 +157,6 @@ int main(int argc, char *argv[]) {
 
     //run function
     rm(tokens.splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, tokens.argLen, floogs.thread);
-
+    if (t==1) {pthread_exit(NULL)};
     return 0;
 }

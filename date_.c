@@ -5,6 +5,7 @@
 #include <errno.h>
 #define _XOPEN_SOURCE 1 
 #include <time.h>
+#include <pthread.h>
 
 #include "flags.h"
 #include "splitStruc.h"

@@ -6,6 +6,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <sys/prctl.h>
+#include <pthread.h>
 
 #define blue "\x1b[94m"
 #define reset "\x1b[0m"
@@ -247,11 +248,12 @@ void shell() {
 
         //externals
         } else if (strcmp(splitString[0], "rm")==0) {
+            char curLoc[1024];
+            strcpy(curLoc, originalLoc);
+            strcat(curLoc, "/rm_.out");
+                
             pid_t pid = fork();
             if (pid==0) {
-                char curLoc[1024];
-                strcpy(curLoc, originalLoc);
-                strcat(curLoc, "/rm_.out");
                 
                 execl(curLoc, inp2, NULL);
                 
@@ -261,6 +263,20 @@ void shell() {
                 puts("Critical Error: fork failure.");
             }
             // rm(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, argLen);
+
+        } else if (strcmp(splitString[0], "rm&t")==0) {
+            void syscaller() {
+                char func[2048];
+                char curLoc[1024];
+                strcpy(curLoc, originalLoc);
+                strcat(curLoc, "/rm_.out");
+                strcat(curLoc, " ");
+                strcat(curLoc, inp2);
+                system(curLoc);
+            }
+            pthread_t tid;
+            pthread_create(&tid, NULL, syscaller, NULL);
+            pthread_join(tid, NULL);
 
         } else if (strcmp(splitString[0], "mkdir")==0) {
             pid_t pid = fork();
