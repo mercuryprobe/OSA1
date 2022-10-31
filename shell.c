@@ -266,7 +266,7 @@ void shell() {
 
         } else if (strcmp(splitString[0], "rm&t")==0) {
             void* syscaller(void* f) {
-                char curLoc[1024];
+                char curLoc[2048];
                 strcpy(curLoc, originalLoc);
                 strcat(curLoc, "/rm_.out ");
                 strcat(curLoc, inp2);
@@ -275,8 +275,9 @@ void shell() {
                         curLoc[i] == 't';
                     }
                 }
+                printf("Command: %s\n", curLoc);
                 system(curLoc);
-                puts("test3");
+                // puts("test3");
             }
             pthread_t tid;
             pthread_create(&tid, NULL, syscaller, NULL);
