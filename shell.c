@@ -164,7 +164,6 @@ static volatile sig_atomic_t active = 1;
 static int catC = 0;
 static void interrupter(int x) {
     //reference: https://stackoverflow.com/questions/4217037/catch-ctrl-c-in-c
-    puts("this");
     if (catC==0) {active = 0;} else {catC=0;}
 }
 
@@ -378,6 +377,7 @@ void shell() {
                 for (int i =0; i<strlen(curLoc); i++) {
                     if (curLoc[i] == '&') {
                         curLoc[i] = 't';
+                        puts(i);
                     }
                 }
                 puts(curLoc);
