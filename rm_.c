@@ -135,15 +135,15 @@ int main(int argc, char *argv[]) {
     //tokenise input
     struct splitStruc tokens;
     int t = 0;
-    printf("\nargc: %d\n", argc);
-    printf("argv[0]: %s\n", argv[0]);
+    // printf("\nargc: %d\n", argc);
+    // printf("argv[0]: %s\n", argv[0]);
     if (argc>1) {
         t = 1;
         for (int i =1; i<argc; i++) {
             printf("argv[%d]: %s\n", i, argv[i]);
             strcpy(tokens.splitString[i-1], argv[i]);
         }
-        tokens.argLen = argc;
+        tokens.argLen = argc-1;
         
     } else {
         struct splitStruc tokens = tokenise(argv[0]);
