@@ -135,9 +135,11 @@ int main(int argc, char *argv[]) {
     //tokenise input
     struct splitStruc tokens;
     int t = 0;
+    puts(argv[0]);
     if (argc>1) {
         t = 1;
         for (int i =1; i<argc; i++) {
+            puts(argv[1]);
             strcpy(tokens.splitString[i-1], argv[i]);
         }
         tokens.argLen = argc;
