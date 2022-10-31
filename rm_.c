@@ -28,7 +28,7 @@ int remover(const char *path, const struct stat *s, int flag, struct FTW *ftw) {
 void rm(char cmd[512][512], int flag1, int flag2, int posn, int last, int t) {
     //removes file, supports multi input
     //flags: -d (directory - delete empty dir) -r (recursive - delete non empty directory)
-
+    puts("heyp")
     if (last!=1) {
         cmd[last-1][strcspn(cmd[last-1], "\n")]=0;
     } else {
@@ -68,7 +68,7 @@ void rm(char cmd[512][512], int flag1, int flag2, int posn, int last, int t) {
     }
     if (recursive==0) {
         for (i; i<last; i++){
-            puts(cmd[i]);
+            puts(cmd[i]); 
             removeResult = remove(cmd[i]);
 
             if (removeResult!=0 & multiple==1) {
