@@ -271,7 +271,7 @@ void shell() {
                 strcpy(curLoc, originalLoc);
                 strcat(curLoc, "/rm_.out ");
                 strcat(curLoc, inp2);
-                system(curLoc);
+                system("/rm_.out what");
                 puts("test3");
             }
             pthread_t tid;
