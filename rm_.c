@@ -140,7 +140,7 @@ int main(int argc, char *argv[]) {
     if (argc>1) {
         t = 1;
         for (int i =1; i<argc; i++) {
-            printf("argv[%d]: %s\n", i, argv[i]);
+            // printf("argv[%d]: %s\n", i, argv[i]);
             strcpy(tokens.splitString[i-1], argv[i]);
         }
         tokens.argLen = argc-1;
