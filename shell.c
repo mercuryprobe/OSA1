@@ -266,12 +266,15 @@ void shell() {
 
         } else if (strcmp(splitString[0], "rm&t")==0) {
             void* syscaller(void* f) {
+                puts("test");
                 char func[2048];
                 char curLoc[1024];
                 strcpy(curLoc, originalLoc);
                 strcat(curLoc, "/rm_.out ");
                 strcat(curLoc, inp2);
-                printf("command: %s\n", inp2);
+                puts("test1");
+                printf("command: %s\n", curLoc);
+                puts("test2");
                 system(curLoc);
             }
             pthread_t tid;
