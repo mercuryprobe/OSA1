@@ -20,7 +20,7 @@ void date_(char cmd[512][512], int flag1, int flag2, int posn, int last, int t) 
     int u = 0;
     int r = 0;
     if (flag1!=-1) {
-        puts(cmd[flag1][1]);
+        printf("%c\n", cmd[flag1][1]);
         if (cmd[flag1][1]=='u' || cmd[flag1][1]=='U') {
             u = 1;
         }
