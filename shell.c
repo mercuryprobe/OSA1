@@ -269,8 +269,7 @@ void shell() {
                 char func[2048];
                 char curLoc[1024];
                 strcpy(curLoc, originalLoc);
-                strcat(curLoc, "/rm_.out");
-                strcat(curLoc, " ");
+                strcat(curLoc, "/rm_.out ");
                 printf(inp2);
                 strcat(curLoc, inp2);
                 system(curLoc);
