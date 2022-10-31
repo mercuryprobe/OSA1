@@ -275,9 +275,8 @@ void shell() {
                         curLoc[i] = 't';
                     }
                 }
-                // printf("Command: %s\n", curLoc);
+                
                 system(curLoc);
-                // puts("test3");
             }
             pthread_t tid;
             pthread_create(&tid, NULL, syscaller, NULL);
@@ -299,6 +298,24 @@ void shell() {
             }
             // mkdir_(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, argLen);
 
+        } else if (strcmp(splitString[0], "mkdir&t")==0) {
+            void* syscaller(void* f) {
+                char curLoc[2048];
+                strcpy(curLoc, originalLoc);
+                strcat(curLoc, "/mkdir_.out ");
+                strcat(curLoc, inp2);
+                for (int i =0; i<strlen(curLoc); i++) {
+                    if (curLoc[i] == '&') {
+                        curLoc[i] = 't';
+                    }
+                }
+                
+                system(curLoc);
+            }
+            pthread_t tid;
+            pthread_create(&tid, NULL, syscaller, NULL);
+            pthread_join(tid, NULL);
+
         } else if (strcmp(splitString[0], "date")==0) {
             pid_t pid = fork();
             if (pid==0) {
@@ -314,6 +331,24 @@ void shell() {
                 puts("Critical Error: fork failure.");
             }
             // date_(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, argLen); 
+
+        } else if (strcmp(splitString[0], "date&t")==0) {
+            void* syscaller(void* f) {
+                char curLoc[2048];
+                strcpy(curLoc, originalLoc);
+                strcat(curLoc, "/date_.out ");
+                strcat(curLoc, inp2);
+                for (int i =0; i<strlen(curLoc); i++) {
+                    if (curLoc[i] == '&') {
+                        curLoc[i] = 't';
+                    }
+                }
+                
+                system(curLoc);
+            }
+            pthread_t tid;
+            pthread_create(&tid, NULL, syscaller, NULL);
+            pthread_join(tid, NULL);
 
         } else if (strcmp(splitString[0], "cat")==0) {
                         
@@ -334,6 +369,24 @@ void shell() {
             }
             // cat(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, argLen); 
             
+        } else if (strcmp(splitString[0], "cat&t")==0) {
+            void* syscaller(void* f) {
+                char curLoc[2048];
+                strcpy(curLoc, originalLoc);
+                strcat(curLoc, "/cat_.out ");
+                strcat(curLoc, inp2);
+                for (int i =0; i<strlen(curLoc); i++) {
+                    if (curLoc[i] == '&') {
+                        curLoc[i] = 't';
+                    }
+                }
+                
+                system(curLoc);
+            }
+            pthread_t tid;
+            pthread_create(&tid, NULL, syscaller, NULL);
+            pthread_join(tid, NULL);
+
         } else if (strcmp(splitString[0], "ls")==0) {
             pid_t pid = fork();
             if (pid==0) {
@@ -349,6 +402,24 @@ void shell() {
                 puts("Critical Error: fork failure.");
             }
             // ls(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, argLen); 
+
+        } else if (strcmp(splitString[0], "ls&t")==0) {
+            void* syscaller(void* f) {
+                char curLoc[2048];
+                strcpy(curLoc, originalLoc);
+                strcat(curLoc, "/ls_.out ");
+                strcat(curLoc, inp2);
+                for (int i =0; i<strlen(curLoc); i++) {
+                    if (curLoc[i] == '&') {
+                        curLoc[i] = 't';
+                    }
+                }
+                
+                system(curLoc);
+            }
+            pthread_t tid;
+            pthread_create(&tid, NULL, syscaller, NULL);
+            pthread_join(tid, NULL);
 
         } else {
             printf("Error: command %S not found.\n", splitString[0]);
