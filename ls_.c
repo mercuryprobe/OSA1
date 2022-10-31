@@ -144,12 +144,7 @@ void ls(char cmd[512][512], int flag1, int flag2, int posn, int last, int t) {
 
 int main(int argc, char *argv[]) {
     //tokenise input
-    struct splitStruc tokens;
-    for (int i =0; i<argc; i++) {
-        strcpy(tokens.splitString[i], argv[i]);
-    }
-    tokens.argLen = argc;
-    
+    struct splitStruc tokens = tokenise(argv[0]);
     tokens.splitString[0][strcspn(tokens.splitString[0], "\n")]=0;
 
     //flag detection
