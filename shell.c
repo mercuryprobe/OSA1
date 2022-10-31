@@ -251,7 +251,7 @@ void shell() {
                 getcwd(curLoc, sizeof(curLoc));
                 strcat(curLoc, "/rm_.out");
                 
-                execl(curLoc, inp2, NULL);
+                execv(curLoc, splitString);
                 
             } else if(pid>0) {
                 wait(NULL);
@@ -267,7 +267,7 @@ void shell() {
                 getcwd(curLoc, sizeof(curLoc));
                 strcat(curLoc, "/mkdir_.out");
                 
-                execl(curLoc, inp2, NULL);
+                execv(curLoc, splitString);
                 
             } else if(pid>0) {
                 wait(NULL);
@@ -283,7 +283,7 @@ void shell() {
                 getcwd(curLoc, sizeof(curLoc));
                 strcat(curLoc, "/date_.out");
                 
-                execl(curLoc, inp2, NULL);
+                execv(curLoc, splitString);
                 
             } else if(pid>0) {
                 wait(NULL);
@@ -301,8 +301,7 @@ void shell() {
                 getcwd(curLoc, sizeof(curLoc));
                 strcat(curLoc, "/cat_.out");
 
-                
-                execl(curLoc, inp2, NULL);
+                execv(curLoc, splitString);
                 
             } else if(pid>0) {
                 wait(NULL);
@@ -318,7 +317,7 @@ void shell() {
                 getcwd(curLoc, sizeof(curLoc));
                 strcat(curLoc, "/ls_.out");
                 
-                execl(curLoc, inp2, NULL);
+                execv(curLoc, splitString);
                 
             } else if(pid>0) {
                 wait(NULL);
