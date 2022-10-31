@@ -97,7 +97,6 @@ int main(int argc, char *argv[]) {
     //tokenise input
     struct splitStruc tokens;
     if (argc!=1) {
-        puts("rip");
         for (int i =0; i<argc; i++) {
             strcpy(tokens.splitString[i], argv[i]);
         }
