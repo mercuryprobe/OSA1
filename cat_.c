@@ -22,6 +22,11 @@ void cat(char cmd[512][512], int flag1, int flag2, int posn, int last, int t) {
     // printf(cmd[posn]);
     cmd[last-1][strcspn(cmd[last-1], "\n")]=0;
     
+    for (int k =0; k< last; k++) {
+        printf("%s ",cmd[k]);
+    }
+    puts("");
+
     //flag check
     int n = 0;
     int c = 0;
@@ -29,6 +34,7 @@ void cat(char cmd[512][512], int flag1, int flag2, int posn, int last, int t) {
         if (cmd[flag1][1]=='n' || cmd[flag1][1]=='N') {
             n = 1;
         } else if (cmd[flag1][0]=='>') {
+            puts("newfile");
             c = 1;
         } else {
             printf("Invalid flag entered.\n");
