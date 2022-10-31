@@ -135,6 +135,7 @@ int main(int argc, char *argv[]) {
     //tokenise input
     struct splitStruc tokens;
     int t = 0;
+    printf("argc: %d", argc);
     puts(argv[0]);
     if (argc>1) {
         t = 1;
