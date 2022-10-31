@@ -359,7 +359,6 @@ void shell() {
                 strcpy(curLoc, originalLoc);
                 strcat(curLoc, "/cat_.out");
 
-                
                 execl(curLoc, inp2, NULL);
                 
             } else if(pid>0) {
@@ -383,6 +382,7 @@ void shell() {
                 
                 system(curLoc);
             }
+            catC = 1; 
             pthread_t tid;
             pthread_create(&tid, NULL, syscaller, NULL);
             pthread_join(tid, NULL);
