@@ -265,7 +265,7 @@ void shell() {
             // rm(splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, argLen);
 
         } else if (strcmp(splitString[0], "rm&t")==0) {
-            void syscaller() {
+            void* syscaller(void* f) {
                 char func[2048];
                 char curLoc[1024];
                 strcpy(curLoc, originalLoc);
