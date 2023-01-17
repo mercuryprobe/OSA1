@@ -8,7 +8,12 @@
 #include <ftw.h>
 #include <limits.h>
 #include <sys/stat.h> 
+#include <pthread.h>
 
+#include "flags.h"
+#include "splitStruc.h"
+#include "flagStruc.h"
+#include "tokeniser.h"
 
 int remover(const char *path, const struct stat *s, int flag, struct FTW *ftw) {
     //removes file if its not a directory (used with nftw)
@@ -20,12 +25,14 @@ int remover(const char *path, const struct stat *s, int flag, struct FTW *ftw) {
     int (*rm_func)(const char *) = remove;
     return rm_func(path);
 }
-void rm(char cmd[512][512], int flag1, int flag2, int posn, int last) {
+void rm(char cmd[512][512], int flag1, int flag2, int posn, int last, int t) {
     //removes file, supports multi input
     //flags: -d (directory - delete empty dir) -r (recursive - delete non empty directory)
-
     if (last!=1) {
         cmd[last-1][strcspn(cmd[last-1], "\n")]=0;
+    } else {
+        puts("Error: Missing operand.");
+        return;
     }
 
     int directory = 0;
@@ -37,7 +44,7 @@ void rm(char cmd[512][512], int flag1, int flag2, int posn, int last) {
         } else if (cmd[flag1][1]=='R' || cmd[flag1][1]=='r') {
             recursive = 1;
         } else {
-            printf("Error: Invalid flag.\n");
+            printf("Error: Invalid flag entered.\n");
             return;
         }
     }
@@ -47,7 +54,7 @@ void rm(char cmd[512][512], int flag1, int flag2, int posn, int last) {
         } else if (cmd[flag2][1]=='R' || cmd[flag2][1]=='r') {
             recursive = 1;
         } else {
-            printf("Error: Invalid flag.\n");
+            printf("Error: Invalid flag entered.\n");
             return;
         }
     }
@@ -60,6 +67,7 @@ void rm(char cmd[512][512], int flag1, int flag2, int posn, int last) {
     }
     if (recursive==0) {
         for (i; i<last; i++){
+            // puts(cmd[i]); 
             removeResult = remove(cmd[i]);
 
             if (removeResult!=0 & multiple==1) {
@@ -94,7 +102,7 @@ void rm(char cmd[512][512], int flag1, int flag2, int posn, int last) {
                     return;
                 } else {
                     if (i!=(last-1)){
-                        rm(cmd, flag1, flag2, i+1, last);
+                        rm(cmd, flag1, flag2, i+1, last, t);
                     }
                 }
             }
@@ -109,7 +117,7 @@ void rm(char cmd[512][512], int flag1, int flag2, int posn, int last) {
 
         if (multiple == 1) {
             if (i!=(last-1)){
-                rm(cmd, flag1, flag2, i+1, last);
+                rm(cmd, flag1, flag2, i+1, last, t);
             }
         }
     } else {
@@ -117,8 +125,39 @@ void rm(char cmd[512][512], int flag1, int flag2, int posn, int last) {
         if (multiple == 1) {
             if (i!=(last-1)){
                 printf("Skipping...\n");
-                rm(cmd, flag1, flag2, i+1, last);
+                rm(cmd, flag1, flag2, i+1, last, t);
             }
         }
     }
+}
+
+int main(int argc, char *argv[]) {
+    //tokenise input
+    struct splitStruc tokens;
+    int t = 0;
+
+    if (argc>1) {
+        t = 1;
+        for (int i =1; i<argc; i++) {
+            strcpy(tokens.splitString[i-1], argv[i]);
+        }
+        tokens.argLen = argc-1;
+        
+    } else {
+        struct splitStruc tokens = tokenise(argv[0]);
+    }
+    
+    tokens.splitString[0][strcspn(tokens.splitString[0], "\n")]=0;
+
+    //flag detection
+    struct flagStruc floogs = flagger(tokens.splitString, tokens.argLen);
+    int flag1 = floogs.flag1;
+    int flag2 = floogs.flag2;
+    int flag1Taken = floogs.flag1Taken;
+    int flag2Taken = floogs.flag2Taken;
+
+    //run function
+    rm(tokens.splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, tokens.argLen, floogs.thread);
+    if (t==1) {pthread_exit(NULL);};
+    return 0;
 }

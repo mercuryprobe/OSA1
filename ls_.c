@@ -9,7 +9,13 @@
 #define __USE_XOPEN_EXTENDED 500
 #include <ftw.h>
 #include <limits.h>
-#include <sys/stat.h>  //mdkir
+#include <sys/stat.h> 
+#include <pthread.h>
+
+#include "flags.h"
+#include "splitStruc.h"
+#include "flagStruc.h"
+#include "tokeniser.h"
 
 static int a = 0;
 // int isSym(const char file[]) {
@@ -60,7 +66,7 @@ int lister(const char *path, const struct stat *s, int flag, struct FTW *ftw) {
     }
     return 0;
 }
-void ls(char cmd[512][512], int flag1, int flag2, int posn, int last) {
+void ls(char cmd[512][512], int flag1, int flag2, int posn, int last, int t) {
     if (last!=1) {
         cmd[last-1][strcspn(cmd[last-1], "\n")]=0;
     }
@@ -135,4 +141,35 @@ void ls(char cmd[512][512], int flag1, int flag2, int posn, int last) {
         }
     }
     a = 0;
+}
+
+int main(int argc, char *argv[]) {
+    //tokenise input
+    struct splitStruc tokens;
+    int t = 0;
+
+    if (argc>1) {
+        t = 1;
+        for (int i =1; i<argc; i++) {
+            strcpy(tokens.splitString[i-1], argv[i]);
+        }
+        tokens.argLen = argc-1;
+        
+    } else {
+        struct splitStruc tokens = tokenise(argv[0]);
+    }
+    
+    tokens.splitString[0][strcspn(tokens.splitString[0], "\n")]=0;
+
+    //flag detection
+    struct flagStruc floogs = flagger(tokens.splitString, tokens.argLen);
+    int flag1 = floogs.flag1;
+    int flag2 = floogs.flag2;
+    int flag1Taken = floogs.flag1Taken;
+    int flag2Taken = floogs.flag2Taken;
+
+    //run function
+    ls(tokens.splitString, flag1, flag2, 1 + flag1Taken + flag2Taken, tokens.argLen, floogs.thread);
+    if (t==1) {pthread_exit(NULL);};
+    return 0;
 }
